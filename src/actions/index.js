@@ -3,6 +3,11 @@ export const setNotes = (notes) => ({
   notes
 });
 
+export const addNote = (note) => ({
+  type: 'ADD_NOTE',
+  note
+});
+
 export const toggleLoading = (bool) => ({
   type: 'TOGGLE_LOADING',
   bool
