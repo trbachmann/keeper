@@ -9,17 +9,27 @@
   border: solid 2px #004ecb;
 }
 
-.NoteForm--title,
 .NoteForm--list-item,
-.NoteForm--new-input,
-.NoteForm--p--complete {
-  margin: 15px auto;
+.NoteForm--p--complete,
+.NoteForm--p--incomplete {
   display: inline-block;
   width: 80%;
   border: none;
   outline: none;
   text-align: left;
   border-bottom: 1px solid black;
+  margin: 0 10px;
+}
+
+.NoteForm--title,
+.NoteForm--new-input {
+  @extend .NoteForm--list-item;
+  margin: 15px auto;
+}
+
+.NoteForm--p--complete,
+.NoteForm--p--incomplete {
+  border-bottom: 0;
 }
 
 .NoteForm--p--complete {
@@ -34,11 +44,21 @@
 .NoteForm--span--incomplete,
 .NoteForm--span--complete,
 .NoteForm--new-input {
-  display: block;
+  display: flex;
+  margin: 15px auto;
+  align-items: center;
+}
+
+%iconwidth {
+  width: 15px;  
 }
 
 .NoteForm--icon--unchecked,
-.NoteForm--icon--checked,
+.NoteForm--icon--checked {
+  margin-left: auto; 
+  @extend %iconwidth;
+}
 .NoteForm--icon--delete {
-  width: 15px;
+  margin-right: auto;
+  @extend %iconwidth;  
 }
