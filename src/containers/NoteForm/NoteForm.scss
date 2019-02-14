@@ -1,25 +1,33 @@
 .NoteForm--title,
 .NoteForm--list-item,
-.NoteForm--new-input {
-  display: block;
+.NoteForm--new-input,
+.NoteForm--p--complete {
   margin: 15px auto;
-  width: 400px;
+  display: inline-block;
+  width: 80%;
   border: none;
   outline: none;
+  text-align: left;
   border-bottom: 1px solid black;
+}
+
+.NoteForm--p--complete {
+  text-decoration: line-through;
+  color: lightgray;
 }
 
 .NoteForm--title {
   font-size: 1.6rem;
 }
 
-.NoteForm--span {
-  position: relative;
+.NoteForm--span--incomplete,
+.NoteForm--span--complete,
+.NoteForm--new-input {
+  display: block;
 }
 
+.NoteForm--icon--unchecked,
+.NoteForm--icon--checked,
 .NoteForm--icon--delete {
-  position: absolute;
-  bottom: 15px;
-  left: 200px;
-  cursor: pointer;
+  width: 15px;
 }
