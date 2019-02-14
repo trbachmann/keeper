@@ -7,13 +7,15 @@ import { Link } from 'react-router-dom';
 
 export const NoteContainer = ({ notes }) => {
   const cards = notes.map(note => {
-    return <NoteCard {...note}/>
+    return <NoteCard {...note} />
   });
 
   return (
     <div className='NoteContainer'>
       <Link to='/new-note' className='NoteContainer--new-note'>New Note</Link>
-      {cards}
+      <div className='NoteContainer--cards'>
+        {cards}
+      </div>
     </div>
   );
 };
