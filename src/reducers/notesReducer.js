@@ -9,6 +9,8 @@ export const notesReducer = (state = [], action) => {
         const { id } = action.note;
         return note.id === id ? action.note : note;
       });
+    case 'DELETE_NOTE':
+      return state.filter(note => note.id !== action.id);
     default:
       return state;
   }

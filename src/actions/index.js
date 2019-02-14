@@ -13,6 +13,11 @@ export const updateNote = (note) => ({
   note
 });
 
+export const deleteNote = (id) => ({
+  type: 'DELETE_NOTE',
+  id
+});
+
 export const toggleLoading = (bool) => ({
   type: 'TOGGLE_LOADING',
   bool
