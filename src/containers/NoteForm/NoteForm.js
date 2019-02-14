@@ -6,6 +6,8 @@ import { fetchData, createOptions } from '../../utils/api';
 import { Redirect } from 'react-router-dom';
 import shortid from 'shortid';
 import deleteicon from '../../images/deleteicon.svg';
+import uncheckedicon from '../../images/uncheckedicon.svg';
+import checkedicon from '../../images/checkedicon.svg';
 
 export class NoteForm extends Component {
   constructor() {
@@ -73,12 +75,28 @@ export class NoteForm extends Component {
     />
   )
 
+  handleComplete = (listItems, id) => {
+    const updatedListItems = listItems.map(item => {
+      const { isComplete } = item;
+      return item.id === id ? { ...item, isComplete: !isComplete } : item;
+    });
+    this.setState({ listItems: updatedListItems });
+  }
+
   populateListItems = (listItems) => {
     const { focusedListItemID } = this.state;
-    return listItems.map(item => {
+    const incompleteItems = listItems.filter(item => !item.isComplete);
+    const completeItems = listItems.filter(item => item.isComplete);
+    const result = [];
+    result.push(incompleteItems.map(item => {
       const { id, description } = item;
       return (
-        <span className='NoteForm--span'>
+        <span className='NoteForm--span--incomplete'>
+          <img
+            src={uncheckedicon}
+            className='NoteForm--icon--unchecked'
+            onClick={() => this.handleComplete(listItems, id)}
+          />
           <input
             key={id}
             name={id}
@@ -94,7 +112,26 @@ export class NoteForm extends Component {
           />
         </span>
       );
-    });
+    }));
+    result.push(completeItems.map(item => {
+      const { id, description } = item;
+      return (
+        <span className='NoteForm--span--complete'>
+          <img
+            src={checkedicon}
+            className='NoteForm--icon--checked'
+            onClick={() => this.handleComplete(listItems, id)}
+          />
+          <p key={id} className='NoteForm--p--complete'>{description}</p>
+          <img
+            src={deleteicon}
+            className='NoteForm--icon--delete'
+            onClick={() => this.handleDelete(listItems, id)}
+          />
+        </span>
+      )
+    }));
+    return result;
   }
 
   getNewListItemInput = () => (
