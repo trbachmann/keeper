@@ -1,8 +1,11 @@
 .NoteCard {
   display: inline-block;
   width: 240px;
-  background-color: #75a7ff;
+  background-color: whitesmoke;
+  border: 1px solid #000;
+  border-radius: 5px;
+  padding: 10px;
   text-decoration: none;
   color: #000;
-  margin: auto;
+  margin: 10px auto;
 }

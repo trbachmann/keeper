@@ -1,3 +1,14 @@
+.NoteForm {
+  z-index: 1;
+  position: fixed;
+  background-color: #fff;
+  width: 50%;
+  left: 25%;
+  top: 13%;
+  border-radius: 10px;
+  border: solid 2px #004ecb;
+}
+
 .NoteForm--title,
 .NoteForm--list-item,
 .NoteForm--new-input,

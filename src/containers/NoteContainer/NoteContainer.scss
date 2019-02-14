@@ -4,3 +4,14 @@
 .NoteContainer--new-note {
   display: block;
 }
+
+.NoteContainer--cards {
+  display: flex;
+  margin-left: -30px;
+  width: auto;
+}
+
+.NoteContainer--cards-masonry-cols {
+  padding-left: 30px;
+  background-clip: padding-box;
+}
