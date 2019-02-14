@@ -1,3 +1,25 @@
-.NoteForm {
-  
+.NoteForm--title,
+.NoteForm--list-item,
+.NoteForm--new-input {
+  display: block;
+  margin: 15px auto;
+  width: 400px;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid black;
+}
+
+.NoteForm--title {
+  font-size: 1.6rem;
+}
+
+.NoteForm--span {
+  position: relative;
+}
+
+.NoteForm--icon--delete {
+  position: absolute;
+  bottom: 15px;
+  left: 200px;
+  cursor: pointer;
 }

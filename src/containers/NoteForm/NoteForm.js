@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { setNotes, setError } from '../../actions';
-import { NewItemInput } from '../../components/NewItemInput/NewItemInput';
 import { fetchData, createOptions } from '../../utils/api';
 import { Redirect } from 'react-router-dom';
+import shortid from 'shortid';
+import deleteicon from '../../images/deleteicon.svg';
 
 export class NoteForm extends Component {
   constructor() {
@@ -12,23 +13,26 @@ export class NoteForm extends Component {
     this.state = {
       title: '',
       listItems: [],
-      status: {}
+      status: {},
+      focusedListItemID: null
     }
   }
 
-  addListItem = (listItem) => {
+  handleChange = (event) => {
+    const { name: id, value: description } = event.target;
     const { listItems } = this.state;
-    this.setState({ listItems: [...listItems, listItem] });
+    const existingListItem = listItems.find(item => item.id === id);
+    let updatedListItems;
+    if (existingListItem) {
+      updatedListItems = this.editListItems(listItems, id, description);
+    } else {
+      updatedListItems = [...listItems, this.createListItem(id, description)];
+    }
+    this.setState({ listItems: updatedListItems, focusedListItemID: id });
   }
 
-  handleChange = (event) => {
-    const { name, value } = event.target;
-    const updatedListItems = this.state.listItems.map(item => {
-      if (item.id === name) {
-        item.description = value;
-      }
-      return item;
-    });
+  handleDelete = (listItems, id) => {
+    const updatedListItems = listItems.filter(item => item.id !== id);
     this.setState({ listItems: updatedListItems });
   }
 
@@ -47,29 +51,72 @@ export class NoteForm extends Component {
     }
   }
 
-  populateListItems = (listItems) => {
+  createListItem = (id, description) => ({
+    id,
+    description,
+    isComplete: false
+  });
+
+  editListItems = (listItems, id, description) => {
     return listItems.map(item => {
+      return item.id === id ? { ...item, description } : item;
+    });
+  }
+
+  getTitleInput = (title) => (
+    <input 
+      name='title' 
+      value={title} 
+      placeholder='Title'
+      onChange={(event) => this.setState({ title: event.target.value})}
+      className='NoteForm--title'
+    />
+  )
+
+  populateListItems = (listItems) => {
+    const { focusedListItemID } = this.state;
+    return listItems.map(item => {
+      const { id, description } = item;
       return (
-        <p key={item.id}>{item.description}</p>
+        <span className='NoteForm--span'>
+          <input
+            key={id}
+            name={id}
+            value={description}
+            autoFocus={id === focusedListItemID}
+            onChange={this.handleChange}
+            className='NoteForm--list-item'
+          />
+          <img
+            src={deleteicon}
+            className='NoteForm--icon--delete'
+            onClick={() => this.handleDelete(listItems, id)}
+          />
+        </span>
       );
     });
   }
 
+  getNewListItemInput = () => (
+    <input
+      name={shortid.generate()}
+      value=''
+      onChange={this.handleChange}
+      placeholder='Add new item'
+      className='NoteForm--new-input'
+    />
+  )
+
   render() {
     const { title, listItems, status } = this.state; 
     return (
-      <div className='NoteForm'>
-        <input 
-          name='title' 
-          value={title} 
-          onChange={(event) => this.setState({ title: event.target.value})}
-          placeholder='Title'
-        />
+      <form className='NoteForm' onSubmit={this.handleSubmit}>
+        {this.getTitleInput(title)}
         {this.populateListItems(listItems)}
-        <NewItemInput addListItem={this.addListItem}/>
-        <button onClick={this.handleSubmit}>Save</button>
+        {this.getNewListItemInput()}
+        <input type='submit' value='Save' className='NoteForm--submit'/>
         {status === 201 && <Redirect to='/' />}
-      </div>
+      </form>
     )
   }
 }
