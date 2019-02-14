@@ -12,7 +12,7 @@ export const NoteContainer = ({ notes }) => {
 
   return (
     <div className='NoteContainer'>
-      <Link to='/new-note'>New Note</Link>
+      <Link to='/new-note' className='NoteContainer--new-note'>New Note</Link>
       {cards}
     </div>
   );

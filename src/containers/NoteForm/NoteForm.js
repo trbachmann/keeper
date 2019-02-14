@@ -96,6 +96,7 @@ export class NoteForm extends Component {
             src={uncheckedicon}
             className='NoteForm--icon--unchecked'
             onClick={() => this.handleComplete(listItems, id)}
+            alt='unchecked icon'
           />
           <input
             key={id}
@@ -109,6 +110,7 @@ export class NoteForm extends Component {
             src={deleteicon}
             className='NoteForm--icon--delete'
             onClick={() => this.handleDelete(listItems, id)}
+            alt='delete icon'
           />
         </span>
       );
@@ -121,12 +123,14 @@ export class NoteForm extends Component {
             src={checkedicon}
             className='NoteForm--icon--checked'
             onClick={() => this.handleComplete(listItems, id)}
+            alt='checked icon'
           />
           <p key={id} className='NoteForm--p--complete'>{description}</p>
           <img
             src={deleteicon}
             className='NoteForm--icon--delete'
             onClick={() => this.handleDelete(listItems, id)}
+            alt='delete icon'
           />
         </span>
       )
