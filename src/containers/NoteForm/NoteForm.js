@@ -148,6 +148,14 @@ export class NoteForm extends Component {
     />
   )
 
+  componentDidMount() {
+    const { path } = this.props.match;
+    const { title, listItems } = this.props;
+    if (path !== '/new-note') {
+      this.setState({ title, listItems });
+    }
+  }
+
   render() {
     const { title, listItems, status } = this.state; 
     return (

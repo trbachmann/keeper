@@ -24,9 +24,15 @@ export class App extends Component {
   }
 
   render() {
+    const { notes } = this.props;
     return (
       <div className="App">
         <h1>Trapper Keeper</h1>
+        <Route path='/notes/:id' render={({ match }) => {
+          const { id } = match.params;
+          const currentNote = notes.find( note => note.id === id );
+          return currentNote ? <NoteForm {...currentNote} match={match}/> : null;
+        }} />
         <Route path='/new-note' component={NoteForm}/>
         <Route path='/' component={NoteContainer}/>
       </div>
