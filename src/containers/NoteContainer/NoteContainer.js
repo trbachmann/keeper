@@ -8,7 +8,7 @@ import Masonry from 'react-masonry-css';
 
 export const NoteContainer = ({ notes }) => {
   const cards = notes.map(note => {
-    return <NoteCard {...note} />
+    return <NoteCard {...note} key={note.id}/>
   }).reverse();
 
   return (

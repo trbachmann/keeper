@@ -13,28 +13,28 @@ export class NoteCard extends Component {
     const completeItems = listItems.filter(item => item.isComplete);
     const result = [];
     result.push(incompleteItems.map(item => {
-      const { description } = item;
+      const { description, id } = item;
       return (
-        <span className='NoteForm--span--incomplete'>
+        <span key={id} className='NoteForm--span--incomplete'>
           <img
             src={uncheckedicon}
             className='NoteForm--icon--unchecked'
             alt='unchecked icon'
           />
-          <p key={id} className='NoteForm--p--incomplete'>{description}</p>
+          <p className='NoteForm--p--incomplete'>{description}</p>
         </span>
       );
     }));
     result.push(completeItems.map(item => {
-      const { description } = item;
+      const { description, id } = item;
       return (
-        <span className='NoteForm--span--complete'>
+        <span key={id} className='NoteForm--span--complete'>
           <img
             src={checkedicon}
             className='NoteForm--icon--checked'
             alt='checked icon'
           />
-          <p key={id} className='NoteForm--p--complete'>{description}</p>
+          <p className='NoteForm--p--complete'>{description}</p>
         </span>
       );
     }));

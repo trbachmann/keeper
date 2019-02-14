@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addNote, setError } from '../../actions';
+import { addNote, setError, updateNote } from '../../actions';
 import { fetchData, createOptions } from '../../utils/api';
 import { Redirect } from 'react-router-dom';
 import shortid from 'shortid';
@@ -38,8 +38,31 @@ export class NoteForm extends Component {
     this.setState({ listItems: updatedListItems });
   }
 
-  handleSubmit = async (event) => {
+  handleSubmit = (event) => {
     event.preventDefault();
+    const { url } = this.props.match;
+    if (url !== '/new-note') {
+      this.putNote(url);
+    } else {
+      this.postNote();
+    }
+  }
+
+  putNote = async (noteUrl) => {
+    const { id } = this.props.match.params;
+    const { title, listItems } = this.state;
+    const url = `http://localhost:3001/api/v1${noteUrl}`;
+    const options = createOptions('PUT', { title, listItems });
+    try {
+      const response = await fetchData(url, options);
+      this.props.updateNote({ id, title, listItems });
+      this.setState({ status: response.status });
+    } catch (error) {
+      this.props.setError(error.message);
+    }
+  }
+
+  postNote = async () => {
     const { title, listItems } = this.state;
     const url = 'http://localhost:3001/api/v1/notes/';
     const options = createOptions('POST', { title, listItems });
@@ -172,7 +195,8 @@ export class NoteForm extends Component {
 
 export const mapDispatchToProps = (dispatch) => ({
   addNote: (note) => dispatch(addNote(note)),
-  setError: (message) => dispatch(setError(message))
+  setError: (message) => dispatch(setError(message)),
+  updateNote: (id, note) => dispatch(updateNote(id, note)) 
 });
 
 export default connect(null, mapDispatchToProps)(NoteForm);

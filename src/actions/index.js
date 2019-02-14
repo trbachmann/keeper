@@ -8,6 +8,11 @@ export const addNote = (note) => ({
   note
 });
 
+export const updateNote = (note) => ({
+  type: 'UPDATE_NOTE',
+  note
+});
+
 export const toggleLoading = (bool) => ({
   type: 'TOGGLE_LOADING',
   bool
