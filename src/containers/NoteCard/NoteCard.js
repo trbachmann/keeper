@@ -9,7 +9,7 @@ export class NoteCard extends Component {
     const { id, title, listItems } = this.props;
     return(
       <Link to={'/notes/' + id}>
-        <div className='NoteCard'></div>
+        <div className='NoteCard'>{title}</div>
       </Link>
     )
   }
