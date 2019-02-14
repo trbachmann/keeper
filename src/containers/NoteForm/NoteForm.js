@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { setNotes, setError } from '../../actions';
+import { addNote, setError } from '../../actions';
 import { fetchData, createOptions } from '../../utils/api';
 import { Redirect } from 'react-router-dom';
 import shortid from 'shortid';
@@ -15,7 +15,7 @@ export class NoteForm extends Component {
     this.state = {
       title: '',
       listItems: [],
-      status: {},
+      status: 0,
       focusedListItemID: null
     }
   }
@@ -45,8 +45,8 @@ export class NoteForm extends Component {
     const options = createOptions('POST', { title, listItems });
     try {
       const response = await fetchData(url, options);
-      const notes = await response.json();
-      this.props.setNotes(notes);
+      const note = await response.json();
+      this.props.addNote(note);
       this.setState({ status: response.status });
     } catch (error) {
       this.props.setError(error.message);
@@ -156,20 +156,20 @@ export class NoteForm extends Component {
         {this.populateListItems(listItems)}
         {this.getNewListItemInput()}
         <input type='submit' value='Save' className='NoteForm--submit'/>
-        {status === 201 && <Redirect to='/' />}
+        {(status >= 200 && status < 300) && <Redirect to='/' />}
       </form>
     )
   }
 }
 
 export const mapDispatchToProps = (dispatch) => ({
-  setNotes: (notes) => dispatch(setNotes(notes)),
+  addNote: (note) => dispatch(addNote(note)),
   setError: (message) => dispatch(setError(message))
 });
 
 export default connect(null, mapDispatchToProps)(NoteForm);
 
 NoteForm.propTypes = {
-  setNotes: PropTypes.func,
+  addNote: PropTypes.func,
   setError: PropTypes.func,
 }
