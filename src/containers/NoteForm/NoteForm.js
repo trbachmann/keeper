@@ -5,6 +5,7 @@ import { setNotes, setError } from '../../actions';
 import { fetchData, createOptions } from '../../utils/api';
 import { Redirect } from 'react-router-dom';
 import shortid from 'shortid';
+import deleteicon from '../../images/deleteicon.svg';
 
 export class NoteForm extends Component {
   constructor() {
@@ -28,6 +29,11 @@ export class NoteForm extends Component {
       updatedListItems = [...listItems, this.createListItem(id, description)];
     }
     this.setState({ listItems: updatedListItems, focusedListItemID: id });
+  }
+
+  handleDelete = (listItems, id) => {
+    const updatedListItems = listItems.filter(item => item.id !== id);
+    this.setState({ listItems: updatedListItems });
   }
 
   handleSubmit = async (event) => {
@@ -63,20 +69,30 @@ export class NoteForm extends Component {
       value={title} 
       placeholder='Title'
       onChange={(event) => this.setState({ title: event.target.value})}
+      className='NoteForm--title'
     />
   )
 
   populateListItems = (listItems) => {
     const { focusedListItemID } = this.state;
     return listItems.map(item => {
+      const { id, description } = item;
       return (
-        <input
-          key={item.id}
-          name={item.id}
-          value={item.description}
-          autoFocus={item.id === focusedListItemID}
-          onChange={this.handleChange}
-        />
+        <span className='NoteForm--span'>
+          <input
+            key={id}
+            name={id}
+            value={description}
+            autoFocus={id === focusedListItemID}
+            onChange={this.handleChange}
+            className='NoteForm--list-item'
+          />
+          <img
+            src={deleteicon}
+            className='NoteForm--icon--delete'
+            onClick={() => this.handleDelete(listItems, id)}
+          />
+        </span>
       );
     });
   }
@@ -87,6 +103,7 @@ export class NoteForm extends Component {
       value=''
       onChange={this.handleChange}
       placeholder='Add new item'
+      className='NoteForm--new-input'
     />
   )
 
@@ -97,7 +114,7 @@ export class NoteForm extends Component {
         {this.getTitleInput(title)}
         {this.populateListItems(listItems)}
         {this.getNewListItemInput()}
-        <input type='submit' value='save' />
+        <input type='submit' value='Save' className='NoteForm--submit'/>
         {status === 201 && <Redirect to='/' />}
       </form>
     )
