@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { setNotes } from '../../actions';
+import { setNotes, setError } from '../../actions';
 import { NewItemInput } from '../../components/NewItemInput/NewItemInput';
+import { fetchData, createOptions } from '../../utils/api';
+import { Redirect } from 'react-router-dom';
 
 export class NoteForm extends Component {
   constructor() {
     super();
     this.state = {
       title: '',
-      listItems: []
+      listItems: [],
+      status: {}
     }
   }
 
@@ -29,6 +32,20 @@ export class NoteForm extends Component {
     this.setState({ listItems: updatedListItems });
   }
 
+  handleSubmit = async (event) => {
+    event.preventDefault();
+    const { title, listItems } = this.state;
+    const url = 'http://localhost:3001/api/v1/notes/';
+    const options = createOptions('POST', { title, listItems });
+    try {
+      const response = await fetchData(url, options);
+      const notes = await response.json();
+      this.props.setNotes(notes);
+      this.setState({ status: response.status });
+    } catch (error) {
+      this.props.setError(error.message);
+    }
+  }
 
   populateListItems = (listItems) => {
     return listItems.map(item => {
@@ -39,9 +56,9 @@ export class NoteForm extends Component {
   }
 
   render() {
-    const { title, listItems } = this.state; 
+    const { title, listItems, status } = this.state; 
     return (
-      <form className='NoteForm'>
+      <div className='NoteForm'>
         <input 
           name='title' 
           value={title} 
@@ -50,17 +67,21 @@ export class NoteForm extends Component {
         />
         {this.populateListItems(listItems)}
         <NewItemInput addListItem={this.addListItem}/>
-      </form>
+        <button onClick={this.handleSubmit}>Save</button>
+        {status === 201 && <Redirect to='/' />}
+      </div>
     )
   }
 }
 
 export const mapDispatchToProps = (dispatch) => ({
-  setNotes: (notes) => dispatch(setNotes(notes))
+  setNotes: (notes) => dispatch(setNotes(notes)),
+  setError: (message) => dispatch(setError(message))
 });
 
 export default connect(null, mapDispatchToProps)(NoteForm);
 
 NoteForm.propTypes = {
-  setNotes: PropTypes.func
+  setNotes: PropTypes.func,
+  setError: PropTypes.func,
 }
