@@ -7,7 +7,7 @@ import { Redirect } from 'react-router-dom';
 import shortid from 'shortid';
 import deleteicon from '../../images/deleteicon.svg';
 import uncheckedicon from '../../images/uncheckedicon.svg';
-import checkedicon from '../../images/checkedicon.svg';
+import { CompleteItem } from '../../components/CompleteItem/CompleteItem';
 
 export class NoteForm extends Component {
   constructor() {
@@ -155,21 +155,13 @@ export class NoteForm extends Component {
     result.push(completeItems.map(item => {
       const { id, description } = item;
       return (
-        <span key={id} className='NoteForm--span--complete'>
-          <img
-            src={checkedicon}
-            className='NoteForm--icon--checked'
-            onClick={() => this.handleComplete(listItems, id)}
-            alt='checked icon'
-          />
-          <p className='NoteForm--p--complete'>{description}</p>
-          <img
-            src={deleteicon}
-            className='NoteForm--icon--delete'
-            onClick={() => this.handleItemDelete(listItems, id)}
-            alt='delete icon'
-          />
-        </span>
+        <CompleteItem
+          id={id}
+          listItems={listItems}
+          description={description}
+          handleComplete={this.handleComplete}
+          handleItemDelete={this.handleItemDelete}
+        />
       )
     }));
     return result;
