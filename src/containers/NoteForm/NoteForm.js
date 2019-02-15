@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addNote, setError, updateNote, deleteNote } from '../../actions';
+import { addNote, setError, deleteNote } from '../../actions';
 import { fetchData, createOptions } from '../../utils/api';
 import { Redirect } from 'react-router-dom';
 import shortid from 'shortid';
 import CompleteItem from '../../components/CompleteItem/CompleteItem';
 import IncompleteItem from '../../components/IncompleteItem/IncompleteItem';
+import { putNote } from '../../thunks/putNote';
 
 export class NoteForm extends Component {
   constructor() {
@@ -37,11 +38,9 @@ export class NoteForm extends Component {
     this.setState({ listItems: updatedListItems });
   }
 
-  handleNoteDelete = async (event) => {
-    event.preventDefault();
+  handleNoteDelete = async () => {
     const { id } = this.props.match.params;
-    const noteUrl = this.props.match.url;
-    const url = `http://localhost:3001/api/v1${noteUrl}`;
+    const url = `http://localhost:3001/api/v1/notes/${id}`;
     const options = createOptions('DELETE');
     try {
       const response = await fetchData(url, options);
@@ -52,27 +51,14 @@ export class NoteForm extends Component {
     }
   }
 
-  handleSubmit = (event) => {
-    event.preventDefault();
-    const { url } = this.props.match;
-    if (url !== '/new-note') {
-      this.putNote(url);
-    } else {
-      this.postNote();
-    }
-  }
-
-  putNote = async (noteUrl) => {
+  handleSubmit = async () => {
     const { id } = this.props.match.params;
     const { title, listItems } = this.state;
-    const url = `http://localhost:3001/api/v1${noteUrl}`;
-    const options = createOptions('PUT', { title, listItems });
-    try {
-      const response = await fetchData(url, options);
-      this.setState({ status: response.status });
-      this.props.updateNote({ id, title, listItems });
-    } catch (error) {
-      this.props.setError(error.message);
+    if (id) {
+      const status = await this.props.putNote({ id, title, listItems }) || 0;
+      this.setState({ status });
+    } else {
+      this.postNote();
     }
   }
 
@@ -124,34 +110,34 @@ export class NoteForm extends Component {
     const { focusedListItemID } = this.state;
     const incompleteItems = listItems.filter(item => !item.isComplete);
     const completeItems = listItems.filter(item => item.isComplete);
-    const result = [];
-    result.push(incompleteItems.map(item => {
-      const { id, description } = item;
-      return (
-        <IncompleteItem
-          id={id}
-          listItems={listItems}
-          description={description}
-          focusedListItemID={focusedListItemID}
-          handleComplete={this.handleComplete}
-          handleChange={this.handleChange}
-          handleItemDelete={this.handleItemDelete}
-        />
-      );
-    }));
-    result.push(completeItems.map(item => {
-      const { id, description } = item;
-      return (
-        <CompleteItem
-          id={id}
-          listItems={listItems}
-          description={description}
-          handleComplete={this.handleComplete}
-          handleItemDelete={this.handleItemDelete}
-        />
-      )
-    }));
-    return result;
+    return [
+      ...incompleteItems.map(item => {
+        return (
+          <IncompleteItem
+            key={item.id}
+            id={item.id}
+            listItems={listItems}
+            description={item.description}
+            focusedListItemID={focusedListItemID}
+            handleComplete={this.handleComplete}
+            handleChange={this.handleChange}
+            handleItemDelete={this.handleItemDelete}
+          />
+        );
+      }),
+      ...completeItems.map(item => {
+        return (
+          <CompleteItem
+            key={item.id}
+            id={item.id}
+            listItems={listItems}
+            description={item.description}
+            handleComplete={this.handleComplete}
+            handleItemDelete={this.handleItemDelete}
+          />
+        );
+      })
+    ];
   }
 
   getNewListItemInput = () => (
@@ -174,13 +160,19 @@ export class NoteForm extends Component {
 
   render() {
     const { title, listItems, status } = this.state; 
+    const { path } = this.props.match;
     return (
       <div className='NoteForm'>
         {this.getTitleInput(title)}
         {this.populateListItems(listItems)}
         {this.getNewListItemInput()}
-        <button className='NoteForm--submit' onClick={this.handleSubmit}>Save</button>
-        <button className='NoteForm--delete' onClick={this.handleNoteDelete}>Delete</button>
+        <button className='NoteForm--submit' onClick={this.handleSubmit}>
+          Save
+        </button>
+        {path !== '/new-note' && 
+          <button className='NoteForm--delete' onClick={this.handleNoteDelete}>
+            Delete
+          </button>}
         {(status >= 200 && status < 300) && <Redirect to='/' />}
       </div>
     )
@@ -190,8 +182,8 @@ export class NoteForm extends Component {
 export const mapDispatchToProps = (dispatch) => ({
   addNote: (note) => dispatch(addNote(note)),
   setError: (message) => dispatch(setError(message)),
-  updateNote: (id, note) => dispatch(updateNote(id, note)),
-  deleteNote: (id) => dispatch(deleteNote(id))
+  deleteNote: (id) => dispatch(deleteNote(id)),
+  putNote: (note) => dispatch(putNote(note))
 });
 
 export default connect(null, mapDispatchToProps)(NoteForm);
@@ -199,4 +191,6 @@ export default connect(null, mapDispatchToProps)(NoteForm);
 NoteForm.propTypes = {
   addNote: PropTypes.func,
   setError: PropTypes.func,
+  deleteNote: PropTypes.func,
+  putNote: PropTypes.func
 }
