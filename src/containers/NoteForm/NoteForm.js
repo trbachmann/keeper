@@ -5,9 +5,8 @@ import { addNote, setError, updateNote, deleteNote } from '../../actions';
 import { fetchData, createOptions } from '../../utils/api';
 import { Redirect } from 'react-router-dom';
 import shortid from 'shortid';
-import deleteicon from '../../images/deleteicon.svg';
-import uncheckedicon from '../../images/uncheckedicon.svg';
-import { CompleteItem } from '../../components/CompleteItem/CompleteItem';
+import CompleteItem from '../../components/CompleteItem/CompleteItem';
+import IncompleteItem from '../../components/IncompleteItem/IncompleteItem';
 
 export class NoteForm extends Component {
   constructor() {
@@ -129,27 +128,15 @@ export class NoteForm extends Component {
     result.push(incompleteItems.map(item => {
       const { id, description } = item;
       return (
-        <span key={id} className='NoteForm--span--incomplete'>
-          <img
-            src={uncheckedicon}
-            className='NoteForm--icon--unchecked'
-            onClick={() => this.handleComplete(listItems, id)}
-            alt='unchecked icon'
-          />
-          <input
-            name={id}
-            value={description}
-            autoFocus={id === focusedListItemID}
-            onChange={this.handleChange}
-            className='NoteForm--list-item'
-          />
-          <img
-            src={deleteicon}
-            className='NoteForm--icon--delete'
-            onClick={() => this.handleItemDelete(listItems, id)}
-            alt='delete icon'
-          />
-        </span>
+        <IncompleteItem
+          id={id}
+          listItems={listItems}
+          description={description}
+          focusedListItemID={focusedListItemID}
+          handleComplete={this.handleComplete}
+          handleChange={this.handleChange}
+          handleItemDelete={this.handleItemDelete}
+        />
       );
     }));
     result.push(completeItems.map(item => {
