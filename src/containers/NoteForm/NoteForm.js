@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addNote, setError, updateNote } from '../../actions';
+import { addNote, setError, updateNote, deleteNote } from '../../actions';
 import { fetchData, createOptions } from '../../utils/api';
 import { Redirect } from 'react-router-dom';
 import shortid from 'shortid';
@@ -33,9 +33,24 @@ export class NoteForm extends Component {
     this.setState({ listItems: updatedListItems, focusedListItemID: id });
   }
 
-  handleDelete = (listItems, id) => {
+  handleItemDelete = (listItems, id) => {
     const updatedListItems = listItems.filter(item => item.id !== id);
     this.setState({ listItems: updatedListItems });
+  }
+
+  handleNoteDelete = async (event) => {
+    event.preventDefault();
+    const { id } = this.props.match.params;
+    const noteUrl = this.props.match.url;
+    const url = `http://localhost:3001/api/v1${noteUrl}`;
+    const options = createOptions('DELETE');
+    try {
+      const response = await fetchData(url, options);
+      this.setState({ status: response.status });
+      this.props.deleteNote(id);
+    } catch (error) {
+      this.setError(error.message);
+    }
   }
 
   handleSubmit = (event) => {
@@ -55,8 +70,8 @@ export class NoteForm extends Component {
     const options = createOptions('PUT', { title, listItems });
     try {
       const response = await fetchData(url, options);
-      this.props.updateNote({ id, title, listItems });
       this.setState({ status: response.status });
+      this.props.updateNote({ id, title, listItems });
     } catch (error) {
       this.props.setError(error.message);
     }
@@ -114,7 +129,7 @@ export class NoteForm extends Component {
     result.push(incompleteItems.map(item => {
       const { id, description } = item;
       return (
-        <span className='NoteForm--span--incomplete'>
+        <span key={id} className='NoteForm--span--incomplete'>
           <img
             src={uncheckedicon}
             className='NoteForm--icon--unchecked'
@@ -122,7 +137,6 @@ export class NoteForm extends Component {
             alt='unchecked icon'
           />
           <input
-            key={id}
             name={id}
             value={description}
             autoFocus={id === focusedListItemID}
@@ -132,7 +146,7 @@ export class NoteForm extends Component {
           <img
             src={deleteicon}
             className='NoteForm--icon--delete'
-            onClick={() => this.handleDelete(listItems, id)}
+            onClick={() => this.handleItemDelete(listItems, id)}
             alt='delete icon'
           />
         </span>
@@ -141,18 +155,18 @@ export class NoteForm extends Component {
     result.push(completeItems.map(item => {
       const { id, description } = item;
       return (
-        <span className='NoteForm--span--complete'>
+        <span key={id} className='NoteForm--span--complete'>
           <img
             src={checkedicon}
             className='NoteForm--icon--checked'
             onClick={() => this.handleComplete(listItems, id)}
             alt='checked icon'
           />
-          <p key={id} className='NoteForm--p--complete'>{description}</p>
+          <p className='NoteForm--p--complete'>{description}</p>
           <img
             src={deleteicon}
             className='NoteForm--icon--delete'
-            onClick={() => this.handleDelete(listItems, id)}
+            onClick={() => this.handleItemDelete(listItems, id)}
             alt='delete icon'
           />
         </span>
@@ -182,13 +196,14 @@ export class NoteForm extends Component {
   render() {
     const { title, listItems, status } = this.state; 
     return (
-      <form className='NoteForm' onSubmit={this.handleSubmit}>
+      <div className='NoteForm'>
         {this.getTitleInput(title)}
         {this.populateListItems(listItems)}
         {this.getNewListItemInput()}
-        <input type='submit' value='Save' className='NoteForm--submit'/>
+        <button className='NoteForm--submit' onClick={this.handleSubmit}>Save</button>
+        <button className='NoteForm--delete' onClick={this.handleNoteDelete}>Delete</button>
         {(status >= 200 && status < 300) && <Redirect to='/' />}
-      </form>
+      </div>
     )
   }
 }
@@ -196,7 +211,8 @@ export class NoteForm extends Component {
 export const mapDispatchToProps = (dispatch) => ({
   addNote: (note) => dispatch(addNote(note)),
   setError: (message) => dispatch(setError(message)),
-  updateNote: (id, note) => dispatch(updateNote(id, note)) 
+  updateNote: (id, note) => dispatch(updateNote(id, note)),
+  deleteNote: (id) => dispatch(deleteNote(id))
 });
 
 export default connect(null, mapDispatchToProps)(NoteForm);
