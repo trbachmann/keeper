@@ -4,20 +4,20 @@ import deleteicon from '../../images/deleteicon.svg';
 import checkedicon from '../../images/checkedicon.svg';
 
 const CompleteItem = (props) => {
-  const { listItems, id, description } = props;
+  const { id, description } = props;
   return (
-    <span key={id} className='NoteForm--span--complete'>
+    <span className='NoteForm--span--complete'>
       <img
         src={checkedicon}
         className='NoteForm--icon--checked'
-        onClick={() => props.handleComplete(listItems, id)}
+        onClick={() => props.handleComplete(id)}
         alt='checked icon'
       />
       <p className='NoteForm--p--complete'>{description}</p>
       <img
         src={deleteicon}
         className='NoteForm--icon--delete'
-        onClick={() => props.handleItemDelete(listItems, id)}
+        onClick={() => props.handleItemDelete(id)}
         alt='delete icon'
       />
     </span>
@@ -25,7 +25,6 @@ const CompleteItem = (props) => {
 }
 
 CompleteItem.propTypes = {
-  listItems: PropTypes.array,
   id: PropTypes.string,
   description: PropTypes.string,
   handleComplete: PropTypes.func,

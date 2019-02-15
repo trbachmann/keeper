@@ -33,7 +33,8 @@ export class NoteForm extends Component {
     this.setState({ listItems: updatedListItems, focusedListItemID: id });
   }
 
-  handleItemDelete = (listItems, id) => {
+  handleItemDelete = (id) => {
+    const { listItems } = this.state;
     const updatedListItems = listItems.filter(item => item.id !== id);
     this.setState({ listItems: updatedListItems });
   }
@@ -98,7 +99,8 @@ export class NoteForm extends Component {
     />
   )
 
-  handleComplete = (listItems, id) => {
+  handleComplete = (id) => {
+    const { listItems } = this.state;    
     const updatedListItems = listItems.map(item => {
       const { isComplete } = item;
       return item.id === id ? { ...item, isComplete: !isComplete } : item;
@@ -116,7 +118,6 @@ export class NoteForm extends Component {
           <IncompleteItem
             key={item.id}
             id={item.id}
-            listItems={listItems}
             description={item.description}
             focusedListItemID={focusedListItemID}
             handleComplete={this.handleComplete}
@@ -130,7 +131,6 @@ export class NoteForm extends Component {
           <CompleteItem
             key={item.id}
             id={item.id}
-            listItems={listItems}
             description={item.description}
             handleComplete={this.handleComplete}
             handleItemDelete={this.handleItemDelete}

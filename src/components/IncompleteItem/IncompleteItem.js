@@ -4,13 +4,13 @@ import deleteicon from '../../images/deleteicon.svg';
 import uncheckedicon from '../../images/uncheckedicon.svg';
 
 const IncompleteItem = (props) => {
-  const { listItems, id, description, focusedListItemID } = props;
+  const { id, description, focusedListItemID } = props;
   return (
-    <span key={id} className='NoteForm--span--incomplete'>
+    <span className='NoteForm--span--incomplete'>
       <img
         src={uncheckedicon}
         className='NoteForm--icon--unchecked'
-        onClick={() => props.handleComplete(listItems, id)}
+        onClick={() => props.handleComplete(id)}
         alt='unchecked icon'
       />
       <input
@@ -23,7 +23,7 @@ const IncompleteItem = (props) => {
       <img
         src={deleteicon}
         className='NoteForm--icon--delete'
-        onClick={() => props.handleItemDelete(listItems, id)}
+        onClick={() => props.handleItemDelete(id)}
         alt='delete icon'
       />
     </span>
@@ -31,7 +31,6 @@ const IncompleteItem = (props) => {
 }
 
 IncompleteItem.propTypes = {
-  listItems: PropTypes.array,
   id: PropTypes.string,
   description: PropTypes.string,
   focusedListItemID: PropTypes.string,
