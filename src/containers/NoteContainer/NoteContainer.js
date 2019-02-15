@@ -12,10 +12,11 @@ export const NoteContainer = ({ notes }) => {
   }).reverse();
 
   const breakpoints = {
-    default: 4,
+    default: 5,
+    1500: 4,
     1100: 3,
-    700: 2,
-    500: 1
+    790: 2,
+    550: 1
   };
 
   return (
