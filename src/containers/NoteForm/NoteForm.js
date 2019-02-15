@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { setError, deleteNote } from '../../actions';
-import { fetchData, createOptions } from '../../utils/api';
 import { Redirect } from 'react-router-dom';
 import shortid from 'shortid';
 import CompleteItem from '../../components/CompleteItem/CompleteItem';
 import IncompleteItem from '../../components/IncompleteItem/IncompleteItem';
 import { putNote } from '../../thunks/putNote';
 import { postNote } from '../../thunks/postNote';
+import { deleteNoteThunk } from '../../thunks/deleteNoteThunk';
 
 export class NoteForm extends Component {
   constructor() {
@@ -123,15 +122,8 @@ export class NoteForm extends Component {
 
   handleNoteDelete = async () => {
     const { id } = this.props.match.params;
-    const url = `http://localhost:3001/api/v1/notes/${id}`;
-    const options = createOptions('DELETE');
-    try {
-      const response = await fetchData(url, options);
-      this.setState({ status: response.status });
-      this.props.deleteNote(id);
-    } catch (error) {
-      this.setError(error.message);
-    }
+    const status = await this.props.deleteNoteThunk(id);
+    this.setState({ status });
   }
 
   handleSubmit = async () => {
@@ -168,17 +160,15 @@ export class NoteForm extends Component {
 }
 
 export const mapDispatchToProps = (dispatch) => ({
-  setError: (message) => dispatch(setError(message)),
-  deleteNote: (id) => dispatch(deleteNote(id)),
   putNote: (note) => dispatch(putNote(note)),
-  postNote: (note) => dispatch(postNote(note))
+  postNote: (note) => dispatch(postNote(note)),
+  deleteNoteThunk: (id) => dispatch(deleteNoteThunk(id)),
 });
 
 export default connect(null, mapDispatchToProps)(NoteForm);
 
 NoteForm.propTypes = {
-  setError: PropTypes.func,
-  deleteNote: PropTypes.func,
+  deleteNoteThunk: PropTypes.func,
   putNote: PropTypes.func,
   postNote: PropTypes.func
 }
