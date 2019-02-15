@@ -11,11 +11,18 @@ export const NoteContainer = ({ notes }) => {
     return <NoteCard {...note} key={note.id}/>
   }).reverse();
 
+  const breakpoints = {
+    default: 4,
+    1100: 3,
+    700: 2,
+    500: 1
+  };
+
   return (
     <div className='NoteContainer'>
       <Link to='/new-note' className='NoteContainer--new-note'>New Note</Link>
       <Masonry
-        breakpointCols={4}
+        breakpointCols={breakpoints}
         className='NoteContainer--cards'
         columnClassName='NoteContainer--cards-masonry-cols'>
         {cards}
