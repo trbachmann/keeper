@@ -1,3 +1,70 @@
 .Loader {
-  
+  z-index: 2;
+  position: absolute;
+  background-color: #fff;
+  width: 100%;
+  height: 100vh;
+  padding-top: 35vh;
+}
+
+.Loader--div {
+	width: 64px;
+	height: 64px;
+	clear: both;
+  margin: 20px auto;
+  position: fixed;
+  z-index: 2;
+}
+
+.Loader--balls, .Loader--balls:before, .Loader--balls:after {
+	border-radius: 50%;
+	background-color: #000;
+	width: 18px;
+	height: 18px;
+	transform-origin: center center;
+	display: inline-block;
+}
+
+.Loader--balls {
+	position: relative;
+	background-color: rgba(#000,1);
+	opacity: 1;
+	animation: middle 1s infinite linear;
+}
+
+.Loader--balls:before, .Loader--balls:after {
+	content: '';
+	position: relative;
+	opacity: 0.25;
+}
+
+.Loader--balls:before {
+	left: 30px;
+	top: 0px;
+	animation: left 1s infinite linear;
+}
+
+.Loader--balls:after {
+	left: -30px;
+	top: -23px;
+	animation: right 1s infinite linear;
+}
+
+@keyframes middle {
+	0% { opacity: 1; }
+	33% {  opacity: 0.25; }
+	66% { opacity: 0.25; }
+	100% {  opacity: 1; }
+}
+
+@keyframes left {
+	0% { opacity: 0.25; }
+	33% { opacity: 1; }
+	66% { opacity: 0.25; }
+}
+
+@keyframes right {
+	33% { opacity: 0.25; }
+	66% { opacity: 1; }
+	100% { opacity: 0.25; }
 }
