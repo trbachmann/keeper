@@ -1,5 +1,6 @@
 import { deleteNoteThunk } from '../deleteNoteThunk';
 import { setError, deleteNote, toggleLoading } from '../../actions';
+import * as api from '../../utils/api';
 
 describe('deleteNoteThunk', () => {
   let mockDispatch;
@@ -8,14 +9,14 @@ describe('deleteNoteThunk', () => {
     mockDispatch = jest.fn();
   });
 
-  it('calls mockDispatch with the deleteNoteThunk action', () => {
+  it('should dispatch toggleLoading with true', () => {
     const thunk = deleteNoteThunk('iau');
     thunk(mockDispatch);
     expect(mockDispatch).toHaveBeenCalledWith(toggleLoading(true));
   });
 
   it('should dispatch toggleLoading with false if the response is okay', async () => {
-    window.fetch = jest.fn().mockImplementation(() => Promise.resolve({
+    api.fetchData = jest.fn().mockImplementation(() => Promise.resolve({
       ok: true,
       status: 204
     }));
@@ -25,7 +26,7 @@ describe('deleteNoteThunk', () => {
   });
 
   it('should dispatch deleteNote with an id if the response is okay', async () => {
-    window.fetch = jest.fn().mockImplementation(() => Promise.resolve({
+    api.fetchData = jest.fn().mockImplementation(() => Promise.resolve({
       ok: true,
       status: 204
     }));
@@ -35,13 +36,19 @@ describe('deleteNoteThunk', () => {
   });
 
   it('should dispatch setError with a message if the response is not okay', async () => {
-    window.fetch = jest.fn().mockImplementation(() => Promise.resolve({
-      ok: false,
-      status: 404,
-      json: () => Promise.resolve('Note not found')
-    }));
+    api.fetchData = jest.fn().mockImplementation(() => {throw new Error('Note not found')});
     const thunk = deleteNoteThunk('sfe');
     await thunk(mockDispatch);
     expect(mockDispatch).toHaveBeenCalledWith(setError('Note not found'));
   });
+
+  it('should return the response.status if everything is okay', async () => {
+    api.fetchData = jest.fn().mockImplementation(() => Promise.resolve({
+      ok: true,
+      status: 204
+    }));
+    const thunk = deleteNoteThunk('sfe');
+    const result = await thunk(mockDispatch);
+    expect(result).toEqual(204);
+  })
 });
