@@ -1,9 +1,16 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { NoteForm } from './NoteForm';
-import { mockNote, mockUpdatedNote } from '../../mockNotes';
+import { NoteForm, mapStateToProps, mapDispatchToProps } from './NoteForm';
+import { mockNote, mockUpdatedNote, mockNotes } from '../../mockNotes';
+import { deleteNoteThunk } from '../../thunks/deleteNoteThunk';
+import { putNote } from '../../thunks/putNote';
+import { postNote } from '../../thunks/postNote';
+import { setStatus } from '../../actions';
 
 jest.mock('shortid', () => ({ generate: jest.fn(() => '') }));
+jest.mock('../../thunks/deleteNoteThunk.js');
+jest.mock('../../thunks/putNote.js');
+jest.mock('../../thunks/postNote.js');
 
 describe('NoteForm', () => {
   let wrapper;
@@ -11,7 +18,15 @@ describe('NoteForm', () => {
   const { id, title, listItems } = mockNote;
   const mockMatch = { params: { id }, path: `/notes/${id}` }
   const mockMatchNewNote = { params: {}, path: '/new-note' }
-  const mockProps = { match: mockMatch, title, listItems }
+  const mockProps = {
+    match: mockMatch,
+    title,
+    listItems,
+    deleteNoteThunk: jest.fn(() => true),
+    putNote: jest.fn(() => true),
+    postNote: jest.fn(() => true),
+    setStatus: jest.fn(() => true)
+  }
   const mockPropsNewNote = {...mockProps, match: mockMatchNewNote}
   const newListItem = {
     id: 'newid',
@@ -38,7 +53,6 @@ describe('NoteForm', () => {
     expect(wrapperNewNote.state()).toEqual({
       title: '',
       listItems: [],
-      status: 0,
       focusedListItemID: null
     });
   });
@@ -142,6 +156,83 @@ describe('NoteForm', () => {
       const expected = [listItems[1]];
       wrapper.instance().handleItemDelete('lpo');
       expect(wrapper.state('listItems')).toEqual(expected);
+    });
+  });
+
+  describe('handleNoteDelete', () => {
+    it('should call deleteNoteThunk with the correct param', async () => {
+      wrapper.instance().handleNoteDelete();
+      expect(mockProps.deleteNoteThunk).toHaveBeenCalledWith(id);
+    });
+
+    it('should call setStatus with the correct param', () => {
+      wrapper.instance().handleNoteDelete();
+      expect(mockProps.setStatus).toHaveBeenCalledWith(0);
+    });
+  });
+
+  describe('handleSubmit', () => {
+    it('should call putNote if there is an id', () => {
+      wrapper.instance().handleSubmit();
+      expect(mockProps.putNote).toHaveBeenCalledWith(mockNote);
+    });
+
+    it('should call postNote if there is not an id', () => {
+      const expected = { title: 'new note', listItems: [] };
+      wrapperNewNote.instance().setState(expected);
+      wrapperNewNote.instance().handleSubmit();
+      expect(mockProps.postNote).toHaveBeenCalledWith(expected);
+    });
+
+    it('should call setStatus with the correct param', () => {
+      wrapper.instance().handleSubmit();
+      expect(mockProps.setStatus).toHaveBeenCalledWith(0);
+    });
+  });
+
+  describe('mapStateToProps', () => {
+    it('should return an object with a status property', () => {
+      const mockState = {
+          notes: mockNotes,
+          isLoading: false,
+          error: '',
+          status: 0
+      };
+      const expected = { status: 0 };
+      const mappedProps = mapStateToProps(mockState);
+      expect(mappedProps).toEqual(expected);
+    });
+  });
+
+  describe('mapDispatchToProps', () => {
+    const mockDispatch = jest.fn();
+
+    it('should call dispatch with a setStatus action', () => {
+      const actionToDispatch = setStatus(204);
+      const mappedProps = mapDispatchToProps(mockDispatch);
+      mappedProps.setStatus(204);
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+    });
+
+    it('should call dispatch with a deleteNoteThunk thunk', () => {
+      const actionToDispatch = deleteNoteThunk('lpo');
+      const mappedProps = mapDispatchToProps(mockDispatch);
+      mappedProps.deleteNoteThunk('lpo');
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+    });
+
+    it('should call dispatch with a postNote thunk', () => {
+      const actionToDispatch = postNote(mockNote);
+      const mappedProps = mapDispatchToProps(mockDispatch);
+      mappedProps.postNote(mockNote);
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+    });
+
+    it('should call dispatch with a putNote thunk', () => {
+      const actionToDispatch = putNote(mockNote);
+      const mappedProps = mapDispatchToProps(mockDispatch);
+      mappedProps.putNote(mockNote);
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
     });
   });
 });
