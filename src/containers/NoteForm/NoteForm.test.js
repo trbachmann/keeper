@@ -77,9 +77,10 @@ describe('NoteForm', () => {
   describe('getListItems', () => {
     it('should return an array of IncompleteItems and CompleteItems', () => {
       const { listItems } = mockUpdatedNote;
+      wrapper.setState({ listItems });
       const incomplete = '.NoteForm--span--incomplete';
       const complete = '.NoteForm--span--complete';
-      const result = wrapper.instance().getListItems(listItems);
+      const result = wrapper.instance().getListItems();
       const wrapperIndex0 = shallow(result[0]);
       const wrapperIndex1 = shallow(result[1]);
       const wrapperIndex2 = shallow(result[2]);
@@ -100,11 +101,11 @@ describe('NoteForm', () => {
 
   describe('getTitleInput', () => {
     it('should return a title input element with the correct value', () => {
-      const result = wrapper.instance().getTitleInput('note title');
+      const result = wrapper.instance().getTitleInput();
       const wrapperInput = shallow(result);
       const inputClass = '.NoteForm--title';
       expect(wrapperInput.find(inputClass)).toHaveLength(1);
-      expect(wrapperInput.find('[value="note title"]')).toHaveLength(1);
+      expect(wrapperInput.find('[value="Workout"]')).toHaveLength(1);
     });
   });
 

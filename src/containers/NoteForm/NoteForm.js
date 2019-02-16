@@ -40,8 +40,8 @@ export class NoteForm extends Component {
     });
   }
 
-  getListItems = (listItems) => {
-    const { focusedListItemID } = this.state;
+  getListItems = () => {
+    const { focusedListItemID, listItems } = this.state;
     const incompleteItems = listItems.filter(item => !item.isComplete);
     const completeItems = listItems.filter(item => item.isComplete);
     return [
@@ -82,10 +82,10 @@ export class NoteForm extends Component {
     />
   )
 
-  getTitleInput = (title) => (
+  getTitleInput = () => (
     <input
       name='title'
-      value={title}
+      value={this.state.title}
       placeholder='Title'
       onChange={(event) => this.setState({ title: event.target.value })}
       className='NoteForm--title'
@@ -139,12 +139,12 @@ export class NoteForm extends Component {
   }
 
   render() {
-    const { title, listItems, status } = this.state; 
+    const { status } = this.state; 
     const { path } = this.props.match;
     return (
       <div className='NoteForm'>
-        {this.getTitleInput(title)}
-        {this.getListItems(listItems)}
+        {this.getTitleInput()}
+        {this.getListItems()}
         {this.getNewListItemInput()}
         <button className='NoteForm--submit' onClick={this.handleSubmit}>
           Save
