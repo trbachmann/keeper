@@ -8,6 +8,7 @@ import IncompleteItem from '../../components/IncompleteItem/IncompleteItem';
 import { putNote } from '../../thunks/putNote';
 import { postNote } from '../../thunks/postNote';
 import { deleteNoteThunk } from '../../thunks/deleteNoteThunk';
+import { setStatus } from '../../actions';
 
 export class NoteForm extends Component {
   constructor() {
@@ -15,7 +16,6 @@ export class NoteForm extends Component {
     this.state = {
       title: '',
       listItems: [],
-      status: 0,
       focusedListItemID: null
     }
   }
@@ -122,24 +122,23 @@ export class NoteForm extends Component {
 
   handleNoteDelete = async () => {
     const { id } = this.props.match.params;
-    const status = await this.props.deleteNoteThunk(id);
-    this.setState({ status });
+    await this.props.deleteNoteThunk(id);
+    this.props.setStatus(0);
   }
 
   handleSubmit = async () => {
     const { id } = this.props.match.params;
     const { title, listItems } = this.state;
-    let status = 0;
     if (id) {
-      status = await this.props.putNote({ id, title, listItems });
+      await this.props.putNote({ id, title, listItems });
     } else {
-      status = await this.props.postNote({ title, listItems });
+      await this.props.postNote({ title, listItems });
     }
-    this.setState({ status });
+    this.props.setStatus(0);
   }
 
   render() {
-    const { status } = this.state; 
+    const { status } = this.props; 
     const { path } = this.props.match;
     return (
       <div className='NoteForm'>
@@ -159,16 +158,23 @@ export class NoteForm extends Component {
   }
 }
 
+export const mapStateToProps = (state) => ({
+  status: state.status
+});
+
 export const mapDispatchToProps = (dispatch) => ({
   putNote: (note) => dispatch(putNote(note)),
   postNote: (note) => dispatch(postNote(note)),
   deleteNoteThunk: (id) => dispatch(deleteNoteThunk(id)),
+  setStatus: (code) => dispatch(setStatus(code))
 });
 
-export default connect(null, mapDispatchToProps)(NoteForm);
+export default connect(mapStateToProps, mapDispatchToProps)(NoteForm);
 
 NoteForm.propTypes = {
   deleteNoteThunk: PropTypes.func,
   putNote: PropTypes.func,
-  postNote: PropTypes.func
+  postNote: PropTypes.func,
+  status: PropTypes.number,
+  setStatus: PropTypes.func
 }
