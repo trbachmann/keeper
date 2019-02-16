@@ -82,4 +82,23 @@ describe('NoteForm', () => {
       expect(wrapperIndex2.find(complete)).toHaveLength(1);
     });
   });
+
+  describe('getNewListItemInput', () => {
+    it('should return an new listItem input element', () => {
+      const result = wrapper.instance().getNewListItemInput();
+      const wrapperInput = shallow(result);
+      const inputClass = '.NoteForm--new-input';
+      expect(wrapperInput.find(inputClass)).toHaveLength(1);
+    });
+  });
+
+  describe('getTitleInput', () => {
+    it('should return a title input element with the correct value', () => {
+      const result = wrapper.instance().getTitleInput('note title');
+      const wrapperInput = shallow(result);
+      const inputClass = '.NoteForm--title';
+      expect(wrapperInput.find(inputClass)).toHaveLength(1);
+      expect(wrapperInput.find('[value="note title"]')).toHaveLength(1);
+    });
+  });
 });
