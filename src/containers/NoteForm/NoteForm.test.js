@@ -13,7 +13,17 @@ describe('NoteForm', () => {
   const mockMatchNewNote = { params: {}, path: '/new-note' }
   const mockProps = { match: mockMatch, title, listItems }
   const mockPropsNewNote = {...mockProps, match: mockMatchNewNote}
-
+  const newListItem = {
+    id: 'newid',
+    description: 'new description',
+    isComplete: false
+  }
+  const updatedListItem = {
+    id: 'lpo',
+    description: 'eat',
+    isComplete: false
+  }
+  
   beforeEach(() => {
     wrapper = shallow(<NoteForm {...mockProps}/>);
     wrapperNewNote = shallow(<NoteForm {...mockPropsNewNote}/>);
@@ -45,23 +55,14 @@ describe('NoteForm', () => {
 
   describe('createListItem', () => {
     it('should return a listItem', () =>{
-      const expected = {
-        id: 'fakeid',
-        description: 'do stuff',
-        isComplete: false
-      }
-      const result = wrapper.instance().createListItem('fakeid', 'do stuff');
-      expect(result).toEqual(expected);
+      const { id, description } = newListItem;
+      const result = wrapper.instance().createListItem(id, description);
+      expect(result).toEqual(newListItem);
     });
   });
 
   describe('editListItem', () => {
     it('should return an updated array of listItems', () => {
-      const updatedListItem = {
-        id: 'lpo',
-        description: 'eat',
-        isComplete: false
-      }
       const expected = [updatedListItem, listItems[1]];
       const result = wrapper.instance().editListItems(listItems, 'lpo', 'eat');
       expect(result).toEqual(expected);
@@ -99,6 +100,26 @@ describe('NoteForm', () => {
       const inputClass = '.NoteForm--title';
       expect(wrapperInput.find(inputClass)).toHaveLength(1);
       expect(wrapperInput.find('[value="note title"]')).toHaveLength(1);
+    });
+  });
+
+  describe('handleChange', () => {
+    it('should set state if the event target is an existing list item', () => {
+      const { id, description } = updatedListItem;
+      const mockEvent = { target: { name: id, value: description } }
+      const expected = [updatedListItem, listItems[1]];
+      wrapper.instance().handleChange(mockEvent);
+      expect(wrapper.state('focusedListItemID')).toEqual(id);
+      expect(wrapper.state('listItems')).toEqual(expected);
+    });
+
+    it('should set state if the event target is a new list item', () => {
+      const { id, description } = newListItem;
+      const mockEvent = { target: { name: id, value: description } }
+      const expected = [...listItems, newListItem];
+      wrapper.instance().handleChange(mockEvent);
+      expect(wrapper.state('focusedListItemID')).toEqual(id);
+      expect(wrapper.state('listItems')).toEqual(expected);
     });
   });
 });
