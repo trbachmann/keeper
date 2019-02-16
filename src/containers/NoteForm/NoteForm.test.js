@@ -67,4 +67,19 @@ describe('NoteForm', () => {
       expect(result).toEqual(expected);
     });
   });
+
+  describe('getListItems', () => {
+    it('should return an array of IncompleteItems and CompleteItems', () => {
+      const { listItems } = mockUpdatedNote;
+      const incomplete = '.NoteForm--span--incomplete';
+      const complete = '.NoteForm--span--complete';
+      const result = wrapper.instance().getListItems(listItems);
+      const wrapperIndex0 = shallow(result[0]);
+      const wrapperIndex1 = shallow(result[1]);
+      const wrapperIndex2 = shallow(result[2]);
+      expect(wrapperIndex0.find(incomplete)).toHaveLength(1);
+      expect(wrapperIndex1.find(incomplete)).toHaveLength(1);
+      expect(wrapperIndex2.find(complete)).toHaveLength(1);
+    });
+  });
 });
