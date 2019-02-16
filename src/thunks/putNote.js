@@ -1,5 +1,5 @@
 import { fetchData, createOptions } from '../utils/api';
-import { setError, updateNote, toggleLoading } from '../actions';
+import { setError, updateNote, toggleLoading, setStatus } from '../actions';
 
 export const putNote = (note) => {
   const { id, title, listItems } = note;
@@ -11,7 +11,7 @@ export const putNote = (note) => {
       const response = await fetchData(url, options);
       dispatch(toggleLoading(false));
       dispatch(updateNote(note));
-      return response.status;
+      dispatch(setStatus(response.status));
     } catch (error) {
       dispatch(setError(error.message));
     }

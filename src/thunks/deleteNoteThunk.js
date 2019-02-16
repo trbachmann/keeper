@@ -1,5 +1,5 @@
 import { fetchData, createOptions } from '../utils/api';
-import { setError, deleteNote, toggleLoading } from '../actions';
+import { setError, deleteNote, toggleLoading, setStatus } from '../actions';
 
 export const deleteNoteThunk = (id) => {
   return async (dispatch) => {
@@ -9,8 +9,8 @@ export const deleteNoteThunk = (id) => {
       dispatch(toggleLoading(true));
       const response = await fetchData(url, options);
       dispatch(toggleLoading(false));
+      dispatch(setStatus(response.status));
       dispatch(deleteNote(id));
-      return response.status;
     } catch (error) {
       dispatch(setError(error.message));
     }

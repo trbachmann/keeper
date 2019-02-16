@@ -1,5 +1,5 @@
 import { fetchData, createOptions } from '../utils/api';
-import { addNote, setError, toggleLoading } from '../actions';
+import { addNote, setError, toggleLoading, setStatus } from '../actions';
 
 export const postNote = (note) => {
   return async (dispatch) => {
@@ -9,10 +9,10 @@ export const postNote = (note) => {
     try {
       dispatch(toggleLoading(true));
       const response = await fetchData(url, options);
-      dispatch(toggleLoading(false));
       const note = await response.json();
+      dispatch(toggleLoading(false));
       dispatch(addNote(note));
-      return response.status;
+      dispatch(setStatus(response.status));
     } catch (error) {
       dispatch(setError(error.message));
     }
