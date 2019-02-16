@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NoteForm should match the snapshot when the path is /new-note 1`] = `
+<div
+  className="NoteForm"
+>
+  <input
+    className="NoteForm--title"
+    name="title"
+    onChange={[Function]}
+    placeholder="Title"
+    value=""
+  />
+  <input
+    className="NoteForm--new-input"
+    name=""
+    onChange={[Function]}
+    placeholder="Add new item"
+    value=""
+  />
+  <button
+    className="NoteForm--submit"
+    onClick={[Function]}
+  >
+    Save
+  </button>
+</div>
+`;
+
+exports[`NoteForm should match the snapshot when the path is /notes/:id 1`] = `
+<div
+  className="NoteForm"
+>
+  <input
+    className="NoteForm--title"
+    name="title"
+    onChange={[Function]}
+    placeholder="Title"
+    value="Workout"
+  />
+  <IncompleteItem
+    description="20 situps"
+    focusedListItemID={null}
+    handleChange={[Function]}
+    handleComplete={[Function]}
+    handleItemDelete={[Function]}
+    id="lpo"
+    key="lpo"
+  />
+  <IncompleteItem
+    description="15 pushups"
+    focusedListItemID={null}
+    handleChange={[Function]}
+    handleComplete={[Function]}
+    handleItemDelete={[Function]}
+    id="lqw"
+    key="lqw"
+  />
+  <input
+    className="NoteForm--new-input"
+    name=""
+    onChange={[Function]}
+    placeholder="Add new item"
+    value=""
+  />
+  <button
+    className="NoteForm--submit"
+    onClick={[Function]}
+  >
+    Save
+  </button>
+  <button
+    className="NoteForm--delete"
+    onClick={[Function]}
+  >
+    Delete
+  </button>
+</div>
+`;
