@@ -27,3 +27,8 @@ export const setError = (message) => ({
   type: 'SET_ERROR',
   message
 });
+
+export const setStatus = (code) => ({
+  type: 'SET_STATUS',
+  code
+});
