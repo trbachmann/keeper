@@ -23,6 +23,11 @@ describe('NoteForm', () => {
     description: 'eat',
     isComplete: false
   }
+  const completedListItem = {
+    id: 'lpo',
+    description: '20 situps',
+    isComplete: true
+  }
   
   beforeEach(() => {
     wrapper = shallow(<NoteForm {...mockProps}/>);
@@ -119,6 +124,22 @@ describe('NoteForm', () => {
       const expected = [...listItems, newListItem];
       wrapper.instance().handleChange(mockEvent);
       expect(wrapper.state('focusedListItemID')).toEqual(id);
+      expect(wrapper.state('listItems')).toEqual(expected);
+    });
+  });
+
+  describe('handleComplete', () => {
+    it('should set state with updated list items', () => {
+      const expected = [completedListItem, listItems[1]];
+      wrapper.instance().handleComplete('lpo');
+      expect(wrapper.state('listItems')).toEqual(expected);
+    });
+  });
+
+  describe('handleItemDelete', () => {
+    it('should set state with remaining list items', () => {
+      const expected = [listItems[1]];
+      wrapper.instance().handleItemDelete('lpo');
       expect(wrapper.state('listItems')).toEqual(expected);
     });
   });
