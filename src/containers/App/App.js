@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { withRouter, Route } from 'react-router-dom';
+import { withRouter, Route, Switch } from 'react-router-dom';
 import NoteContainer from '../NoteContainer/NoteContainer';
 import NoteForm from '../NoteForm/NoteForm';
 import { fetchNotes } from '../../thunks/fetchNotes';
+import Error404 from '../../components/Error404/Error404';
 
 export class App extends Component {
   componentDidMount = () => {
@@ -16,13 +17,28 @@ export class App extends Component {
     return (
       <div className="App">
         <h1>Trapper Keeper</h1>
-        <Route path='/notes/:id' render={({ match }) => {
-          const { id } = match.params;
-          const currentNote = notes.find( note => note.id === id );
-          return currentNote ? <NoteForm {...currentNote} match={match}/> : null;
-        }} />
-        <Route path='/new-note' component={NoteForm}/>
-        <Route path='/' component={NoteContainer}/>
+        <Switch>
+          <Route path='/new-note' render={({ match }) => {
+            return (
+              <Fragment>
+                <NoteContainer/>
+                <NoteForm match={match}/>
+              </Fragment>
+            );
+          }}/>
+          <Route path='/notes/:id' render={({ match }) => {
+            const { id } = match.params;
+            const currentNote = notes.find( note => note.id === id );
+            return currentNote ? (
+              <Fragment>
+                <NoteContainer/>
+                <NoteForm {...currentNote} match={match}/>
+              </Fragment>
+            ) : <Error404 />;
+          }} />
+          <Route exact path='/' component={NoteContainer}/>
+          <Route component={Error404}/>
+        </Switch>
       </div>
     );
   }
