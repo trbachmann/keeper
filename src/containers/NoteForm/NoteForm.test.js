@@ -35,4 +35,11 @@ describe('NoteForm', () => {
   it('should match the snapshot when the path is /notes/:id', () => {
     expect(wrapper).toMatchSnapshot();
   });
+
+  describe('componentDidMount', () => {
+    it('should set state when path is not /new-note', () => {
+      expect(wrapper.state('title')).toEqual(title);
+      expect(wrapper.state('listItems')).toEqual(listItems);
+    });
+  });
 });
