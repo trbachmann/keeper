@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { NoteForm } from './NoteForm';
-import { mockNote } from '../../mockNotes';
+import { mockNote, mockUpdatedNote } from '../../mockNotes';
 
 jest.mock('shortid', () => ({ generate: jest.fn(() => '') }));
 
@@ -40,6 +40,31 @@ describe('NoteForm', () => {
     it('should set state when path is not /new-note', () => {
       expect(wrapper.state('title')).toEqual(title);
       expect(wrapper.state('listItems')).toEqual(listItems);
+    });
+  });
+
+  describe('createListItem', () => {
+    it('should return a listItem', () =>{
+      const expected = {
+        id: 'fakeid',
+        description: 'do stuff',
+        isComplete: false
+      }
+      const result = wrapper.instance().createListItem('fakeid', 'do stuff');
+      expect(result).toEqual(expected);
+    });
+  });
+
+  describe('editListItem', () => {
+    it('should return an updated array of listItems', () => {
+      const updatedListItem = {
+        id: 'lpo',
+        description: 'eat',
+        isComplete: false
+      }
+      const expected = [updatedListItem, listItems[1]];
+      const result = wrapper.instance().editListItems(listItems, 'lpo', 'eat');
+      expect(result).toEqual(expected);
     });
   });
 });
