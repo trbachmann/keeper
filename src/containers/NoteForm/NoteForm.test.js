@@ -22,6 +22,7 @@ describe('NoteForm', () => {
     match: mockMatch,
     title,
     listItems,
+    status: 0,
     deleteNoteThunk: jest.fn(() => true),
     putNote: jest.fn(() => true),
     postNote: jest.fn(() => true),
@@ -62,6 +63,11 @@ describe('NoteForm', () => {
   });
 
   it('should match the snapshot when the path is /notes/:id', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should match the snapshot when 200 < status < 300', () => {
+    wrapper = shallow(<NoteForm {...mockProps} status={200} />);
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -120,6 +126,12 @@ describe('NoteForm', () => {
       const inputClass = '.NoteForm--title';
       expect(wrapperInput.find(inputClass)).toHaveLength(1);
       expect(wrapperInput.find('[value="Workout"]')).toHaveLength(1);
+    });
+
+    it('should set state if the title input changes', () => {
+      const mockEvent = { target: { value: 'A' } };
+      wrapperNewNote.find('.NoteForm--title').simulate('change', mockEvent);
+      expect(wrapperNewNote.state('title')).toEqual('A');
     });
   });
 

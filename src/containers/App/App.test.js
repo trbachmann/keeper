@@ -16,7 +16,7 @@ const mockProps = {
   fetchNotes: jest.fn(() => true)
 }
 
-const mockMatch = { params: { id: 'hghgfjhg' }, path: 'notes/ijf' }
+const mockMatch = { params: { id: 'ijf' }, path: 'notes/ijf' };
 
 jest.mock('../../thunks/fetchNotes.js');
 
@@ -42,10 +42,21 @@ describe('App', () => {
       expect(mockProps.fetchNotes).toHaveBeenCalled();
     });
 
+    it('should return an array of JSX when there is a note', () => {
+      const result = wrapper.instance().getNotesRoute({ match: mockMatch });
+      expect(result).toHaveLength(2);
+    });
+
     it('should return an Error404 component when there is no note', () => {
+      const mockMatch = { params: { id: 'hghgfjhg' }, path: 'notes/hghgfjhg' };
       const result = wrapper.instance().getNotesRoute({ match: mockMatch });
       const wrapper404 = shallow(result);
       expect(wrapper404.find('.Error404')).toHaveLength(1);
+    });
+
+    it('should return an array of JSX', () => {
+      const result = wrapper.instance().getNewNoteRoute({ match: mockMatch });
+      expect(result).toHaveLength(2);
     });
   });
 

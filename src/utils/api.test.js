@@ -23,6 +23,11 @@ describe('api', () => {
     expect(window.fetch).toHaveBeenCalledWith(mockUrl, mockOptions);
   });
 
+  it('should call fetch with the default second param', async () => {
+    await fetchData(mockUrl);
+    expect(window.fetch).toHaveBeenCalledWith(mockUrl, {});
+  });
+
   it('should return response if everything is okay', async () => {
     const result = await fetchData(mockUrl, mockOptions);
     expect(result).toEqual({ status: 201, ok: true });
