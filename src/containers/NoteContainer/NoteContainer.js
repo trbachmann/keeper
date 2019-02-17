@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import Masonry from 'react-masonry-css';
 import Loader from '../../components/Loader/Loader';
 
-export const NoteContainer = ({ notes, isLoading }) => {
+export const NoteContainer = ({ notes, isLoading, isDisabled }) => {
   const cards = notes.map(note => {
     return <NoteCard {...note} key={note.id}/>
   }).reverse();
@@ -20,19 +20,19 @@ export const NoteContainer = ({ notes, isLoading }) => {
     550: 1
   };
 
+  const disabledClass = isDisabled ? '--disabled' : '';
+
   return (
-    <div className='NoteContainer'>
+    <div className={'NoteContainer' + disabledClass}>
       <Link to='/new-note' className='NoteContainer--new-note'>New Note</Link>
       {isLoading && <Loader />}
-      {
-        !isLoading &&
+      {!isLoading &&
         <Masonry
           breakpointCols={breakpoints}
           className='NoteContainer--cards'
           columnClassName='NoteContainer--cards-masonry-cols'>
           {cards}
-        </Masonry>
-      }
+        </Masonry>}
     </div>
   );
 };
@@ -46,5 +46,6 @@ export default connect(mapStateToProps)(NoteContainer);
 
 NoteContainer.propTypes = {
   notes: PropTypes.array,
-  isLoading: PropTypes.bool
+  isLoading: PropTypes.bool,
+  isDisabled: PropTypes.bool
 }
