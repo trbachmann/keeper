@@ -9,6 +9,12 @@ describe('notesReducer', () => {
     expect(result).toEqual(expected);
   });
 
+  it('should return state with an array of notes', () => {
+    const expected = data.mockNotes;
+    const result = notesReducer(undefined, actions.setNotes(data.mockNotes));
+    expect(result).toEqual(expected);
+  });
+
   it('should return state with a new note', () => {
     const initialState = [];
     const expected = [ data.mockNote ];
