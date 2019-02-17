@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { setNotes } from '../../actions';
 import { Link } from 'react-router-dom';
 import uncheckedicon from '../../images/uncheckedicon.svg';
 import checkedicon from '../../images/checkedicon.svg';
@@ -48,14 +46,9 @@ export class NoteCard extends Component {
   }
 }
 
-export const mapDispatchToProps = (dispatch) => ({
-  setNotes: (notes) => dispatch(setNotes(notes))
-});
-
-export default connect(null, mapDispatchToProps)(NoteCard);
+export default NoteCard;
 
 NoteCard.propTypes = {
-  setNotes: PropTypes.func,
   id: PropTypes.string,
   title: PropTypes.string,
   listItems: PropTypes.array
