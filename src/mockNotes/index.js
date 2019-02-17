@@ -72,7 +72,7 @@ export const mockNote = {
     {
       id: 'lqw',
       description: '15 pushups',
-      isComplete: false
+      isComplete: true
     }
   ]
 };
