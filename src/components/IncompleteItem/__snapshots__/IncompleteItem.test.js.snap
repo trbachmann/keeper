@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IncompleteItem should map the snapshot 1`] = `
+<span
+  className="NoteForm--span--incomplete"
+>
+  <img
+    alt="unchecked icon"
+    className="NoteForm--icon--unchecked"
+    onClick={[Function]}
+    src="uncheckedicon.svg"
+  />
+  <input
+    autoFocus={true}
+    className="NoteForm--list-item"
+    name="abc"
+    onChange={[MockFunction]}
+    value="do stuff"
+  />
+  <img
+    alt="delete icon"
+    className="NoteForm--icon--delete"
+    onClick={[Function]}
+    src="deleteicon.svg"
+  />
+</span>
+`;
