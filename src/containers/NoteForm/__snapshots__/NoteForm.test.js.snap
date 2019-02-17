@@ -47,10 +47,8 @@ exports[`NoteForm should match the snapshot when the path is /notes/:id 1`] = `
     id="lpo"
     key="lpo"
   />
-  <IncompleteItem
+  <CompleteItem
     description="15 pushups"
-    focusedListItemID={null}
-    handleChange={[Function]}
     handleComplete={[Function]}
     handleItemDelete={[Function]}
     id="lqw"

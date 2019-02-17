@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NoteCard should pass snapshot test 1`] = `
+<Link
+  className="NoteCard"
+  replace={false}
+  to="/notes/rzz"
+>
+  <h3>
+    Workout
+  </h3>
+  <div>
+    <span
+      className="NoteForm--span--incomplete"
+      key="lpo"
+    >
+      <img
+        alt="unchecked icon"
+        className="NoteForm--icon--unchecked"
+        src="uncheckedicon.svg"
+      />
+      <p
+        className="NoteForm--p--incomplete"
+      >
+        20 situps
+      </p>
+    </span>
+    <span
+      className="NoteForm--span--complete"
+      key="lqw"
+    >
+      <img
+        alt="checked icon"
+        className="NoteForm--icon--checked"
+        src="checkedicon.svg"
+      />
+      <p
+        className="NoteForm--p--complete"
+      >
+        15 pushups
+      </p>
+    </span>
+  </div>
+</Link>
+`;
