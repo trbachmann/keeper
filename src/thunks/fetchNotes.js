@@ -9,7 +9,7 @@ export const fetchNotes = () => {
       dispatch(toggleLoading(false));
       dispatch(setNotes(await response.json()));
     } catch (error) {
-      dispatch(setError(error));
+      dispatch(setError(error.message));
     }
   }
 }
