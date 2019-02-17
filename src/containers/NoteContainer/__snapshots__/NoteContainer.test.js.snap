@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NoteContainer should match the snapshot 1`] = `
+<div
+  className="NoteContainer"
+>
+  <Link
+    className="NoteContainer--new-note"
+    replace={false}
+    to="/new-note"
+  >
+    New Note
+  </Link>
+  <Masonry
+    breakpointCols={
+      Object {
+        "1100": 3,
+        "1500": 4,
+        "550": 1,
+        "790": 2,
+        "default": 5,
+      }
+    }
+    className="NoteContainer--cards"
+    columnClassName="NoteContainer--cards-masonry-cols"
+  >
+    <NoteCard
+      id="fah"
+      key="fah"
+      listItems={
+        Array [
+          Object {
+            "description": "gather ingredients",
+            "id": "ley",
+            "isComplete": false,
+          },
+          Object {
+            "description": "preheat oven",
+            "id": "mei",
+            "isComplete": false,
+          },
+        ]
+      }
+      title="Make dinner"
+    />
+    <NoteCard
+      id="bah"
+      key="bah"
+      listItems={
+        Array [
+          Object {
+            "description": "Stop by King Soopers",
+            "id": "rey",
+            "isComplete": false,
+          },
+          Object {
+            "description": "Stop by Sprouts",
+            "id": "moo",
+            "isComplete": false,
+          },
+        ]
+      }
+      title="Grocery shopping"
+    />
+    <NoteCard
+      id="pdo"
+      key="pdo"
+      listItems={
+        Array [
+          Object {
+            "description": "Setup user account",
+            "id": "cat",
+            "isComplete": false,
+          },
+        ]
+      }
+      title="Start portfolio"
+    />
+    <NoteCard
+      id="ijf"
+      key="ijf"
+      listItems={
+        Array [
+          Object {
+            "description": "read through lesson",
+            "id": "asg",
+            "isComplete": false,
+          },
+          Object {
+            "description": "follow along with tutorial",
+            "id": "rhf",
+            "isComplete": false,
+          },
+        ]
+      }
+      title="Learn Redux"
+    />
+  </Masonry>
+</div>
+`;

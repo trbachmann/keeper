@@ -45,5 +45,6 @@ export const mapStateToProps = (state) => ({
 export default connect(mapStateToProps)(NoteContainer);
 
 NoteContainer.propTypes = {
-  notes: PropTypes.array
+  notes: PropTypes.array,
+  isLoading: PropTypes.bool
 }
