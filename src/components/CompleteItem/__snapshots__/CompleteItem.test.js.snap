@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CompleteItem should pass snapshot test 1`] = `
+<span
+  className="NoteForm--span--complete"
+>
+  <img
+    alt="checked icon"
+    className="NoteForm--icon--checked"
+    onClick={[Function]}
+    src="checkedicon.svg"
+  />
+  <p
+    className="NoteForm--p--complete"
+  >
+    Get groceries
+  </p>
+  <img
+    alt="delete icon"
+    className="NoteForm--icon--delete"
+    onClick={[Function]}
+    src="deleteicon.svg"
+  />
+</span>
+`;
