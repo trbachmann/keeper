@@ -12,6 +12,17 @@ export class App extends Component {
     this.props.fetchNotes();
   }
 
+  getNotesRoute = ({ match }) => {
+    const { id } = match.params;
+    const currentNote = this.props.notes.find( note => note.id === id );
+    return currentNote ? (
+      <Fragment>
+        <NoteContainer/>
+        <NoteForm {...currentNote} match={match}/>
+      </Fragment>
+    ) : <Error404 />;
+  }
+
   render() {
     const { notes } = this.props;
     return (
@@ -26,16 +37,7 @@ export class App extends Component {
               </Fragment>
             );
           }}/>
-          <Route path='/notes/:id' render={({ match }) => {
-            const { id } = match.params;
-            const currentNote = notes.find( note => note.id === id );
-            return currentNote ? (
-              <Fragment>
-                <NoteContainer/>
-                <NoteForm {...currentNote} match={match}/>
-              </Fragment>
-            ) : <Error404 />;
-          }} />
+          <Route path='/notes/:id' render={this.getNotesRoute} />
           <Route exact path='/' component={NoteContainer}/>
           <Route component={Error404}/>
         </Switch>

@@ -16,6 +16,8 @@ const mockProps = {
   fetchNotes: jest.fn(() => true)
 }
 
+const mockMatch = { params: { id: 'hghgfjhg' }, path: 'notes/ijf' }
+
 jest.mock('../../thunks/fetchNotes.js');
 
 describe('App', () => {
@@ -40,6 +42,11 @@ describe('App', () => {
       expect(mockProps.fetchNotes).toHaveBeenCalled();
     });
 
+    it('should return an Error404 component when there is no note', () => {
+      const result = wrapper.instance().getNotesRoute({ match: mockMatch });
+      const wrapper404 = shallow(result);
+      expect(wrapper404.find('.Error404')).toHaveLength(1);
+    });
   });
 
   describe('mapStateToProps', () => {
