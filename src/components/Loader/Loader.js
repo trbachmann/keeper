@@ -1,5 +1,5 @@
-import React from 'react'
-import './Loader.scss'
+import React from 'react';
+import './Loader.scss';
 
 const Loader = () => {
 
@@ -8,6 +8,6 @@ const Loader = () => {
       <div className="Loader--div Loader--balls"></div>
     </div>
   )
-}
+};
 
-export default Loader
+export default Loader;
