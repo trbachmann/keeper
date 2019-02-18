@@ -6,12 +6,14 @@ exports[`NoteCard should pass snapshot test 1`] = `
   replace={false}
   to="/notes/rzz"
 >
-  <h3>
+  <h3
+    className="NoteCard--h3"
+  >
     Workout
   </h3>
   <div>
     <span
-      className="NoteForm--span--incomplete"
+      className="NoteCard--span--incomplete"
       key="lpo"
     >
       <img
@@ -26,7 +28,7 @@ exports[`NoteCard should pass snapshot test 1`] = `
       </p>
     </span>
     <span
-      className="NoteForm--span--complete"
+      className="NoteCard--span--complete"
       key="lqw"
     >
       <img
@@ -40,6 +42,178 @@ exports[`NoteCard should pass snapshot test 1`] = `
         15 pushups
       </p>
     </span>
+  </div>
+</Link>
+`;
+
+exports[`NoteCard should pass snapshot test when there are more than 10 items 1`] = `
+<Link
+  className="NoteCard"
+  replace={false}
+  to="/notes/bah"
+>
+  <h3
+    className="NoteCard--h3"
+  >
+    Grocery shopping
+  </h3>
+  <div>
+    <span
+      className="NoteCard--span--incomplete"
+      key="rey"
+    >
+      <img
+        alt="unchecked icon"
+        className="NoteForm--icon--unchecked"
+        src="uncheckedicon.svg"
+      />
+      <p
+        className="NoteForm--p--incomplete"
+      >
+        Stop by King Soopers
+      </p>
+    </span>
+    <span
+      className="NoteCard--span--incomplete"
+      key="fde"
+    >
+      <img
+        alt="unchecked icon"
+        className="NoteForm--icon--unchecked"
+        src="uncheckedicon.svg"
+      />
+      <p
+        className="NoteForm--p--incomplete"
+      >
+        Stop by King Soopers
+      </p>
+    </span>
+    <span
+      className="NoteCard--span--incomplete"
+      key="dfg"
+    >
+      <img
+        alt="unchecked icon"
+        className="NoteForm--icon--unchecked"
+        src="uncheckedicon.svg"
+      />
+      <p
+        className="NoteForm--p--incomplete"
+      >
+        Stop by King Soopers
+      </p>
+    </span>
+    <span
+      className="NoteCard--span--incomplete"
+      key="ert"
+    >
+      <img
+        alt="unchecked icon"
+        className="NoteForm--icon--unchecked"
+        src="uncheckedicon.svg"
+      />
+      <p
+        className="NoteForm--p--incomplete"
+      >
+        Stop by King Soopers
+      </p>
+    </span>
+    <span
+      className="NoteCard--span--incomplete"
+      key="tuy"
+    >
+      <img
+        alt="unchecked icon"
+        className="NoteForm--icon--unchecked"
+        src="uncheckedicon.svg"
+      />
+      <p
+        className="NoteForm--p--incomplete"
+      >
+        Stop by King Soopers
+      </p>
+    </span>
+    <span
+      className="NoteCard--span--incomplete"
+      key="jkh"
+    >
+      <img
+        alt="unchecked icon"
+        className="NoteForm--icon--unchecked"
+        src="uncheckedicon.svg"
+      />
+      <p
+        className="NoteForm--p--incomplete"
+      >
+        Stop by King Soopers
+      </p>
+    </span>
+    <span
+      className="NoteCard--span--incomplete"
+      key="rew"
+    >
+      <img
+        alt="unchecked icon"
+        className="NoteForm--icon--unchecked"
+        src="uncheckedicon.svg"
+      />
+      <p
+        className="NoteForm--p--incomplete"
+      >
+        Stop by King Soopers
+      </p>
+    </span>
+    <span
+      className="NoteCard--span--incomplete"
+      key="lkj"
+    >
+      <img
+        alt="unchecked icon"
+        className="NoteForm--icon--unchecked"
+        src="uncheckedicon.svg"
+      />
+      <p
+        className="NoteForm--p--incomplete"
+      >
+        Stop by King Soopers
+      </p>
+    </span>
+    <span
+      className="NoteCard--span--incomplete"
+      key="uip"
+    >
+      <img
+        alt="unchecked icon"
+        className="NoteForm--icon--unchecked"
+        src="uncheckedicon.svg"
+      />
+      <p
+        className="NoteForm--p--incomplete"
+      >
+        Stop by King Soopers
+      </p>
+    </span>
+    <span
+      className="NoteCard--span--incomplete"
+      key="xcz"
+    >
+      <img
+        alt="unchecked icon"
+        className="NoteForm--icon--unchecked"
+        src="uncheckedicon.svg"
+      />
+      <p
+        className="NoteForm--p--incomplete"
+      >
+        Stop by King Soopers
+      </p>
+    </span>
+    <p
+      className="NoteCard--ellipsis"
+      key="..."
+    >
+      ...
+    </p>
   </div>
 </Link>
 `;

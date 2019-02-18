@@ -20,6 +20,13 @@ exports[`NoteForm should match the snapshot when 200 < status < 300 1`] = `
     id="lpo"
     key="lpo"
   />
+  <input
+    className="NoteForm--new-input"
+    name=""
+    onChange={[Function]}
+    placeholder="Add item"
+    value=""
+  />
   <CompleteItem
     description="15 pushups"
     handleComplete={[Function]}
@@ -27,22 +34,15 @@ exports[`NoteForm should match the snapshot when 200 < status < 300 1`] = `
     id="lqw"
     key="lqw"
   />
-  <input
-    className="NoteForm--new-input"
-    name=""
-    onChange={[Function]}
-    placeholder="Add new item"
-    value=""
-  />
   <button
-    className="NoteForm--submit"
+    className="NoteForm--button"
     disabled={false}
     onClick={[Function]}
   >
     Save
   </button>
   <button
-    className="NoteForm--delete"
+    className="NoteForm--button"
     onClick={[Function]}
   >
     Delete
@@ -69,11 +69,11 @@ exports[`NoteForm should match the snapshot when the path is /new-note 1`] = `
     className="NoteForm--new-input"
     name=""
     onChange={[Function]}
-    placeholder="Add new item"
+    placeholder="Add item"
     value=""
   />
   <button
-    className="NoteForm--submit"
+    className="NoteForm--button"
     disabled={true}
     onClick={[Function]}
   >
@@ -84,7 +84,7 @@ exports[`NoteForm should match the snapshot when the path is /new-note 1`] = `
     to="/"
   >
     <button
-      className="NoteForm--discard"
+      className="NoteForm--button"
     >
       Discard
     </button>
@@ -112,6 +112,13 @@ exports[`NoteForm should match the snapshot when the path is /notes/:id 1`] = `
     id="lpo"
     key="lpo"
   />
+  <input
+    className="NoteForm--new-input"
+    name=""
+    onChange={[Function]}
+    placeholder="Add item"
+    value=""
+  />
   <CompleteItem
     description="15 pushups"
     handleComplete={[Function]}
@@ -119,22 +126,15 @@ exports[`NoteForm should match the snapshot when the path is /notes/:id 1`] = `
     id="lqw"
     key="lqw"
   />
-  <input
-    className="NoteForm--new-input"
-    name=""
-    onChange={[Function]}
-    placeholder="Add new item"
-    value=""
-  />
   <button
-    className="NoteForm--submit"
+    className="NoteForm--button"
     disabled={false}
     onClick={[Function]}
   >
     Save
   </button>
   <button
-    className="NoteForm--delete"
+    className="NoteForm--button"
     onClick={[Function]}
   >
     Delete

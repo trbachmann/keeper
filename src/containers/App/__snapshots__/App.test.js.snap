@@ -4,7 +4,9 @@ exports[`App App component should match the snapshot 1`] = `
 <div
   className="App"
 >
-  <h1>
+  <h1
+    className="App--h1"
+  >
     Trapper Keeper
   </h1>
   <Switch>
