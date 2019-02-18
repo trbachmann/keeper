@@ -16,9 +16,20 @@
   border-radius: 50%;
   height: 30px;
   width: 30px;
-  border: 1px solid lightgray;
+  border: 2px solid #000;
   outline: none;
   cursor: pointer;
+}
+
+.NoteForm--div--palette-icon {
+  display: flex;
+  justify-content: flex-end;
+  cursor: pointer;
+}
+
+.NoteForm--palette-icon {
+  height: 36px;
+  margin-top: -20px;
 }
 
 .NoteForm--color-options {
@@ -166,7 +177,7 @@
 
 .NoteForm--button {
   width: 104px;
-  margin: 8px;
+  margin: 16px 8px;
   padding: 8px 16px;
   border: none;
   border-radius: 4px;
