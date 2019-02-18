@@ -16,15 +16,16 @@ export class NoteForm extends Component {
     this.state = {
       title: '',
       listItems: [],
-      focusedListItemID: null
+      focusedListItemID: null,
+      color: 'white'
     }
   }
 
   componentDidMount() {
     const { path } = this.props.match;
-    const { title, listItems } = this.props;
+    const { title, listItems, color } = this.props;
     if (path !== '/new-note') {
-      this.setState({ title, listItems });
+      this.setState({ title, listItems, color });
     }
   }
 
@@ -107,6 +108,11 @@ export class NoteForm extends Component {
     this.setState({ listItems: updatedListItems, focusedListItemID: id });
   }
 
+  handleColorChoice = (event) => {
+    const color = event.target.id;
+    this.setState({ color });
+  }
+
   handleComplete = (id) => {
     const { listItems } = this.state;
     const updatedListItems = listItems.map(item => {
@@ -130,21 +136,21 @@ export class NoteForm extends Component {
 
   handleSubmit = async () => {
     const { id } = this.props.match.params;
-    const { title, listItems } = this.state;
+    const { title, listItems, color } = this.state;
     if (id) {
-      await this.props.putNote({ id, title, listItems });
+      await this.props.putNote({ id, title, listItems, color });
     } else {
-      await this.props.postNote({ title, listItems });
+      await this.props.postNote({ title, listItems, color });
     }
     this.props.setStatus(0);
   }
 
   render() {
-    const { title } = this.state;
+    const { title, color } = this.state;
     const { status } = this.props; 
     const { path } = this.props.match;
     return (
-      <div className='NoteForm'>
+      <div className={'NoteForm--background-' + color}>
         {this.getTitleInput()}
         {this.getIncompleteListItems()}
         {this.getNewListItemInput()}
@@ -164,6 +170,16 @@ export class NoteForm extends Component {
             <button className='NoteForm--button'>Discard</button>
           </Link>}
         {(status >= 200 && status < 300) && <Redirect to='/' />}
+        <div className='NoteForm--color-options'>
+          <button id='white' className='NoteForm--color' onClick={this.handleColorChoice}></button>
+          <button id='pink' className='NoteForm--color' onClick={this.handleColorChoice}></button>
+          <button id='orange' className='NoteForm--color' onClick={this.handleColorChoice}></button>
+          <button id='yellow' className='NoteForm--color' onClick={this.handleColorChoice}></button>
+          <button id='green' className='NoteForm--color' onClick={this.handleColorChoice}></button>
+          <button id='blue' className='NoteForm--color' onClick={this.handleColorChoice}></button>
+          <button id='lavender' className='NoteForm--color' onClick={this.handleColorChoice}></button>
+          <button id='gray' className='NoteForm--color' onClick={this.handleColorChoice}></button>
+        </div>
       </div>
     )
   }
