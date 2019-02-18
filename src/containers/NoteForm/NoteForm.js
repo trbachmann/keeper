@@ -79,7 +79,7 @@ export class NoteForm extends Component {
       name={shortid.generate()}
       value=''
       onChange={this.handleChange}
-      placeholder='Add item'
+      placeholder='List item'
       className='NoteForm--new-input'
     />
   )
@@ -140,7 +140,7 @@ export class NoteForm extends Component {
   }
 
   render() {
-    const { title, listItems } = this.state;
+    const { title } = this.state;
     const { status } = this.props; 
     const { path } = this.props.match;
     return (
@@ -151,7 +151,7 @@ export class NoteForm extends Component {
         {this.getCompleteListItems()}
         <button
           className='NoteForm--button'
-          disabled={title.trim() === '' || listItems.length === 0}
+          disabled={title.trim() === ''}
           onClick={this.handleSubmit}
         >
           Save

@@ -24,7 +24,7 @@ exports[`NoteForm should match the snapshot when 200 < status < 300 1`] = `
     className="NoteForm--new-input"
     name=""
     onChange={[Function]}
-    placeholder="Add item"
+    placeholder="List item"
     value=""
   />
   <CompleteItem
@@ -69,7 +69,7 @@ exports[`NoteForm should match the snapshot when the path is /new-note 1`] = `
     className="NoteForm--new-input"
     name=""
     onChange={[Function]}
-    placeholder="Add item"
+    placeholder="List item"
     value=""
   />
   <button
@@ -116,7 +116,7 @@ exports[`NoteForm should match the snapshot when the path is /notes/:id 1`] = `
     className="NoteForm--new-input"
     name=""
     onChange={[Function]}
-    placeholder="Add item"
+    placeholder="List item"
     value=""
   />
   <CompleteItem

@@ -111,8 +111,8 @@ describe('NoteForm', () => {
       wrapper.setState({ listItems });
       const complete = '.NoteForm--span--complete';
       const result = wrapper.instance().getCompleteListItems();
-      const wrapperIndex2 = shallow(result[0]);
-      expect(wrapperIndex2.find(complete)).toHaveLength(1);
+      const wrapperIndex0 = shallow(result[0]);
+      expect(wrapperIndex0.find(complete)).toHaveLength(1);
     });
   });
 
@@ -211,10 +211,10 @@ describe('NoteForm', () => {
   describe('mapStateToProps', () => {
     it('should return an object with a status property', () => {
       const mockState = {
-          notes: mockNotes,
-          isLoading: false,
-          error: '',
-          status: 0
+        notes: mockNotes,
+        isLoading: false,
+        error: '',
+        status: 0
       };
       const expected = { status: 0 };
       const mappedProps = mapStateToProps(mockState);
