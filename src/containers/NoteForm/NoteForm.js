@@ -9,6 +9,7 @@ import { putNote } from '../../thunks/putNote';
 import { postNote } from '../../thunks/postNote';
 import { deleteNoteThunk } from '../../thunks/deleteNoteThunk';
 import { setStatus } from '../../actions';
+import paletteicon from '../../images/paletteicon.svg';
 
 export class NoteForm extends Component {
   constructor() {
@@ -17,7 +18,8 @@ export class NoteForm extends Component {
       title: '',
       listItems: [],
       focusedListItemID: null,
-      color: 'white'
+      color: 'white',
+      showColorOptions: false
     }
   }
 
@@ -145,9 +147,14 @@ export class NoteForm extends Component {
     this.props.setStatus(0);
   }
 
+  toggleShowColorOptions = () => {
+    const { showColorOptions } = this.state;
+    this.setState({ showColorOptions: !showColorOptions });
+  }
+
   render() {
-    const { title, color } = this.state;
-    const { status } = this.props; 
+    const { title, color, showColorOptions } = this.state;
+    const { status } = this.props;
     const { path } = this.props.match;
     return (
       <div className={'NoteForm--background-' + color}>
@@ -162,24 +169,29 @@ export class NoteForm extends Component {
         >
           Save
         </button>
-        {path !== '/new-note' ? 
+        {path !== '/new-note' ?
           <button className='NoteForm--button' onClick={this.handleNoteDelete}>
             Delete
           </button> :
           <Link to='/'>
             <button className='NoteForm--button'>Discard</button>
           </Link>}
-        {(status >= 200 && status < 300) && <Redirect to='/' />}
-        <div className='NoteForm--color-options'>
-          <button id='white' className='NoteForm--color' onClick={this.handleColorChoice}></button>
-          <button id='pink' className='NoteForm--color' onClick={this.handleColorChoice}></button>
-          <button id='orange' className='NoteForm--color' onClick={this.handleColorChoice}></button>
-          <button id='yellow' className='NoteForm--color' onClick={this.handleColorChoice}></button>
-          <button id='green' className='NoteForm--color' onClick={this.handleColorChoice}></button>
-          <button id='blue' className='NoteForm--color' onClick={this.handleColorChoice}></button>
-          <button id='lavender' className='NoteForm--color' onClick={this.handleColorChoice}></button>
-          <button id='gray' className='NoteForm--color' onClick={this.handleColorChoice}></button>
+        {showColorOptions &&
+          <div className='NoteForm--color-options'>
+            <button id='white' className='NoteForm--color' onClick={this.handleColorChoice}></button>
+            <button id='pink' className='NoteForm--color' onClick={this.handleColorChoice}></button>
+            <button id='orange' className='NoteForm--color' onClick={this.handleColorChoice}></button>
+            <button id='yellow' className='NoteForm--color' onClick={this.handleColorChoice}></button>
+            <button id='green' className='NoteForm--color' onClick={this.handleColorChoice}></button>
+            <button id='blue' className='NoteForm--color' onClick={this.handleColorChoice}></button>
+            <button id='lavender' className='NoteForm--color' onClick={this.handleColorChoice}></button>
+            <button id='gray' className='NoteForm--color' onClick={this.handleColorChoice}></button>
+          </div>
+        }
+        <div className='NoteForm--div--palette-icon'>
+          <img className='NoteForm--palette-icon' src={paletteicon} alt='palette icon' onClick={this.toggleShowColorOptions} />
         </div>
+        {(status >= 200 && status < 300) && <Redirect to='/' />}
       </div>
     )
   }
