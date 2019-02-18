@@ -191,3 +191,70 @@ export const mockNotesAfterUpdating = [
     ]
   }
 ];
+
+export const mockNoteLong = { 
+  id: 'bah', 
+  title: 'Grocery shopping', 
+  listItems: [
+    { 
+      id: 'rey', 
+      description: 'Stop by King Soopers', 
+      isComplete: false
+    }, 
+    { 
+      id: 'fde', 
+      description: 'Stop by King Soopers', 
+      isComplete: false
+    }, 
+    { 
+      id: 'dfg', 
+      description: 'Stop by King Soopers', 
+      isComplete: false
+    }, 
+    { 
+      id: 'ert', 
+      description: 'Stop by King Soopers', 
+      isComplete: false
+    }, 
+    { 
+      id: 'tuy', 
+      description: 'Stop by King Soopers', 
+      isComplete: false
+    }, 
+    { 
+      id: 'jkh', 
+      description: 'Stop by King Soopers', 
+      isComplete: false
+    }, 
+    { 
+      id: 'rew', 
+      description: 'Stop by King Soopers', 
+      isComplete: false
+    }, 
+    { 
+      id: 'lkj', 
+      description: 'Stop by King Soopers', 
+      isComplete: false
+    }, 
+    { 
+      id: 'uip', 
+      description: 'Stop by King Soopers', 
+      isComplete: false
+    }, 
+    { 
+      id: 'xcz', 
+      description: 'Stop by King Soopers', 
+      isComplete: false
+    }, 
+    { 
+      id: 'ngv', 
+      description: 'Stop by King Soopers', 
+      isComplete: true
+    },
+    { 
+      id: 'lsd', 
+      description: 'Stop by King Soopers', 
+      isComplete: true
+    }
+  ]
+}
