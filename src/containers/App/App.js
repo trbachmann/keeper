@@ -33,8 +33,8 @@ export class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <h1>Trapper Keeper</h1>
+      <div className='App'>
+        <h1 className='App--h1'>Trapper Keeper</h1>
         <Switch>
           <Route path='/new-note' render={this.getNewNoteRoute} />
           <Route path='/notes/:id' render={this.getNotesRoute} />

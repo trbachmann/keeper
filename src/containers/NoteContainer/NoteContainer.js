@@ -1,11 +1,11 @@
 import React from 'react';
-import './NoteContainer.scss';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { NoteCard } from '../NoteCard/NoteCard';
 import { Link } from 'react-router-dom';
 import Masonry from 'react-masonry-css';
 import Loader from '../../components/Loader/Loader';
+import newnoteicon from '../../images/newnoteicon.svg';
 
 export const NoteContainer = ({ notes, isLoading, isDisabled }) => {
   const cards = notes.map(note => {
@@ -13,18 +13,30 @@ export const NoteContainer = ({ notes, isLoading, isDisabled }) => {
   }).reverse();
 
   const breakpoints = {
-    default: 5,
-    1500: 4,
-    1100: 3,
-    790: 2,
-    550: 1
+    default: 6,
+    1552: 5,
+    1296: 4,
+    1040: 3,
+    784: 2,
+    528: 1
   };
 
   const disabledClass = isDisabled ? '--disabled' : '';
 
   return (
     <div className={'NoteContainer' + disabledClass}>
-      <Link to='/new-note' className='NoteContainer--new-note'>New Note</Link>
+      <div className='NoteContainer--div'>
+        <Link to='/new-note' className='NoteContainer--link'>
+          <img
+            src={newnoteicon}
+            className='NoteContainer--icon--new-note'
+            alt='new note icon'
+          />
+          <span className='NoteContainer--span'>
+            New Note
+          </span>
+        </Link>
+      </div>
       {isLoading && <Loader />}
       {!isLoading &&
         <Masonry

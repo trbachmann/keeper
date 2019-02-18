@@ -94,19 +94,25 @@ describe('NoteForm', () => {
     });
   });
 
-  describe('getListItems', () => {
-    it('should return an array of IncompleteItems and CompleteItems', () => {
+  describe('getIncompleteListItems', () => {
+    it('should return an array of IncompleteItems', () => {
       const { listItems } = mockUpdatedNote;
       wrapper.setState({ listItems });
       const incomplete = '.NoteForm--span--incomplete';
-      const complete = '.NoteForm--span--complete';
-      const result = wrapper.instance().getListItems();
+      const result = wrapper.instance().getIncompleteListItems();
       const wrapperIndex0 = shallow(result[0]);
-      const wrapperIndex1 = shallow(result[1]);
-      const wrapperIndex2 = shallow(result[2]);
       expect(wrapperIndex0.find(incomplete)).toHaveLength(1);
-      expect(wrapperIndex1.find(incomplete)).toHaveLength(1);
-      expect(wrapperIndex2.find(complete)).toHaveLength(1);
+    });
+  });
+
+  describe('getCompleteListItems', () => {
+    it('should return an array of CompleteItems', () => {
+      const { listItems } = mockUpdatedNote;
+      wrapper.setState({ listItems });
+      const complete = '.NoteForm--span--complete';
+      const result = wrapper.instance().getCompleteListItems();
+      const wrapperIndex0 = shallow(result[0]);
+      expect(wrapperIndex0.find(complete)).toHaveLength(1);
     });
   });
 
@@ -205,10 +211,10 @@ describe('NoteForm', () => {
   describe('mapStateToProps', () => {
     it('should return an object with a status property', () => {
       const mockState = {
-          notes: mockNotes,
-          isLoading: false,
-          error: '',
-          status: 0
+        notes: mockNotes,
+        isLoading: false,
+        error: '',
+        status: 0
       };
       const expected = { status: 0 };
       const mappedProps = mapStateToProps(mockState);

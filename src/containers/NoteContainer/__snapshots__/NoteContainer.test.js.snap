@@ -4,21 +4,35 @@ exports[`NoteContainer should match the snapshot 1`] = `
 <div
   className="NoteContainer"
 >
-  <Link
-    className="NoteContainer--new-note"
-    replace={false}
-    to="/new-note"
+  <div
+    className="NoteContainer--div"
   >
-    New Note
-  </Link>
+    <Link
+      className="NoteContainer--link"
+      replace={false}
+      to="/new-note"
+    >
+      <img
+        alt="new note icon"
+        className="NoteContainer--icon--new-note"
+        src="newnoteicon.svg"
+      />
+      <span
+        className="NoteContainer--span"
+      >
+        New Note
+      </span>
+    </Link>
+  </div>
   <Masonry
     breakpointCols={
       Object {
-        "1100": 3,
-        "1500": 4,
-        "550": 1,
-        "790": 2,
-        "default": 5,
+        "1040": 3,
+        "1296": 4,
+        "1552": 5,
+        "528": 1,
+        "784": 2,
+        "default": 6,
       }
     }
     className="NoteContainer--cards"
@@ -103,21 +117,35 @@ exports[`NoteContainer should match the snapshot when isDisabled is true 1`] = `
 <div
   className="NoteContainer--disabled"
 >
-  <Link
-    className="NoteContainer--new-note"
-    replace={false}
-    to="/new-note"
+  <div
+    className="NoteContainer--div"
   >
-    New Note
-  </Link>
+    <Link
+      className="NoteContainer--link"
+      replace={false}
+      to="/new-note"
+    >
+      <img
+        alt="new note icon"
+        className="NoteContainer--icon--new-note"
+        src="newnoteicon.svg"
+      />
+      <span
+        className="NoteContainer--span"
+      >
+        New Note
+      </span>
+    </Link>
+  </div>
   <Masonry
     breakpointCols={
       Object {
-        "1100": 3,
-        "1500": 4,
-        "550": 1,
-        "790": 2,
-        "default": 5,
+        "1040": 3,
+        "1296": 4,
+        "1552": 5,
+        "528": 1,
+        "784": 2,
+        "default": 6,
       }
     }
     className="NoteContainer--cards"
@@ -202,13 +230,26 @@ exports[`NoteContainer should match the snapshot when isLoading is true 1`] = `
 <div
   className="NoteContainer"
 >
-  <Link
-    className="NoteContainer--new-note"
-    replace={false}
-    to="/new-note"
+  <div
+    className="NoteContainer--div"
   >
-    New Note
-  </Link>
+    <Link
+      className="NoteContainer--link"
+      replace={false}
+      to="/new-note"
+    >
+      <img
+        alt="new note icon"
+        className="NoteContainer--icon--new-note"
+        src="newnoteicon.svg"
+      />
+      <span
+        className="NoteContainer--span"
+      >
+        New Note
+      </span>
+    </Link>
+  </div>
   <Loader />
 </div>
 `;
