@@ -1,3 +1,8 @@
+.NoteContainer--disabled {
+  pointer-events: none;
+  filter: opacity(0.9) blur(.7px);
+}
+
 .NoteContainer--new-note {
   display: block;
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import shortid from 'shortid';
 import CompleteItem from '../../components/CompleteItem/CompleteItem';
 import IncompleteItem from '../../components/IncompleteItem/IncompleteItem';
@@ -138,6 +138,7 @@ export class NoteForm extends Component {
   }
 
   render() {
+    const { title, listItems } = this.state;
     const { status } = this.props; 
     const { path } = this.props.match;
     return (
@@ -145,13 +146,20 @@ export class NoteForm extends Component {
         {this.getTitleInput()}
         {this.getListItems()}
         {this.getNewListItemInput()}
-        <button className='NoteForm--submit' onClick={this.handleSubmit}>
+        <button
+          className='NoteForm--submit'
+          disabled={title.trim() === '' || listItems.length === 0}
+          onClick={this.handleSubmit}
+        >
           Save
         </button>
-        {path !== '/new-note' && 
+        {path !== '/new-note' ? 
           <button className='NoteForm--delete' onClick={this.handleNoteDelete}>
             Delete
-          </button>}
+          </button> :
+          <Link to='/'>
+            <button className='NoteForm--discard'>Discard</button>
+          </Link>}
         {(status >= 200 && status < 300) && <Redirect to='/' />}
       </div>
     )
