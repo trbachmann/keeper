@@ -13,6 +13,46 @@
   }
 }
 
+.NoteCard--background-pink {
+  @extend .NoteCard;
+  background-color: $pink-background;
+}
+
+.NoteCard--background-orange {
+  @extend .NoteCard;
+  background-color: $orange-background;
+}
+
+.NoteCard--background-gray {
+  @extend .NoteCard;
+  background-color: $gray-background;
+}
+
+.NoteCard--background-yellow {
+  @extend .NoteCard;
+  background-color: $yellow-background;
+}
+
+.NoteCard--background-lavender {
+  @extend .NoteCard;
+  background-color: $lavender-background;
+}
+
+.NoteCard--background-green {
+  @extend .NoteCard;
+  background-color: $green-background;
+}
+
+.NoteCard--background-blue {
+  @extend .NoteCard;
+  background-color: $blue-background;
+}
+
+.NoteCard--background-white {
+  @extend .NoteCard;
+  background-color: #fff;
+}
+
 .NoteCard--h3 {
   font-weight: 400;
   font-size: 1.1rem;

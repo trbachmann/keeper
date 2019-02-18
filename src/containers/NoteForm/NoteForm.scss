@@ -12,9 +12,99 @@
   box-shadow: $heavy-shadow;
 }
 
+.NoteForm--color {
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  border: 1px solid lightgray;
+  outline: none;
+  cursor: pointer;
+}
+
+.NoteForm--color-options {
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 30px);
+  grid-gap: 8px 8px;
+  justify-content: center;
+}
+
+.NoteForm--background-pink {
+  @extend .NoteForm;
+  background-color: $pink-background;
+}
+
+#pink {
+  background-color: $pink-background;
+}
+
+.NoteForm--background-orange {
+  @extend .NoteForm;
+  background-color: $orange-background;
+}
+
+#orange {
+  background-color: $orange-background;
+}
+
+.NoteForm--background-gray {
+  @extend .NoteForm;
+  background-color: $gray-background;
+}
+
+#gray {
+  background-color: $gray-background;
+}
+
+.NoteForm--background-yellow {
+  @extend .NoteForm;
+  background-color: $yellow-background;
+}
+
+#yellow {
+  background-color: $yellow-background;
+}
+
+.NoteForm--background-lavender {
+  @extend .NoteForm;
+  background-color: $lavender-background;
+}
+
+#lavender {
+  background-color: $lavender-background;
+}
+
+.NoteForm--background-green {
+  @extend .NoteForm;
+  background-color: $green-background;
+}
+
+#green {
+  background-color: $green-background;
+}
+
+.NoteForm--background-blue {
+  @extend .NoteForm;
+  background-color: $blue-background;
+}
+
+#blue {
+  background-color: $blue-background;
+}
+
+.NoteForm--background-white {
+  @extend .NoteForm;
+  background-color: #fff;
+}
+
+#white {
+  background-color: #fff;
+}
+
 .NoteForm--list-item,
 .NoteForm--p--complete,
 .NoteForm--p--incomplete {
+  background-color: transparent;
   display: inline-block;
   width: 80%;
   border: none;
@@ -65,7 +155,7 @@
 .NoteForm--icon--unchecked,
 .NoteForm--icon--checked {
   @extend %icon;
-  margin-left: auto; 
+  margin-left: auto;
 }
 
 .NoteForm--icon--delete {
