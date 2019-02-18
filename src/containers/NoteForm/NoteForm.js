@@ -40,36 +40,38 @@ export class NoteForm extends Component {
     });
   }
 
-  getListItems = () => {
+  getIncompleteListItems = () => {
     const { focusedListItemID, listItems } = this.state;
     const incompleteItems = listItems.filter(item => !item.isComplete);
+    return incompleteItems.map(item => {
+      return (
+        <IncompleteItem
+          key={item.id}
+          id={item.id}
+          description={item.description}
+          focusedListItemID={focusedListItemID}
+          handleComplete={this.handleComplete}
+          handleChange={this.handleChange}
+          handleItemDelete={this.handleItemDelete}
+        />
+      );
+    });
+  }
+
+  getCompleteListItems = () => {
+    const { listItems } = this.state;
     const completeItems = listItems.filter(item => item.isComplete);
-    return [
-      ...incompleteItems.map(item => {
-        return (
-          <IncompleteItem
-            key={item.id}
-            id={item.id}
-            description={item.description}
-            focusedListItemID={focusedListItemID}
-            handleComplete={this.handleComplete}
-            handleChange={this.handleChange}
-            handleItemDelete={this.handleItemDelete}
-          />
-        );
-      }),
-      ...completeItems.map(item => {
-        return (
-          <CompleteItem
-            key={item.id}
-            id={item.id}
-            description={item.description}
-            handleComplete={this.handleComplete}
-            handleItemDelete={this.handleItemDelete}
-          />
-        );
-      })
-    ];
+    return completeItems.map(item => {
+      return (
+        <CompleteItem
+          key={item.id}
+          id={item.id}
+          description={item.description}
+          handleComplete={this.handleComplete}
+          handleItemDelete={this.handleItemDelete}
+        />
+      );
+    });
   }
 
   getNewListItemInput = () => (
@@ -77,7 +79,7 @@ export class NoteForm extends Component {
       name={shortid.generate()}
       value=''
       onChange={this.handleChange}
-      placeholder='Add new item'
+      placeholder='Add item'
       className='NoteForm--new-input'
     />
   )
@@ -144,21 +146,22 @@ export class NoteForm extends Component {
     return (
       <div className='NoteForm'>
         {this.getTitleInput()}
-        {this.getListItems()}
+        {this.getIncompleteListItems()}
         {this.getNewListItemInput()}
+        {this.getCompleteListItems()}
         <button
-          className='NoteForm--submit'
+          className='NoteForm--button'
           disabled={title.trim() === '' || listItems.length === 0}
           onClick={this.handleSubmit}
         >
           Save
         </button>
         {path !== '/new-note' ? 
-          <button className='NoteForm--delete' onClick={this.handleNoteDelete}>
+          <button className='NoteForm--button' onClick={this.handleNoteDelete}>
             Delete
           </button> :
           <Link to='/'>
-            <button className='NoteForm--discard'>Discard</button>
+            <button className='NoteForm--button'>Discard</button>
           </Link>}
         {(status >= 200 && status < 300) && <Redirect to='/' />}
       </div>
