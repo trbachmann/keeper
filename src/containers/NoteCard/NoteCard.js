@@ -5,7 +5,7 @@ import uncheckedicon from '../../images/uncheckedicon.svg';
 import checkedicon from '../../images/checkedicon.svg';
 
 export const NoteCard = (props) => {
-  const { id, title, listItems } = props;
+  const { id, title, listItems, color } = props;
   const incompleteItems = listItems.filter(item => !item.isComplete);
   const completeItems = listItems.filter(item => item.isComplete);
   const result = [
@@ -42,7 +42,7 @@ export const NoteCard = (props) => {
   }
 
   return (
-    <Link to={'/notes/' + id} className='NoteCard'>
+    <Link to={'/notes/' + id} className={'NoteCard--background-' + color}>
       <h3 className='NoteCard--h3'>{title}</h3>
       <div>{result}</div>
     </Link>
