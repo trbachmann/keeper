@@ -3,9 +3,9 @@ import { addNote, setError, toggleLoading, setStatus } from '../actions';
 
 export const postNote = (note) => {
   return async (dispatch) => {
-    const { title, listItems } = note;
+    const { title, listItems, color } = note;
     const url = 'http://localhost:3001/api/v1/notes/';
-    const options = createOptions('POST', { title, listItems });
+    const options = createOptions('POST', { title, listItems, color });
     try {
       dispatch(toggleLoading(true));
       const response = await fetchData(url, options);
