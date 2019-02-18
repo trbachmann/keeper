@@ -1,10 +1,29 @@
+.NoteContainer {
+  width: 1536px;
+  margin: auto;
+}
+
 .NoteContainer--disabled {
+  @extend .NoteContainer;
   pointer-events: none;
   filter: opacity(0.9) blur(.7px);
 }
 
-.NoteContainer--new-note {
+.NoteContainer--div {
+  width: 100%;
+  display: grid;
+  margin: 24px 0 16px;
+  justify-content: center;
+  grid-template-columns: 48px 88px 48px;
+}
+
+.NoteContainer--link {
   display: block;
+  font-size: 1.2rem;
+  text-decoration: none;
+  color: #000;
+  display: grid;
+  grid-template-columns: 48px 88px;
 }
 
 .NoteContainer--cards {
@@ -14,4 +33,51 @@
 
 .NoteContainer--cards-masonry-cols {
   background-clip: padding-box;
+}
+
+.NoteContainer--icon--new-note {
+  width: 32px;
+  justify-self: right;
+  margin-right: 16px;
+  border-radius: 5px;
+  box-shadow: $light-shadow;
+  
+  &:hover {
+    box-shadow: $heavy-shadow;
+  }
+}
+
+.NoteContainer--span {
+  justify-self: left;
+  align-self: center;
+}
+
+@media screen and (max-width: 1552px) {
+  .NoteContainer {
+    width: 1280px;
+  }
+}
+
+@media screen and (max-width: 1296px) {
+  .NoteContainer {
+    width: 1024px;
+  }
+}
+
+@media screen and (max-width: 1040px) {
+  .NoteContainer {
+    width: 768px;
+  }
+}
+
+@media screen and (max-width: 784px) {
+  .NoteContainer {
+    width: 512px;
+  }
+}
+
+@media screen and (max-width: 528px) {
+  .NoteContainer {
+    width: 256px;
+  }
 }
