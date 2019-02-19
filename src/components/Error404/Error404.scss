@@ -1,12 +1,21 @@
-.Error404--img {
-  width: 60%;
-  margin-top: 30px;
+.Error404 {
+  padding-top: 40px;
+  width: 100%;
+  height: 100vh;
+  background-image: url('../images/blank-note-unsplash.jpg');
+  background-size: cover;
+  background-position: bottom;
 }
 
-.Error404--div {
-  position: fixed;
-  width: 100%;
-  top: 26vh;
-  color: white;
-  font-size: 65px;
+.Error404--h2 {
+  color: #fff;
+  font-size: 5rem;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.Error404--Link {
+  color: $primary-dark;
+  font-size: 3rem;
+  cursor: pointer;
 }
