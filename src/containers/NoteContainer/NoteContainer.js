@@ -18,15 +18,23 @@ export class NoteContainer extends Component {
       ],
       color: 'white'
     };
-    return <NoteCard {...welcomeMessage} key={welcomeMessage.id}/>
+    return <NoteCard {...welcomeMessage} key={welcomeMessage.id} />
   }
 
   render() {
-    const { notes, isDisabled } = this.props;
-    const cards = notes.map((note, index) => {
-      return <NoteCard {...note} key={note.id} index={index}/>
+    const { notes, query, isDisabled } = this.props;
+
+    const mappedNotes = query ? notes.filter(note => {
+      return note.title.toLowerCase().includes(query) ||
+        note.listItems.filter(item => {
+          return item.description.toLowerCase().includes(query)
+        }).length;
+    }) : notes;
+
+    const cards = mappedNotes.map((note, index) => {
+      return <NoteCard {...note} key={note.id} index={index} />
     }).reverse();
-    
+
     const breakpoints = {
       default: 6,
       1552: 5,
@@ -49,30 +57,33 @@ export class NoteContainer extends Component {
             <img
               src={newnoteicon}
               className='NoteContainer--icon--new-note'
-              alt='new note icon'/>
+              alt='new note icon' />
             <span className='NoteContainer--span'>
               New Note
             </span>
           </Link>
         </div>
-          <Masonry
-            breakpointCols={breakpoints}
-            className='NoteContainer--cards'
-            columnClassName='NoteContainer--cards-masonry-cols'>
-            {cards}
-          </Masonry>
+        <Masonry
+          breakpointCols={breakpoints}
+          className='NoteContainer--cards'
+          columnClassName='NoteContainer--cards-masonry-cols'>
+          {cards}
+        </Masonry>
       </div>
     );
   }
 }
 
 export const mapStateToProps = (state) => ({
-  notes: state.notes
+  notes: state.notes,
+  query: state.query
 });
 
 export default connect(mapStateToProps)(NoteContainer);
 
 NoteContainer.propTypes = {
   notes: PropTypes.array,
+  isLoading: PropTypes.bool,
+  query: PropTypes.string,
   isDisabled: PropTypes.bool
 }
