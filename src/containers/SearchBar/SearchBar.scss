@@ -1,0 +1,13 @@
+.SearchBar--input {
+  background-color: transparent;
+  display: inline-block;
+  width: 200px;
+  border: none;
+  outline: none;
+  text-align: left;
+  border-bottom: 1px solid #000;
+
+  &::placeholder {
+    opacity: .4;
+  }
+}
