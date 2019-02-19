@@ -1,13 +1,261 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NoteCard should pass snapshot test 1`] = `
-<ContextConsumer>
-  <Component />
-</ContextConsumer>
+<Link
+  replace={false}
+  to="/notes/rzz"
+>
+  <div
+    className="NoteCard--background-lavender"
+    draggable={true}
+    onDragOver={[Function]}
+    onDragStart={[Function]}
+    onDrop={[Function]}
+  >
+    <h3
+      className="NoteCard--h3"
+    >
+      Workout
+    </h3>
+    <div>
+      <span
+        className="NoteCard--span--incomplete"
+        key="lpo"
+      >
+        <img
+          alt="unchecked icon"
+          className="NoteForm--icon--unchecked"
+          src="uncheckedicon.svg"
+        />
+        <p
+          className="NoteForm--p--incomplete"
+        >
+          20 situps
+        </p>
+      </span>
+      <span
+        className="NoteCard--span--complete"
+        key="lqw"
+      >
+        <img
+          alt="checked icon"
+          className="NoteForm--icon--checked"
+          src="checkedicon.svg"
+        />
+        <p
+          className="NoteForm--p--complete"
+        >
+          15 pushups
+        </p>
+      </span>
+    </div>
+    <span
+      className="NoteCard--icon-container"
+    >
+      <img
+        alt="edit icon"
+        className="NoteCard--delete-icon"
+        src="edit.svg"
+      />
+      <img
+        alt="delete icon"
+        className="NoteCard--edit-icon"
+        src="delete.svg"
+      />
+    </span>
+  </div>
+</Link>
 `;
 
 exports[`NoteCard should pass snapshot test when there are more than 10 items 1`] = `
-<ContextConsumer>
-  <Component />
-</ContextConsumer>
+<Link
+  replace={false}
+  to="/notes/bah"
+>
+  <div
+    className="NoteCard--background-undefined"
+    draggable={true}
+    onDragOver={[Function]}
+    onDragStart={[Function]}
+    onDrop={[Function]}
+  >
+    <h3
+      className="NoteCard--h3"
+    >
+      Grocery shopping
+    </h3>
+    <div>
+      <span
+        className="NoteCard--span--incomplete"
+        key="rey"
+      >
+        <img
+          alt="unchecked icon"
+          className="NoteForm--icon--unchecked"
+          src="uncheckedicon.svg"
+        />
+        <p
+          className="NoteForm--p--incomplete"
+        >
+          Stop by King Soopers
+        </p>
+      </span>
+      <span
+        className="NoteCard--span--incomplete"
+        key="fde"
+      >
+        <img
+          alt="unchecked icon"
+          className="NoteForm--icon--unchecked"
+          src="uncheckedicon.svg"
+        />
+        <p
+          className="NoteForm--p--incomplete"
+        >
+          Stop by King Soopers
+        </p>
+      </span>
+      <span
+        className="NoteCard--span--incomplete"
+        key="dfg"
+      >
+        <img
+          alt="unchecked icon"
+          className="NoteForm--icon--unchecked"
+          src="uncheckedicon.svg"
+        />
+        <p
+          className="NoteForm--p--incomplete"
+        >
+          Stop by King Soopers
+        </p>
+      </span>
+      <span
+        className="NoteCard--span--incomplete"
+        key="ert"
+      >
+        <img
+          alt="unchecked icon"
+          className="NoteForm--icon--unchecked"
+          src="uncheckedicon.svg"
+        />
+        <p
+          className="NoteForm--p--incomplete"
+        >
+          Stop by King Soopers
+        </p>
+      </span>
+      <span
+        className="NoteCard--span--incomplete"
+        key="tuy"
+      >
+        <img
+          alt="unchecked icon"
+          className="NoteForm--icon--unchecked"
+          src="uncheckedicon.svg"
+        />
+        <p
+          className="NoteForm--p--incomplete"
+        >
+          Stop by King Soopers
+        </p>
+      </span>
+      <span
+        className="NoteCard--span--incomplete"
+        key="jkh"
+      >
+        <img
+          alt="unchecked icon"
+          className="NoteForm--icon--unchecked"
+          src="uncheckedicon.svg"
+        />
+        <p
+          className="NoteForm--p--incomplete"
+        >
+          Stop by King Soopers
+        </p>
+      </span>
+      <span
+        className="NoteCard--span--incomplete"
+        key="rew"
+      >
+        <img
+          alt="unchecked icon"
+          className="NoteForm--icon--unchecked"
+          src="uncheckedicon.svg"
+        />
+        <p
+          className="NoteForm--p--incomplete"
+        >
+          Stop by King Soopers
+        </p>
+      </span>
+      <span
+        className="NoteCard--span--incomplete"
+        key="lkj"
+      >
+        <img
+          alt="unchecked icon"
+          className="NoteForm--icon--unchecked"
+          src="uncheckedicon.svg"
+        />
+        <p
+          className="NoteForm--p--incomplete"
+        >
+          Stop by King Soopers
+        </p>
+      </span>
+      <span
+        className="NoteCard--span--incomplete"
+        key="uip"
+      >
+        <img
+          alt="unchecked icon"
+          className="NoteForm--icon--unchecked"
+          src="uncheckedicon.svg"
+        />
+        <p
+          className="NoteForm--p--incomplete"
+        >
+          Stop by King Soopers
+        </p>
+      </span>
+      <span
+        className="NoteCard--span--incomplete"
+        key="xcz"
+      >
+        <img
+          alt="unchecked icon"
+          className="NoteForm--icon--unchecked"
+          src="uncheckedicon.svg"
+        />
+        <p
+          className="NoteForm--p--incomplete"
+        >
+          Stop by King Soopers
+        </p>
+      </span>
+      <p
+        className="NoteCard--ellipsis"
+        key="..."
+      >
+        ...
+      </p>
+    </div>
+    <span
+      className="NoteCard--icon-container"
+    >
+      <img
+        alt="edit icon"
+        className="NoteCard--delete-icon"
+        src="edit.svg"
+      />
+      <img
+        alt="delete icon"
+        className="NoteCard--edit-icon"
+        src="delete.svg"
+      />
+    </span>
+  </div>
+</Link>
 `;
