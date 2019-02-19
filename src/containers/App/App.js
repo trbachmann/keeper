@@ -7,6 +7,7 @@ import NoteForm from '../NoteForm/NoteForm';
 import { fetchNotes } from '../../thunks/fetchNotes';
 import Error404 from '../../components/Error404/Error404';
 import notebookicon from '../../images/notebook.svg';
+import Loader from '../../components/Loader/Loader';
 
 export class App extends Component {
   componentDidMount = () => {
@@ -40,6 +41,7 @@ export class App extends Component {
           <img className='App--notebook-icon' src={notebookicon} alt='note icon' />
           Keeper
         </h1>
+        {this.props.isLoading && <Loader />}
         <Switch>
           <Route path='/new-note' render={this.getNewNoteRoute} />
           <Route path='/notes/:id' render={this.getNotesRoute} />

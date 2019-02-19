@@ -1,7 +1,7 @@
 .Loader {
   z-index: 2;
   position: absolute;
-  background-color: #fff;
+  background-color: transparent;
   width: 100%;
   height: 100vh;
   padding-top: 35vh;
@@ -18,7 +18,7 @@
 
 .Loader--balls, .Loader--balls:before, .Loader--balls:after {
 	border-radius: 50%;
-	background-color: #000;
+	background-color: $secondary-dark;
 	width: 18px;
 	height: 18px;
 	transform-origin: center center;
@@ -27,7 +27,7 @@
 
 .Loader--balls {
 	position: relative;
-	background-color: rgba(#000,1);
+	background-color: $secondary-dark;
 	opacity: 1;
 	animation: middle 1s infinite linear;
 }
