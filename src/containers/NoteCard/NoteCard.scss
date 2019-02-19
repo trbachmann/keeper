@@ -67,7 +67,7 @@
   font-weight: 300;
   font-size: 1rem;
   margin: 8px;
-  word-break: break-all;
+  overflow-wrap: break-word;
 }
 
 .NoteCard--ellipsis {
