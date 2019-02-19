@@ -136,7 +136,8 @@ export class NoteForm extends Component {
     this.props.setStatus(0);
   }
 
-  handleSubmit = async () => {
+  handleSubmit = async (event) => {
+    event.preventDefault();
     const { id } = this.props.match.params;
     const { title, listItems, color } = this.state;
     if (id) {
@@ -157,7 +158,7 @@ export class NoteForm extends Component {
     const { status } = this.props;
     const { path } = this.props.match;
     return (
-      <div className={'NoteForm--background-' + color}>
+      <form className={'NoteForm--background-' + color} onSubmit={this.handleSubmit}>
         {this.getTitleInput()}
         {this.getIncompleteListItems()}
         {this.getNewListItemInput()}
@@ -165,7 +166,7 @@ export class NoteForm extends Component {
         <button
           className={'NoteForm--button-' + color}
           disabled={title.trim() === ''}
-          onClick={this.handleSubmit}
+          // onClick={this.handleSubmit}
         >
           Save
         </button>
@@ -192,7 +193,7 @@ export class NoteForm extends Component {
           <img className='NoteForm--palette-icon' src={paletteicon} alt='palette icon' onClick={this.toggleShowColorOptions} />
         </div>
         {(status >= 200 && status < 300) && <Redirect to='/' />}
-      </div>
+      </form>
     )
   }
 }
