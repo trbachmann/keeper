@@ -1,7 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { NoteCard } from './NoteCard';
+import { NoteCard, mapStateToProps, mapDispatchToProps } from './NoteCard';
+import { putAllNotes } from '../../thunks/putAllNotes';
 import { mockNotes, mockNote, mockNoteLong } from '../../mockNotes';
+
+jest.mock('../../thunks/putAllNotes.js');
 
 describe('NoteCard', () => {
   let wrapper;
@@ -51,6 +54,30 @@ describe('NoteCard', () => {
       wrapper.find('.NoteCard--background-lavender').simulate('drop', mockEvent);
       const expected = [mockNotes[1], mockNotes[0], ...mockNotes.slice(2)];
       expect(mockProps.putAllNotes).toHaveBeenCalledWith(expected);
+    });
+  });
+
+  describe('mapStateToProps', () => {
+    it('should take in initial state and return a props object with notes', () => {
+      const mockState = {
+        notes: mockNotes,
+        isLoading: false,
+        status: 0,
+        error: ''
+      }
+      const expected = { notes: mockNotes };
+      const result = mapStateToProps(mockState);
+      expect(result).toEqual(expected);
+    });
+  });
+
+  describe('mapDispatchToProps', () => {
+    it('should call dispatch with putAllNotes when props.putAllNotes is called', () => {
+      const mockDispatch = jest.fn();
+      const actionToDispatch = putAllNotes(mockNotes);
+      const mappedProps = mapDispatchToProps(mockDispatch);
+      mappedProps.putAllNotes(mockNotes);
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
     });
   });
 });
