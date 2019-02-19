@@ -173,35 +173,37 @@ export class NoteForm extends Component {
     });
 
     return (
-      <form className={'NoteForm--background-' + color} onSubmit={this.handleSubmit}>
-        <div className='NoteForm--title-and-listitems'>
-          {this.getTitleInput()}
-          {this.getIncompleteListItems()}
-          {this.getNewListItemInput()}
-          {this.getCompleteListItems()}
-        </div>
-        <button
-          className={'NoteForm--button-' + color}
-          disabled={title.trim() === ''}>
-          Save
-        </button>
-        {path !== '/new-note' ?
-          <button className={'NoteForm--button-' + color} onClick={this.handleNoteDelete}>
-            Delete
-          </button> :
-          <Link to='/'>
-            <button className={'NoteForm--button-' + color}>Discard</button>
-          </Link>}
-        {showColorOptions &&
-          <div className='NoteForm--color-options'>
-            {buttons}
+      <div className='NoteForm--div--overlay'>
+        <form className={'NoteForm--background-' + color} onSubmit={this.handleSubmit}>
+          <div className='NoteForm--title-and-listitems'>
+            {this.getTitleInput()}
+            {this.getIncompleteListItems()}
+            {this.getNewListItemInput()}
+            {this.getCompleteListItems()}
           </div>
-        }
-        <div className='NoteForm--div--palette-icon'>
-          <img className='NoteForm--palette-icon' src={paletteicon} alt='palette icon' onClick={this.toggleShowColorOptions} />
-        </div>
-        {(status >= 200 && status < 300) && <Redirect to='/' />}
-      </form>
+          <button
+            className={'NoteForm--button-' + color}
+            disabled={title.trim() === ''}>
+            Save
+          </button>
+          {path !== '/new-note' ?
+            <button className={'NoteForm--button-' + color} onClick={this.handleNoteDelete}>
+              Delete
+            </button> :
+            <Link to='/'>
+              <button className={'NoteForm--button-' + color}>Discard</button>
+            </Link>}
+          {showColorOptions &&
+            <div className='NoteForm--color-options'>
+              {buttons}
+            </div>
+          }
+          <div className='NoteForm--div--palette-icon'>
+            <img className='NoteForm--palette-icon' src={paletteicon} alt='palette icon' onClick={this.toggleShowColorOptions} />
+          </div>
+          {(status >= 200 && status < 300) && <Redirect to='/' />}
+        </form>
+      </div>
     )
   }
 }
