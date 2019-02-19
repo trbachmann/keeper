@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { setNotes } from '../../actions';
+import { putAllNotes } from '../../thunks/putAllNotes';
 import uncheckedicon from '../../images/uncheckedicon.svg';
 import checkedicon from '../../images/checkedicon.svg';
 import editicon from '../../images/edit.svg';
@@ -14,12 +14,12 @@ export class NoteCard extends Component {
   }
 
   handleDrop = (event) => {
-    const { notes, index: droppedOnIndex } = this.props;
+    const { notes, index: droppedOnIndex, putAllNotes } = this.props;
     const [...updatedNotes] = notes;
     const draggedIndex = event.dataTransfer.getData('draggedIndex');
     const tempNote = updatedNotes.splice(draggedIndex, 1);
     updatedNotes.splice(droppedOnIndex, 0 , ...tempNote);
-    this.props.setNotes(updatedNotes);
+    putAllNotes(updatedNotes);
   }
 
   render() {
@@ -83,7 +83,7 @@ export const mapStateToProps = (state) => ({
 });
 
 export const mapDispatchToProps = (dispatch) => ({
-  setNotes: (notes) => dispatch(setNotes(notes))
+  putAllNotes: (notes) => dispatch(putAllNotes(notes))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NoteCard);
@@ -93,5 +93,6 @@ NoteCard.propTypes = {
   title: PropTypes.string,
   listItems: PropTypes.array,
   color: PropTypes.string,
-  notes: PropTypes.array
+  notes: PropTypes.array,
+  putAllNotes: PropTypes.func
 }
