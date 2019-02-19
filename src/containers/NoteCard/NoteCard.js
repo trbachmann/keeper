@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import uncheckedicon from '../../images/uncheckedicon.svg';
 import checkedicon from '../../images/checkedicon.svg';
+import editicon from '../../images/edit.svg';
+import deleteicon from '../../images/delete.svg';
 
 export const NoteCard = (props) => {
   const { id, title, listItems, color } = props;
@@ -45,6 +47,10 @@ export const NoteCard = (props) => {
     <Link to={'/notes/' + id} className={'NoteCard--background-' + color}>
       <h3 className='NoteCard--h3'>{title}</h3>
       <div>{result}</div>
+      <span className='NoteCard--icon-container'>
+        <img className='NoteCard--delete-icon' src={editicon} alt='edit icon'/>
+        <img className='NoteCard--edit-icon' src={deleteicon} alt='delete icon'/>
+      </span>
     </Link>
   )
 }

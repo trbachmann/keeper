@@ -165,10 +165,12 @@ export class NoteForm extends Component {
 
     return (
       <form className={'NoteForm--background-' + color} onSubmit={this.handleSubmit}>
-        {this.getTitleInput()}
-        {this.getIncompleteListItems()}
-        {this.getNewListItemInput()}
-        {this.getCompleteListItems()}
+        <div className='NoteForm--title-and-listitems'>
+          {this.getTitleInput()}
+          {this.getIncompleteListItems()}
+          {this.getNewListItemInput()}
+          {this.getCompleteListItems()}
+        </div>
         <button
           className={'NoteForm--button-' + color}
           disabled={title.trim() === ''}>
