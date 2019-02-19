@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { NoteCard } from '../NoteCard/NoteCard';
+import NoteCard from '../NoteCard/NoteCard';
 import { Link } from 'react-router-dom';
 import Masonry from 'react-masonry-css';
 import Loader from '../../components/Loader/Loader';
 import newnoteicon from '../../images/newnoteicon.svg';
 
 export const NoteContainer = ({ notes, isLoading, isDisabled }) => {
-  const cards = notes.map(note => {
-    return <NoteCard {...note} key={note.id}/>
+  const cards = notes.map((note, index) => {
+    return <NoteCard {...note} key={note.id} index={index}/>
   }).reverse();
 
   const breakpoints = {

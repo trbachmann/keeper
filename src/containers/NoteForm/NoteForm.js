@@ -24,11 +24,17 @@ export class NoteForm extends Component {
   }
 
   componentDidMount() {
+    document.addEventListener('keydown', this.handleKeydown);
     const { path } = this.props.match;
     const { title, listItems, color } = this.props;
     if (path !== '/new-note') {
       this.setState({ title, listItems, color });
     }
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKeydown);
+    this.props.setStatus(0);
   }
 
   createListItem = (id, description) => ({
@@ -131,10 +137,14 @@ export class NoteForm extends Component {
     this.setState({ listItems: updatedListItems });
   }
 
-  handleNoteDelete = async () => {
+  handleKeydown = (event) => {
+    event.key === 'Escape' && this.props.setStatus(200);
+  }
+
+  handleNoteDelete = async (event) => {
+    event.preventDefault();
     const { id } = this.props.match.params;
     await this.props.deleteNoteThunk(id);
-    this.props.setStatus(0);
   }
 
   handleSubmit = async (event) => {
@@ -146,7 +156,6 @@ export class NoteForm extends Component {
     } else {
       await this.props.postNote({ title, listItems, color });
     }
-    this.props.setStatus(0);
   }
 
   toggleShowColorOptions = () => {
