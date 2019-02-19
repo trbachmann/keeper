@@ -2,7 +2,7 @@
 
 exports[`NoteCard should pass snapshot test 1`] = `
 <Link
-  className="NoteCard"
+  className="NoteCard--background-lavender"
   replace={false}
   to="/notes/rzz"
 >
@@ -48,7 +48,7 @@ exports[`NoteCard should pass snapshot test 1`] = `
 
 exports[`NoteCard should pass snapshot test when there are more than 10 items 1`] = `
 <Link
-  className="NoteCard"
+  className="NoteCard--background-undefined"
   replace={false}
   to="/notes/bah"
 >

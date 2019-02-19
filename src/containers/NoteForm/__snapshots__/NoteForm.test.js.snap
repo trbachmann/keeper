@@ -1,8 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NoteForm should match the snapshot when 200 < status < 300 1`] = `
-<div
-  className="NoteForm"
+<form
+  className="NoteForm--background-lavender"
+  onSubmit={[Function]}
 >
   <input
     className="NoteForm--title"
@@ -35,28 +36,38 @@ exports[`NoteForm should match the snapshot when 200 < status < 300 1`] = `
     key="lqw"
   />
   <button
-    className="NoteForm--button"
+    className="NoteForm--button-lavender"
     disabled={false}
-    onClick={[Function]}
   >
     Save
   </button>
   <button
-    className="NoteForm--button"
+    className="NoteForm--button-lavender"
     onClick={[Function]}
   >
     Delete
   </button>
+  <div
+    className="NoteForm--div--palette-icon"
+  >
+    <img
+      alt="palette icon"
+      className="NoteForm--palette-icon"
+      onClick={[Function]}
+      src="paletteicon.svg"
+    />
+  </div>
   <Redirect
     push={false}
     to="/"
   />
-</div>
+</form>
 `;
 
 exports[`NoteForm should match the snapshot when the path is /new-note 1`] = `
-<div
-  className="NoteForm"
+<form
+  className="NoteForm--background-white"
+  onSubmit={[Function]}
 >
   <input
     className="NoteForm--title"
@@ -73,9 +84,8 @@ exports[`NoteForm should match the snapshot when the path is /new-note 1`] = `
     value=""
   />
   <button
-    className="NoteForm--button"
+    className="NoteForm--button-white"
     disabled={true}
-    onClick={[Function]}
   >
     Save
   </button>
@@ -84,17 +94,28 @@ exports[`NoteForm should match the snapshot when the path is /new-note 1`] = `
     to="/"
   >
     <button
-      className="NoteForm--button"
+      className="NoteForm--button-white"
     >
       Discard
     </button>
   </Link>
-</div>
+  <div
+    className="NoteForm--div--palette-icon"
+  >
+    <img
+      alt="palette icon"
+      className="NoteForm--palette-icon"
+      onClick={[Function]}
+      src="paletteicon.svg"
+    />
+  </div>
+</form>
 `;
 
 exports[`NoteForm should match the snapshot when the path is /notes/:id 1`] = `
-<div
-  className="NoteForm"
+<form
+  className="NoteForm--background-lavender"
+  onSubmit={[Function]}
 >
   <input
     className="NoteForm--title"
@@ -127,17 +148,26 @@ exports[`NoteForm should match the snapshot when the path is /notes/:id 1`] = `
     key="lqw"
   />
   <button
-    className="NoteForm--button"
+    className="NoteForm--button-lavender"
     disabled={false}
-    onClick={[Function]}
   >
     Save
   </button>
   <button
-    className="NoteForm--button"
+    className="NoteForm--button-lavender"
     onClick={[Function]}
   >
     Delete
   </button>
-</div>
+  <div
+    className="NoteForm--div--palette-icon"
+  >
+    <img
+      alt="palette icon"
+      className="NoteForm--palette-icon"
+      onClick={[Function]}
+      src="paletteicon.svg"
+    />
+  </div>
+</form>
 `;

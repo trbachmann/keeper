@@ -74,7 +74,8 @@ export const mockNote = {
       description: '15 pushups',
       isComplete: true
     }
-  ]
+  ],
+  color: 'lavender'
 };
 
 export const mockNotesAfterDelete = [
