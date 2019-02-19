@@ -14,7 +14,7 @@ Run `npm install` from the root directory
 Run `npm start` and visit localhost:3001 in your browser  
 
 ### Preview:
-![Keeper video](.src/images/keeper-gif-med.gif)  
+![Keeper video](./src/images/keeper-gif-med.gif)  
 ### Primary Technologies Used:
 * React 
 * Redux
