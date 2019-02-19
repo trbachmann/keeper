@@ -4,23 +4,17 @@ exports[`Error404 should match the snapshot 1`] = `
 <div
   className="Error404"
 >
-  <div
-    className="Error404--div"
+  <h2
+    className="Error404--h2"
   >
-    <h2>
-      No Note Found
-    </h2>
-    <Link
-      replace={false}
-      to="/"
-    >
-      Back to Notes
-    </Link>
-  </div>
-  <img
-    alt="blank note"
-    className="Error404--img"
-    src="blank-note-unsplash.jpg"
-  />
+    No Note Found
+  </h2>
+  <Link
+    className="Error404--Link"
+    replace={false}
+    to="/"
+  >
+    Back to Notes
+  </Link>
 </div>
 `;

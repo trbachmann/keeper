@@ -36,14 +36,12 @@ export const NoteContainer = ({ notes, isLoading, isDisabled }) => {
           </span>
         </Link>
       </div>
-      {isLoading && <Loader />}
-      {!isLoading &&
         <Masonry
           breakpointCols={breakpoints}
           className='NoteContainer--cards'
           columnClassName='NoteContainer--cards-masonry-cols'>
           {cards}
-        </Masonry>}
+        </Masonry>
     </div>
   );
 };

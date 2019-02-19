@@ -191,14 +191,10 @@ describe('NoteForm', () => {
   });
 
   describe('handleNoteDelete', () => {
+    const mockEvent = { preventDefault: jest.fn() };
     it('should call deleteNoteThunk with the correct param', async () => {
-      wrapper.instance().handleNoteDelete();
+      wrapper.instance().handleNoteDelete(mockEvent);
       expect(mockProps.deleteNoteThunk).toHaveBeenCalledWith(id);
-    });
-
-    it('should call setStatus with the correct param', () => {
-      wrapper.instance().handleNoteDelete();
-      expect(mockProps.setStatus).toHaveBeenCalledWith(0);
     });
   });
 
@@ -214,11 +210,6 @@ describe('NoteForm', () => {
       wrapperNewNote.instance().setState(expected);
       wrapperNewNote.instance().handleSubmit(mockEvent);
       expect(mockProps.postNote).toHaveBeenCalledWith(expected);
-    });
-
-    it('should call setStatus with the correct param', () => {
-      wrapper.instance().handleSubmit(mockEvent);
-      expect(mockProps.setStatus).toHaveBeenCalledWith(0);
     });
   });
 

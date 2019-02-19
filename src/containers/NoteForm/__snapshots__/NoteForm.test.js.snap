@@ -1,185 +1,197 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NoteForm should match the snapshot when 200 < status < 300 1`] = `
-<form
-  className="NoteForm--background-lavender"
-  onSubmit={[Function]}
+<div
+  className="NoteForm--div--overlay"
 >
-  <div
-    className="NoteForm--title-and-listitems"
+  <form
+    className="NoteForm--background-lavender"
+    onSubmit={[Function]}
   >
-    <input
-      className="NoteForm--title"
-      name="title"
-      onChange={[Function]}
-      placeholder="Title"
-      value="Workout"
-    />
-    <IncompleteItem
-      description="20 situps"
-      focusedListItemID={null}
-      handleChange={[Function]}
-      handleComplete={[Function]}
-      handleItemDelete={[Function]}
-      id="lpo"
-      key="lpo"
-    />
-    <input
-      className="NoteForm--new-input"
-      name=""
-      onChange={[Function]}
-      placeholder="List item"
-      value=""
-    />
-    <CompleteItem
-      description="15 pushups"
-      handleComplete={[Function]}
-      handleItemDelete={[Function]}
-      id="lqw"
-      key="lqw"
-    />
-  </div>
-  <button
-    className="NoteForm--button-lavender"
-    disabled={false}
-  >
-    Save
-  </button>
-  <button
-    className="NoteForm--button-lavender"
-    onClick={[Function]}
-  >
-    Delete
-  </button>
-  <div
-    className="NoteForm--div--palette-icon"
-  >
-    <img
-      alt="palette icon"
-      className="NoteForm--palette-icon"
+    <div
+      className="NoteForm--title-and-listitems"
+    >
+      <input
+        className="NoteForm--title"
+        name="title"
+        onChange={[Function]}
+        placeholder="Title"
+        value="Workout"
+      />
+      <IncompleteItem
+        description="20 situps"
+        focusedListItemID={null}
+        handleChange={[Function]}
+        handleComplete={[Function]}
+        handleItemDelete={[Function]}
+        id="lpo"
+        key="lpo"
+      />
+      <input
+        className="NoteForm--new-input"
+        name=""
+        onChange={[Function]}
+        placeholder="List item"
+        value=""
+      />
+      <CompleteItem
+        description="15 pushups"
+        handleComplete={[Function]}
+        handleItemDelete={[Function]}
+        id="lqw"
+        key="lqw"
+      />
+    </div>
+    <button
+      className="NoteForm--button-lavender"
+      disabled={false}
+    >
+      Save
+    </button>
+    <button
+      className="NoteForm--button-lavender"
       onClick={[Function]}
-      src="paletteicon.svg"
+    >
+      Delete
+    </button>
+    <div
+      className="NoteForm--div--palette-icon"
+    >
+      <img
+        alt="palette icon"
+        className="NoteForm--palette-icon"
+        onClick={[Function]}
+        src="paletteicon.svg"
+      />
+    </div>
+    <Redirect
+      push={false}
+      to="/"
     />
-  </div>
-  <Redirect
-    push={false}
-    to="/"
-  />
-</form>
+  </form>
+</div>
 `;
 
 exports[`NoteForm should match the snapshot when the path is /new-note 1`] = `
-<form
-  className="NoteForm--background-white"
-  onSubmit={[Function]}
+<div
+  className="NoteForm--div--overlay"
 >
-  <div
-    className="NoteForm--title-and-listitems"
+  <form
+    className="NoteForm--background-white"
+    onSubmit={[Function]}
   >
-    <input
-      className="NoteForm--title"
-      name="title"
-      onChange={[Function]}
-      placeholder="Title"
-      value=""
-    />
-    <input
-      className="NoteForm--new-input"
-      name=""
-      onChange={[Function]}
-      placeholder="List item"
-      value=""
-    />
-  </div>
-  <button
-    className="NoteForm--button-white"
-    disabled={true}
-  >
-    Save
-  </button>
-  <Link
-    replace={false}
-    to="/"
-  >
+    <div
+      className="NoteForm--title-and-listitems"
+    >
+      <input
+        className="NoteForm--title"
+        name="title"
+        onChange={[Function]}
+        placeholder="Title"
+        value=""
+      />
+      <input
+        className="NoteForm--new-input"
+        name=""
+        onChange={[Function]}
+        placeholder="List item"
+        value=""
+      />
+    </div>
     <button
       className="NoteForm--button-white"
+      disabled={true}
     >
-      Discard
+      Save
     </button>
-  </Link>
-  <div
-    className="NoteForm--div--palette-icon"
-  >
-    <img
-      alt="palette icon"
-      className="NoteForm--palette-icon"
-      onClick={[Function]}
-      src="paletteicon.svg"
-    />
-  </div>
-</form>
+    <Link
+      replace={false}
+      to="/"
+    >
+      <button
+        className="NoteForm--button-white"
+      >
+        Discard
+      </button>
+    </Link>
+    <div
+      className="NoteForm--div--palette-icon"
+    >
+      <img
+        alt="palette icon"
+        className="NoteForm--palette-icon"
+        onClick={[Function]}
+        src="paletteicon.svg"
+      />
+    </div>
+  </form>
+</div>
 `;
 
 exports[`NoteForm should match the snapshot when the path is /notes/:id 1`] = `
-<form
-  className="NoteForm--background-lavender"
-  onSubmit={[Function]}
+<div
+  className="NoteForm--div--overlay"
 >
-  <div
-    className="NoteForm--title-and-listitems"
+  <form
+    className="NoteForm--background-lavender"
+    onSubmit={[Function]}
   >
-    <input
-      className="NoteForm--title"
-      name="title"
-      onChange={[Function]}
-      placeholder="Title"
-      value="Workout"
-    />
-    <IncompleteItem
-      description="20 situps"
-      focusedListItemID={null}
-      handleChange={[Function]}
-      handleComplete={[Function]}
-      handleItemDelete={[Function]}
-      id="lpo"
-      key="lpo"
-    />
-    <input
-      className="NoteForm--new-input"
-      name=""
-      onChange={[Function]}
-      placeholder="List item"
-      value=""
-    />
-    <CompleteItem
-      description="15 pushups"
-      handleComplete={[Function]}
-      handleItemDelete={[Function]}
-      id="lqw"
-      key="lqw"
-    />
-  </div>
-  <button
-    className="NoteForm--button-lavender"
-    disabled={false}
-  >
-    Save
-  </button>
-  <button
-    className="NoteForm--button-lavender"
-    onClick={[Function]}
-  >
-    Delete
-  </button>
-  <div
-    className="NoteForm--div--palette-icon"
-  >
-    <img
-      alt="palette icon"
-      className="NoteForm--palette-icon"
+    <div
+      className="NoteForm--title-and-listitems"
+    >
+      <input
+        className="NoteForm--title"
+        name="title"
+        onChange={[Function]}
+        placeholder="Title"
+        value="Workout"
+      />
+      <IncompleteItem
+        description="20 situps"
+        focusedListItemID={null}
+        handleChange={[Function]}
+        handleComplete={[Function]}
+        handleItemDelete={[Function]}
+        id="lpo"
+        key="lpo"
+      />
+      <input
+        className="NoteForm--new-input"
+        name=""
+        onChange={[Function]}
+        placeholder="List item"
+        value=""
+      />
+      <CompleteItem
+        description="15 pushups"
+        handleComplete={[Function]}
+        handleItemDelete={[Function]}
+        id="lqw"
+        key="lqw"
+      />
+    </div>
+    <button
+      className="NoteForm--button-lavender"
+      disabled={false}
+    >
+      Save
+    </button>
+    <button
+      className="NoteForm--button-lavender"
       onClick={[Function]}
-      src="paletteicon.svg"
-    />
-  </div>
-</form>
+    >
+      Delete
+    </button>
+    <div
+      className="NoteForm--div--palette-icon"
+    >
+      <img
+        alt="palette icon"
+        className="NoteForm--palette-icon"
+        onClick={[Function]}
+        src="paletteicon.svg"
+      />
+    </div>
+  </form>
+</div>
 `;
