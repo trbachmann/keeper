@@ -1,0 +1,13 @@
+@mixin button-color($background, $hover) {
+  @extend .NoteForm--button;
+  background-color: $background;
+
+  &:hover {
+    background-color: $hover;
+  }
+  
+  &:disabled {
+    background-color: #d1d1d1;
+    color: #9b9b9b;
+  }
+}
