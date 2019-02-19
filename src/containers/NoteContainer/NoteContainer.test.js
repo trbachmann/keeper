@@ -6,17 +6,11 @@ import { mockNotes } from '../../mockNotes';
 describe('NoteContainer', () => {
   const mockProps = {
     notes: mockNotes,
-    isLoading: false,
     isDisabled: false
   }
 
   it('should match the snapshot', () => {
     let wrapper = shallow(<NoteContainer {...mockProps} />);
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should match the snapshot when isLoading is true', () => {
-    let wrapper = shallow(<NoteContainer {...mockProps} isLoading={true} />);
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -34,7 +28,7 @@ describe('mapStateToProps', () => {
         error: '',
         status: 0
     };
-    const expected = { notes: mockNotes, isLoading: false };
+    const expected = { notes: mockNotes };
     const mappedProps = mapStateToProps(mockState);
     expect(mappedProps).toEqual(expected);
   });

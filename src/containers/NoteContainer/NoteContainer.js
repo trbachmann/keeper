@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import Masonry from 'react-masonry-css';
 import newnoteicon from '../../images/newnoteicon.svg';
 
-export const NoteContainer = ({ notes, isLoading, isDisabled }) => {
+export const NoteContainer = ({ notes, isDisabled }) => {
   const cards = notes.map((note, index) => {
     return <NoteCard {...note} key={note.id} index={index}/>
   }).reverse();
@@ -46,14 +46,12 @@ export const NoteContainer = ({ notes, isLoading, isDisabled }) => {
 };
 
 export const mapStateToProps = (state) => ({
-  notes: state.notes,
-  isLoading: state.isLoading
+  notes: state.notes
 });
 
 export default connect(mapStateToProps)(NoteContainer);
 
 NoteContainer.propTypes = {
   notes: PropTypes.array,
-  isLoading: PropTypes.bool,
   isDisabled: PropTypes.bool
 }
