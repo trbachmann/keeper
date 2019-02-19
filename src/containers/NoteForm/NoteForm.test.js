@@ -81,6 +81,13 @@ describe('NoteForm', () => {
       expect(wrapper.state('color')).toEqual(color);      
     });
   });
+  
+  describe('componentWillUnmount', () => {
+    it('should dispatch setStatus with 0', () => {
+      wrapper.instance().componentWillUnmount();
+      expect(mockProps.setStatus).toHaveBeenCalledWith(0);
+    });
+  });
 
   describe('createListItem', () => {
     it('should return a listItem', () =>{
@@ -187,6 +194,14 @@ describe('NoteForm', () => {
       const expected = [listItems[1]];
       wrapper.instance().handleItemDelete('lpo');
       expect(wrapper.state('listItems')).toEqual(expected);
+    });
+  });
+
+  describe('handleKeydown', () => {
+    it('should dispatch setStatus with 200 if Escape is pressed', () => {
+      const mockEvent = { key: 'Escape' };
+      wrapper.instance().handleKeydown(mockEvent);
+      expect(mockProps.setStatus).toHaveBeenCalledWith(200);
     });
   });
 
