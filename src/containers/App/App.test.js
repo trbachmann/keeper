@@ -33,7 +33,13 @@ describe('App', () => {
     beforeEach(() => {
       wrapper = shallow(<App {...mockProps}/>);
     });
+
     it('should match the snapshot', () => {
+      expect(wrapper).toMatchSnapshot();
+    });
+    
+    it('should match the snapshot when isLoading is true', () => {
+      wrapper = shallow(<App {...mockProps} isLoading={true} />);
       expect(wrapper).toMatchSnapshot();
     });
 

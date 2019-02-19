@@ -34,3 +34,39 @@ exports[`App App component should match the snapshot 1`] = `
   </Switch>
 </div>
 `;
+
+exports[`App App component should match the snapshot when isLoading is true 1`] = `
+<div
+  className="App"
+>
+  <h1
+    className="App--h1"
+  >
+    <img
+      alt="note icon"
+      className="App--notebook-icon"
+      src="notebook.svg"
+    />
+    Keeper
+  </h1>
+  <Loader />
+  <Switch>
+    <Route
+      path="/new-note"
+      render={[Function]}
+    />
+    <Route
+      path="/notes/:id"
+      render={[Function]}
+    />
+    <Route
+      component={[Function]}
+      exact={true}
+      path="/"
+    />
+    <Route
+      component={[Function]}
+    />
+  </Switch>
+</div>
+`;
