@@ -158,17 +158,22 @@ export class NoteForm extends Component {
     const { title, color, showColorOptions } = this.state;
     const { status } = this.props;
     const { path } = this.props.match;
+    const colors = ['white', 'pink', 'orange', 'yellow', 'green', 'blue', 'lavender', 'gray'];
+    const buttons = colors.map(color => {
+      return <button key={color} id={color} className='NoteForm--color' onClick={this.handleColorChoice}></button >
+    });
+
     return (
       <form className={'NoteForm--background-' + color} onSubmit={this.handleSubmit}>
-        {this.getTitleInput()}
-        {this.getIncompleteListItems()}
-        {this.getNewListItemInput()}
-        {this.getCompleteListItems()}
+        <div className='NoteForm--title-and-listitems'>
+          {this.getTitleInput()}
+          {this.getIncompleteListItems()}
+          {this.getNewListItemInput()}
+          {this.getCompleteListItems()}
+        </div>
         <button
           className={'NoteForm--button-' + color}
-          disabled={title.trim() === ''}
-          // onClick={this.handleSubmit}
-        >
+          disabled={title.trim() === ''}>
           Save
         </button>
         {path !== '/new-note' ?
@@ -180,14 +185,7 @@ export class NoteForm extends Component {
           </Link>}
         {showColorOptions &&
           <div className='NoteForm--color-options'>
-            <button id='white' className='NoteForm--color' onClick={this.handleColorChoice}></button>
-            <button id='pink' className='NoteForm--color' onClick={this.handleColorChoice}></button>
-            <button id='orange' className='NoteForm--color' onClick={this.handleColorChoice}></button>
-            <button id='yellow' className='NoteForm--color' onClick={this.handleColorChoice}></button>
-            <button id='green' className='NoteForm--color' onClick={this.handleColorChoice}></button>
-            <button id='blue' className='NoteForm--color' onClick={this.handleColorChoice}></button>
-            <button id='lavender' className='NoteForm--color' onClick={this.handleColorChoice}></button>
-            <button id='gray' className='NoteForm--color' onClick={this.handleColorChoice}></button>
+            {buttons}
           </div>
         }
         <div className='NoteForm--div--palette-icon'>

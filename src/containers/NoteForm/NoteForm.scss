@@ -3,13 +3,16 @@
   position: fixed;
   background-color: #fff;
   width: 40%;
-  max-height: 70%;
   left: 30%;
   top: 96px;
   border-radius: 10px;
   padding: 16px;
-  overflow-y: auto;
   box-shadow: $heavy-shadow;
+}
+
+.NoteForm--title-and-listitems {
+  overflow: scroll;
+  max-height: 350px;
 }
 
 .NoteForm--color {
@@ -121,7 +124,7 @@
   border: none;
   outline: none;
   text-align: left;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid #000;
   margin: 0 10px;
 }
 
@@ -167,6 +170,7 @@
 .NoteForm--icon--checked {
   @extend %icon;
   margin-left: auto;
+  border-radius: 1px;
 }
 
 .NoteForm--icon--delete {

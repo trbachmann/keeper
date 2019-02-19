@@ -36,9 +36,9 @@
 }
 
 .NoteContainer--icon--new-note {
-  width: 32px;
+  width: 22px;
   justify-self: right;
-  margin-right: 16px;
+  margin-right: 14px;
   border-radius: 5px;
   box-shadow: $light-shadow;
   
@@ -78,6 +78,6 @@
 
 @media screen and (max-width: 528px) {
   .NoteContainer {
-    width: 256px;
+    width: 100%;
   }
 }

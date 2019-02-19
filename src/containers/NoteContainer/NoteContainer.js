@@ -30,8 +30,7 @@ export const NoteContainer = ({ notes, isLoading, isDisabled }) => {
           <img
             src={newnoteicon}
             className='NoteContainer--icon--new-note'
-            alt='new note icon'
-          />
+            alt='new note icon'/>
           <span className='NoteContainer--span'>
             New Note
           </span>
