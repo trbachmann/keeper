@@ -10,6 +10,11 @@
   
   &:hover {
     box-shadow: $heavy-shadow;
+    cursor: grab;
+  }
+  
+  &:active {
+    cursor: grabbing;
   }
 }
 
