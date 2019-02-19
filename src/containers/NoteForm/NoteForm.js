@@ -160,7 +160,7 @@ export class NoteForm extends Component {
     const { path } = this.props.match;
     const colors = ['white', 'pink', 'orange', 'yellow', 'green', 'blue', 'lavender', 'gray'];
     const buttons = colors.map(color => {
-      return <button id={color} className='NoteForm--color' onClick={this.handleColorChoice}></button >
+      return <button key={color} id={color} className='NoteForm--color' onClick={this.handleColorChoice}></button >
     });
 
     return (
