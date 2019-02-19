@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import NoteCard from '../NoteCard/NoteCard';
 import { Link } from 'react-router-dom';
 import Masonry from 'react-masonry-css';
-import Loader from '../../components/Loader/Loader';
 import newnoteicon from '../../images/newnoteicon.svg';
 
 export const NoteContainer = ({ notes, isLoading, isDisabled }) => {
