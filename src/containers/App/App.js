@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter, Route, Switch } from 'react-router-dom';
+import SearchBar from '../SearchBar/SearchBar';
 import NoteContainer from '../NoteContainer/NoteContainer';
 import NoteForm from '../NoteForm/NoteForm';
 import { fetchNotes } from '../../thunks/fetchNotes';
@@ -17,7 +18,7 @@ export class App extends Component {
   getNotesRoute = ({ match }) => {
     const { notes } = this.props;
     const { id } = match.params;
-    const currentNote = notes.find( note => note.id === id );
+    const currentNote = notes.find(note => note.id === id);
     return currentNote ? (
       [
         <NoteContainer isDisabled={true} key="NoteContainer" />,
@@ -28,19 +29,21 @@ export class App extends Component {
 
   getNewNoteRoute = ({ match }) => {
     return [
-      <NoteContainer isDisabled={true} key="NoteContainer"/>,
-      <NoteForm match={match} key="NoteForm"/>
+      <NoteContainer isDisabled={true} key="NoteContainer" />,
+      <NoteForm match={match} key="NoteForm" />
     ]
   }
 
   render() {
     return (
       <div className='App'>
-        
-        <h1 className='App--h1'>
-          <img className='App--notebook-icon' src={notebookicon} alt='note icon' />
-          Keeper
-        </h1>
+        <header className='App--header'>
+          <h1 className='App--h1'>
+            <img className='App--notebook-icon' src={notebookicon} alt='note icon' />
+            Keeper
+          </h1>
+          <SearchBar />
+        </header>
         {this.props.isLoading && <Loader />}
         <Switch>
           <Route path='/new-note' render={this.getNewNoteRoute} />

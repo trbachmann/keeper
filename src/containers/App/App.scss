@@ -2,24 +2,36 @@
   text-align: center;
 }
 
-.App--h1 {
+.App--header {
   background-color: #fff;
-  color: $secondary-dark;
-  font-size: 1.6rem;
-  letter-spacing: 3px;
-  font-weight: 500;
   margin: 0;
   padding: 0% 4%;
-  height: 65px;
+  height: auto;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: left;
   box-shadow: $heavy-shadow;
   z-index: 10;
   position: relative;
 }
 
+.App--h1 {
+  display: flex;
+  align-items: center;
+  font-size: 1.6rem;
+  color: $secondary-dark;
+  letter-spacing: 3px;
+  font-weight: 500;
+}
+
 .App--notebook-icon {
   height: 1.7rem;
   margin-right: 4px;
+}
+
+@media screen and (max-width: 528px) {
+  .App--header {
+    display: grid;
+    padding: 0px 0px 16px 38px;
+  }  
 }
