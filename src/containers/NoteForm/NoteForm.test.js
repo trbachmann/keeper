@@ -15,13 +15,14 @@ jest.mock('../../thunks/postNote.js');
 describe('NoteForm', () => {
   let wrapper;
   let wrapperNewNote;
-  const { id, title, listItems } = mockNote;
+  const { id, title, listItems, color } = mockNote;
   const mockMatch = { params: { id }, path: `/notes/${id}` }
   const mockMatchNewNote = { params: {}, path: '/new-note' }
   const mockProps = {
     match: mockMatch,
     title,
     listItems,
+    color,
     status: 0,
     deleteNoteThunk: jest.fn(() => true),
     putNote: jest.fn(() => true),
@@ -54,7 +55,9 @@ describe('NoteForm', () => {
     expect(wrapperNewNote.state()).toEqual({
       title: '',
       listItems: [],
-      focusedListItemID: null
+      focusedListItemID: null,
+      color: 'white',
+      showColorOptions: false
     });
   });
 
@@ -75,6 +78,7 @@ describe('NoteForm', () => {
     it('should set state when path is not /new-note', () => {
       expect(wrapper.state('title')).toEqual(title);
       expect(wrapper.state('listItems')).toEqual(listItems);
+      expect(wrapper.state('color')).toEqual(color);      
     });
   });
 
@@ -161,6 +165,15 @@ describe('NoteForm', () => {
     });
   });
 
+  describe('handleColorChoice', () => {
+    it('should set state with a new color', () => {
+      expect(wrapper.state('color')).toEqual('lavender');
+      const mockEvent = { target: { id: 'blue' } };
+      wrapper.instance().handleColorChoice(mockEvent);
+      expect(wrapper.state('color')).toEqual('blue');
+    });
+  });
+
   describe('handleComplete', () => {
     it('should set state with updated list items', () => {
       const expected = [completedListItem, listItems[1]];
@@ -190,21 +203,30 @@ describe('NoteForm', () => {
   });
 
   describe('handleSubmit', () => {
+    const mockEvent = { preventDefault: jest.fn() };
     it('should call putNote if there is an id', () => {
-      wrapper.instance().handleSubmit();
+      wrapper.instance().handleSubmit(mockEvent);
       expect(mockProps.putNote).toHaveBeenCalledWith(mockNote);
     });
 
     it('should call postNote if there is not an id', () => {
-      const expected = { title: 'new note', listItems: [] };
+      const expected = { title: 'new note', listItems: [], color: 'green' };
       wrapperNewNote.instance().setState(expected);
-      wrapperNewNote.instance().handleSubmit();
+      wrapperNewNote.instance().handleSubmit(mockEvent);
       expect(mockProps.postNote).toHaveBeenCalledWith(expected);
     });
 
     it('should call setStatus with the correct param', () => {
-      wrapper.instance().handleSubmit();
+      wrapper.instance().handleSubmit(mockEvent);
       expect(mockProps.setStatus).toHaveBeenCalledWith(0);
+    });
+  });
+
+  describe('toggleShowColorOptions', () => {
+    it('should toggle showColorOptions in state', () => {
+      expect(wrapper.state('showColorOptions')).toEqual(false);
+      wrapper.instance().toggleShowColorOptions();
+      expect(wrapper.state('showColorOptions')).toEqual(true);      
     });
   });
 
