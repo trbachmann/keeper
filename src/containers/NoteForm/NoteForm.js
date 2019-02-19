@@ -163,18 +163,18 @@ export class NoteForm extends Component {
         {this.getNewListItemInput()}
         {this.getCompleteListItems()}
         <button
-          className='NoteForm--button'
+          className={'NoteForm--button-' + color}
           disabled={title.trim() === ''}
           onClick={this.handleSubmit}
         >
           Save
         </button>
         {path !== '/new-note' ?
-          <button className='NoteForm--button' onClick={this.handleNoteDelete}>
+          <button className={'NoteForm--button-' + color} onClick={this.handleNoteDelete}>
             Delete
           </button> :
           <Link to='/'>
-            <button className='NoteForm--button'>Discard</button>
+            <button className={'NoteForm--button-' + color}>Discard</button>
           </Link>}
         {showColorOptions &&
           <div className='NoteForm--color-options'>

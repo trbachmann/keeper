@@ -183,10 +183,11 @@
   border-radius: 4px;
   background-color: $secondary;
   color: #fff;
+  font-weight: 500;
   text-transform: uppercase;
   outline: none;
   box-shadow: $light-shadow;
-  letter-spacing: 0.03rem;
+  letter-spacing: 0.05rem;
   cursor: pointer;
 
   &:hover {
@@ -195,11 +196,43 @@
   }
 
   &:disabled {
-    background-color: #e0e0e0;
+    background-color: #d1d1d1;
+    color: #9b9b9b;
     box-shadow: none;
-    color: rgba(0, 0, 0, 0.87);
     cursor: not-allowed;
   }
+}
+
+.NoteForm--button-white {
+  @extend .NoteForm--button;
+}
+
+.NoteForm--button-pink {
+  @include button-color($pink-button, #ca9eb6);
+}
+
+.NoteForm--button-orange {
+  @include button-color($orange-button, #b07e00);
+}
+
+.NoteForm--button-yellow {
+  @include button-color($yellow-button, #b6af3b);
+}
+
+.NoteForm--button-green {
+  @include button-color($green-button, #8ab856);
+}
+
+.NoteForm--button-blue {
+  @include button-color($blue-button, #7a93b7);
+}
+
+.NoteForm--button-lavender {
+  @include button-color($lavender-button, #9b7bb8);
+}
+
+.NoteForm--button-gray {
+  @include button-color($gray-button, #a5a7a8);
 }
 
 @media screen and (max-width: 1552px) {
