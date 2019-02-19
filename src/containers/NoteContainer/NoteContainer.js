@@ -6,10 +6,29 @@ import { Link } from 'react-router-dom';
 import Masonry from 'react-masonry-css';
 import newnoteicon from '../../images/newnoteicon.svg';
 
-export const NoteContainer = ({ notes, isDisabled }) => {
+export const addWelcomeNote = () => {
+  const welcomeMessage = {
+    id: 'welcome',
+    title: 'Welcome to Keeper',
+    listItems: [
+      { id: 'firstInstruction', description: 'Keep track of your projects', isComplete: false },
+      { id: 'secondInstruction', description: 'List out your tasks to track', isComplete: false },
+      { id: 'thirdInstruction', description: 'Click the plus sign above to get started', isComplete: false },
+    ],
+    color: 'white'
+  };
+  return <NoteCard {...welcomeMessage} key={welcomeMessage.id}/>
+}
+
+export const NoteContainer = ({ notes, isLoading, isDisabled }) => {
   const cards = notes.map((note, index) => {
     return <NoteCard {...note} key={note.id} index={index}/>
   }).reverse();
+
+  if (!notes.length) {
+    const welcome = addWelcomeNote();
+    cards.push(welcome);
+  }
 
   const breakpoints = {
     default: 6,
