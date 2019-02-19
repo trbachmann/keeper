@@ -168,7 +168,7 @@ describe('NoteForm', () => {
   describe('handleColorChoice', () => {
     it('should set state with a new color', () => {
       expect(wrapper.state('color')).toEqual('lavender');
-      const mockEvent = { target: { id: 'blue' } };
+      const mockEvent = { target: { id: 'blue' }, preventDefault: jest.fn() };
       wrapper.instance().handleColorChoice(mockEvent);
       expect(wrapper.state('color')).toEqual('blue');
     });

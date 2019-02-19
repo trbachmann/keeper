@@ -111,6 +111,7 @@ export class NoteForm extends Component {
   }
 
   handleColorChoice = (event) => {
+    event.preventDefault();
     const color = event.target.id;
     this.setState({ color });
   }
