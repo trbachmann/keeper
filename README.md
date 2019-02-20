@@ -1,5 +1,4 @@
-# Keeper
-Keeper is an application to help users track the projects they are working on to stay on task and accomplish their goals. Keeper is modled after Google Keep. Users can save notes about multiple projects, add lists of items they need to do in order to complete a project, check them off as they go and edit or delete any part of a note.
+# KeeperKeeper is an application to help users track the projects they are working on to stay on task and accomplish their goals. Keeper is modeled after Google Keep. Users can save notes about multiple projects, add lists of items they need to do in order to complete a project, check them off as they go and edit or delete any part of a note.
 
 ### Set-Up:   
 #### Front-end  
