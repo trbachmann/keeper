@@ -84,7 +84,7 @@ export class NoteCard extends Component {
   }
 
   render() {
-    const { id, title, color } = this.props;
+    const { id, title, color, disabled } = this.props;
     const result = [
       ...this.getIncompleteItems(),
       ...this.getCompleteItems()
@@ -93,13 +93,19 @@ export class NoteCard extends Component {
       result.splice(10);
       result.push(<p className='NoteCard--ellipsis' key='...'>...</p>);
     }
+    let noteCardClass = 'NoteCard--background-';
+    if (disabled) {
+      noteCardClass += 'disabled';
+    } else {
+      noteCardClass += color;
+    }
     return (
       <div 
         draggable
         onDragStart={this.handleDrag}
         onDragOver={(event) => event.preventDefault()}
         onDrop={this.handleDrop}
-        className={'NoteCard--background-' + color}
+        className={noteCardClass}
       >
         <h3 className='NoteCard--h3'>{title}</h3>
         <div>{result}</div>

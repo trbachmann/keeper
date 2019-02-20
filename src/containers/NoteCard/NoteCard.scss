@@ -18,6 +18,11 @@
   }
 }
 
+.NoteCard--background-disabled {
+  @extend .NoteCard;
+  pointer-events: none;
+}
+
 .NoteCard--background-pink {
   @extend .NoteCard;
   background-color: $pink-background;

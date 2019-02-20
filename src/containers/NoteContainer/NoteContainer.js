@@ -18,7 +18,7 @@ export class NoteContainer extends Component {
       ],
       color: 'white'
     };
-    return <NoteCard {...welcomeMessage} key={welcomeMessage.id} />
+    return <NoteCard {...welcomeMessage} key={welcomeMessage.id} disabled/>
   }
 
   getNotesToDisplay = () => {
