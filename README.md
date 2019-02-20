@@ -37,7 +37,7 @@ Run `npm test` from the associated root directory
 [![Waffle.io - Columns and their card count](https://badge.waffle.io/whitneyburton/trapper-keeper.svg?columns=all)](https://waffle.io/whitneyburton/trapper-keeper)
 
 ### Original Assignment: 
-[Trapper Kepper](http://frontend.turing.io/projects/trapper-keeper.html) project from Turing School of Software & Design
+[Trapper Keeper](http://frontend.turing.io/projects/trapper-keeper.html) project from Turing School of Software & Design
 
 ### Contributors
 [Jeo D](https://github.com/dForDeveloper)  
