@@ -175,8 +175,8 @@ export class NoteForm extends Component {
     return (
       <div className='NoteForm--div--overlay'>
         <form className={'NoteForm--background-' + color} onSubmit={this.handleSubmit}>
+          {this.getTitleInput()}
           <div className='NoteForm--title-and-listitems'>
-            {this.getTitleInput()}
             {this.getIncompleteListItems()}
             {this.getNewListItemInput()}
             {this.getCompleteListItems()}
