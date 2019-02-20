@@ -44,16 +44,21 @@ exports[`App App component should match the snapshot when isLoading is true 1`] 
 <div
   className="App"
 >
-  <h1
-    className="App--h1"
+  <header
+    className="App--header"
   >
-    <img
-      alt="note icon"
-      className="App--notebook-icon"
-      src="notebook.svg"
-    />
-    Keeper
-  </h1>
+    <h1
+      className="App--h1"
+    >
+      <img
+        alt="note icon"
+        className="App--notebook-icon"
+        src="notebook.svg"
+      />
+      Keeper
+    </h1>
+    <Connect(SearchBar) />
+  </header>
   <Loader />
   <Switch>
     <Route
