@@ -70,4 +70,26 @@ describe('actions', () => {
       expect(result).toEqual(expected);
     });
   }); 
+
+  describe('setStatus', () => {
+    it('should return an object with a type SET_STATUS and a code', () => {
+      const expected = {
+        type: 'SET_STATUS',
+        code: 200
+      };
+      const result = actions.setStatus(200);
+      expect(result).toEqual(expected);
+    });
+  });
+
+  describe('setQuery', () => {
+    it('should return an object with a type SET_QUERY and a query', () => {
+      const expected = {
+        type: 'SET_QUERY',
+        query: 'heyo'
+      };
+      const result = actions.setQuery('heyo');
+      expect(result).toEqual(expected);
+    });
+  });
 });
