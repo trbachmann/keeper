@@ -21,17 +21,25 @@ export class NoteContainer extends Component {
     return <NoteCard {...welcomeMessage} key={welcomeMessage.id} />
   }
 
-  render() {
-    const { notes, query, isDisabled } = this.props;
-
-    const mappedNotes = query ? notes.filter(note => {
-      return note.title.toLowerCase().includes(query) ||
+  getNotesToDisplay = () => {
+    const { query, notes } = this.props;
+    if (query) {
+      return notes.filter(note => {
+        return note.title.toLowerCase().includes(query) ||
         note.listItems.filter(item => {
           return item.description.toLowerCase().includes(query)
         }).length;
-    }) : notes;
+      });
+    }
+    return notes;
+  }
 
-    const cards = mappedNotes.map((note, index) => {
+  render() {
+    const { notes, isDisabled } = this.props;
+
+    const notesToDisplay = this.getNotesToDisplay();
+    
+    const cards = notesToDisplay.map((note, index) => {
       return <NoteCard {...note} key={note.id} index={index} />
     }).reverse();
 
