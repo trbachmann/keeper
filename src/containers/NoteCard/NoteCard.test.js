@@ -1,10 +1,20 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { NoteCard, mapStateToProps, mapDispatchToProps } from './NoteCard';
+import { setStatus } from '../../actions';
 import { putAllNotes } from '../../thunks/putAllNotes';
-import { mockNotes, mockNote, mockNoteLong } from '../../mockNotes';
+import { putNote } from '../../thunks/putNote';
+import { deleteNoteThunk } from '../../thunks/deleteNoteThunk';
+import {
+  mockNotes,
+  mockNote,
+  mockNoteLong,
+  mockNoteAfterComplete
+} from '../../mockNotes';
 
 jest.mock('../../thunks/putAllNotes.js');
+jest.mock('../../thunks/putNote.js');
+jest.mock('../../thunks/deleteNoteThunk.js');
 
 describe('NoteCard', () => {
   let wrapper;
@@ -12,7 +22,10 @@ describe('NoteCard', () => {
     ...mockNote,
     index: 0,
     notes: mockNotes,
-    putAllNotes: jest.fn()
+    putAllNotes: jest.fn(),
+    putNote: jest.fn(),
+    setStatus: jest.fn(),
+    deleteNoteThunk: jest.fn()
   }
   const mockEvent = {
     dataTransfer: {
@@ -21,6 +34,7 @@ describe('NoteCard', () => {
     },
     preventDefault: jest.fn()
   };
+  const foundClass = '.NoteCard--background-lavender';
 
   beforeEach(() => {
     wrapper = shallow(<NoteCard {...mockProps} />);
@@ -35,30 +49,56 @@ describe('NoteCard', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  describe('handleComplete', () => {
+    it('should dispatch putNote with the updatedNote', () => {
+      wrapper.instance().handleComplete('lpo');
+      expect(mockProps.putNote).toHaveBeenCalledWith(mockNoteAfterComplete);    
+    });
+    
+    it('should dispatch setStatus with 0', async () => {
+      await wrapper.instance().handleComplete('lpo');
+      expect(mockProps.setStatus).toHaveBeenCalledWith(0);
+    });
+  });
+  
+  describe('handleDelete', () => {
+    it('should dispatch deleteNoteThunk with the id', () => {
+      const expected = mockProps.id;
+      wrapper.instance().handleDelete('rzz');
+      expect(mockProps.deleteNoteThunk).toHaveBeenCalledWith(expected);
+    });
+    
+    it('should dispatch setStatus with 0', async () => {
+      await wrapper.instance().handleDelete();
+      expect(mockProps.setStatus).toHaveBeenCalledWith(0);
+    });
+  });
+
   describe('handleDrag', () => {
-    it('should call event.dataTransfer.setData with the correct params', () => {
-      wrapper.find('.NoteCard--background-lavender').simulate('dragstart', mockEvent);
-      expect(mockEvent.dataTransfer.setData).toHaveBeenCalledWith('draggedIndex', 0);
+    it('should call dataTransfer.setData with the correct params', () => {
+      wrapper.find(foundClass).simulate('dragstart', mockEvent);
+      expect(mockEvent.dataTransfer.setData)
+        .toHaveBeenCalledWith('draggedIndex', 0);
     });
   });
   
   describe('handleDragOver', () => {
     it('should call event.preventDefault()', () => {
-      wrapper.find('.NoteCard--background-lavender').simulate('dragover', mockEvent);
+      wrapper.find(foundClass).simulate('dragover', mockEvent);
       expect(mockEvent.preventDefault).toHaveBeenCalled();
     });
   });
 
   describe('handleDrop', () => {
     it('should call putAllNotes with the updated array of notes', () => {
-      wrapper.find('.NoteCard--background-lavender').simulate('drop', mockEvent);
+      wrapper.find(foundClass).simulate('drop', mockEvent);
       const expected = [mockNotes[1], mockNotes[0], ...mockNotes.slice(2)];
       expect(mockProps.putAllNotes).toHaveBeenCalledWith(expected);
     });
   });
 
   describe('mapStateToProps', () => {
-    it('should take in initial state and return a props object with notes', () => {
+    it('should return a props object with notes', () => {
       const mockState = {
         notes: mockNotes,
         isLoading: false,
@@ -72,11 +112,30 @@ describe('NoteCard', () => {
   });
 
   describe('mapDispatchToProps', () => {
-    it('should call dispatch with putAllNotes when props.putAllNotes is called', () => {
-      const mockDispatch = jest.fn();
+    const mockDispatch = jest.fn();
+    const mappedProps = mapDispatchToProps(mockDispatch);
+
+    it('should call dispatch with putAllNotes', () => {
       const actionToDispatch = putAllNotes(mockNotes);
-      const mappedProps = mapDispatchToProps(mockDispatch);
       mappedProps.putAllNotes(mockNotes);
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+    });
+
+    it('should call dispatch with putNote', () => {
+      const actionToDispatch = putNote(mockNotes);
+      mappedProps.putNote(mockNote);
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+    });
+
+    it('should call dispatch with deleteNoteThunk', () => {
+      const actionToDispatch = deleteNoteThunk('rzz');
+      mappedProps.deleteNoteThunk('rzz');
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+    });
+
+    it('should call dispatch with setStatus', () => {
+      const actionToDispatch = setStatus(0);
+      mappedProps.setStatus(0);
       expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
     });
   });
