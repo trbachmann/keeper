@@ -1,7 +1,7 @@
 .NoteCard {
   display: inline-block;
   width: 240px;
-  padding: 12px 8px 24px 4px;
+  padding: 12px 4px;
   border-radius: 10px;
   text-decoration: none;
   color: #000;
@@ -84,13 +84,14 @@
 .NoteCard--icon-container {
   display: flex;
   justify-content: space-between;
-  margin: 0px 10px;
+}
 
-  .NoteCard--delete-icon,
-  .NoteCard--edit-icon {
-    width: 24px;
-    cursor: pointer;
-  }
+.NoteCard--delete-icon,
+.NoteCard--edit-icon {
+  width: 24px;
+  height: 24px;
+  margin: 8px 12px 0;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 528px) {
