@@ -55,7 +55,7 @@ describe('NoteForm', () => {
     expect(wrapperNewNote.state()).toEqual({
       title: '',
       listItems: [],
-      focusedListItemID: null,
+      focusedListItemID: 'title',
       color: 'white',
       showColorOptions: false
     });

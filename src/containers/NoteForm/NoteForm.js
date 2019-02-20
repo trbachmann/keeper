@@ -17,7 +17,7 @@ export class NoteForm extends Component {
     this.state = {
       title: '',
       listItems: [],
-      focusedListItemID: null,
+      focusedListItemID: 'title',
       color: 'white',
       showColorOptions: false
     }
@@ -97,6 +97,7 @@ export class NoteForm extends Component {
     <input
       name='title'
       value={this.state.title}
+      autoFocus={this.state.focusedListItemID === 'title'}
       placeholder='Title'
       onChange={(event) => this.setState({ title: event.target.value })}
       className='NoteForm--title'
