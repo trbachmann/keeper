@@ -9,11 +9,6 @@ describe('NoteContainer', () => {
     isDisabled: false,
     query: ''
   };
-  const mockPropsWithQuery = {
-    notes: mockNotes,
-    isDisabled: false,
-    query: 'Learn'
-  };
 
   let wrapper;
 
