@@ -9,7 +9,8 @@ import {
   mockNotes,
   mockNote,
   mockNoteLong,
-  mockNoteAfterComplete
+  mockNoteAfterComplete,
+  mockNoteAfterCompleteOpposite
 } from '../../mockNotes';
 
 jest.mock('../../thunks/putAllNotes.js');
@@ -70,9 +71,14 @@ describe('NoteCard', () => {
   });
 
   describe('handleComplete', () => {
-    it('should dispatch putNote with the updatedNote', () => {
-      wrapper.instance().handleComplete('lpo');
+    it('should dispatch putNote with the updatedNote when the item was unchecked', () => {
+      wrapper.find('.NoteForm--icon--unchecked').simulate('click');
       expect(mockProps.putNote).toHaveBeenCalledWith(mockNoteAfterComplete);    
+    });
+
+    it('should dispatch putNote with the updateNote when the item was checked', () => {
+      wrapper.find('.NoteForm--icon--checked').simulate('click');
+      expect(mockProps.putNote).toHaveBeenCalledWith(mockNoteAfterCompleteOpposite);    
     });
     
     it('should dispatch setStatus with 0', async () => {

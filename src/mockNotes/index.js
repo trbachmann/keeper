@@ -96,6 +96,24 @@ export const mockNoteAfterComplete = {
   color: 'lavender'
 };
 
+export const mockNoteAfterCompleteOpposite = {
+  id: 'rzz',
+  title: 'Workout',
+  listItems: [
+    {
+      id: 'lpo',
+      description: '20 situps',
+      isComplete: false
+    },
+    {
+      id: 'lqw',
+      description: '15 pushups',
+      isComplete: false
+    }
+  ],
+  color: 'lavender'
+};
+
 export const mockNotesAfterDelete = [
   { 
     id: 'ijf', 
