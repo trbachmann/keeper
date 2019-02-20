@@ -22,7 +22,7 @@ export class NoteCard extends Component {
           <span key={id} className='NoteCard--span--complete'>
             <img
               src={checkedicon}
-              className='NoteForm--icon--checked'
+              className='NoteCard--icon--checked'
               alt='checked icon'
               onClick={() => this.handleComplete(id)}
             />
@@ -43,7 +43,7 @@ export class NoteCard extends Component {
           <span key={id} className='NoteCard--span--incomplete'>
             <img
               src={uncheckedicon}
-              className='NoteForm--icon--unchecked'
+              className='NoteCard--icon--unchecked'
               alt='unchecked icon'
               onClick={() => this.handleComplete(id)}
             />
