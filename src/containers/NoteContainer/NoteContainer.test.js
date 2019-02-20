@@ -45,7 +45,6 @@ describe('NoteContainer', () => {
     const wrapper = shallow(<NoteContainer notes={mockNotes} query='redux' isDisabled={false} />);
     const result = wrapper.instance().getNotesToDisplay();
     const expected = [ mockNotes[0] ];
-    console.log(result, expected)
     expect(result).toEqual(expected);
   });
 });
