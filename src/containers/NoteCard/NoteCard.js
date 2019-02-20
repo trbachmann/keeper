@@ -12,6 +12,48 @@ import deleteicon from '../../images/delete.svg';
 import { setStatus } from '../../actions';
 
 export class NoteCard extends Component {
+  getCompleteItems = () => {
+    const { listItems } = this.props;
+    const completeItems = listItems.filter(item => item.isComplete);
+    return (
+      completeItems.map(item => {
+        const { description, id } = item;
+        return (
+          <span key={id} className='NoteCard--span--complete'>
+            <img
+              src={checkedicon}
+              className='NoteForm--icon--checked'
+              alt='checked icon'
+              onClick={() => this.handleComplete(id)}
+            />
+            <p className='NoteForm--p--complete'>{description}</p>
+          </span>
+        );
+      })
+    );
+  }
+
+  getIncompleteItems = () => {
+    const { listItems } = this.props;
+    const incompleteItems = listItems.filter(item => !item.isComplete);
+    return (
+      incompleteItems.map(item => {
+        const { description, id } = item;
+        return (
+          <span key={id} className='NoteCard--span--incomplete'>
+            <img
+              src={uncheckedicon}
+              className='NoteForm--icon--unchecked'
+              alt='unchecked icon'
+              onClick={() => this.handleComplete(id)}
+            />
+            <p className='NoteForm--p--incomplete'>{description}</p>
+          </span>
+        );
+      })
+    );
+  }
+
   handleComplete = async (itemID) => {
     const { id, title, color, listItems, putNote, setStatus } = this.props;
     const updatedListItems = listItems.map(item => {
@@ -42,38 +84,10 @@ export class NoteCard extends Component {
   }
 
   render() {
-    const { id, title, listItems, color } = this.props;
-    const incompleteItems = listItems.filter(item => !item.isComplete);
-    const completeItems = listItems.filter(item => item.isComplete);
+    const { id, title, color } = this.props;
     const result = [
-      ...incompleteItems.map(item => {
-        const { description, id } = item;
-        return (
-          <span key={id} className='NoteCard--span--incomplete'>
-            <img
-              src={uncheckedicon}
-              className='NoteForm--icon--unchecked'
-              alt='unchecked icon'
-              onClick={() => this.handleComplete(id)}
-            />
-            <p className='NoteForm--p--incomplete'>{description}</p>
-          </span>
-        );
-      }),
-      ...completeItems.map(item => {
-        const { description, id } = item;
-        return (
-          <span key={id} className='NoteCard--span--complete'>
-            <img
-              src={checkedicon}
-              className='NoteForm--icon--checked'
-              alt='checked icon'
-              onClick={() => this.handleComplete(id)}
-            />
-            <p className='NoteForm--p--complete'>{description}</p>
-          </span>
-        );
-      })
+      ...this.getIncompleteItems(),
+      ...this.getCompleteItems()
     ];
     if (result.length > 10) {
       result.splice(10);
@@ -85,12 +99,17 @@ export class NoteCard extends Component {
         onDragStart={this.handleDrag}
         onDragOver={(event) => event.preventDefault()}
         onDrop={this.handleDrop}
-        className={'NoteCard--background-' + color}>
+        className={'NoteCard--background-' + color}
+      >
         <h3 className='NoteCard--h3'>{title}</h3>
         <div>{result}</div>
         <span className='NoteCard--icon-container'>
           <Link to={'/notes/' + id}>
-            <img className='NoteCard--edit-icon' src={editicon} alt='edit icon'/>
+            <img
+              className='NoteCard--edit-icon'
+              src={editicon}
+              alt='edit icon'
+            />
           </Link>
           <img
             className='NoteCard--delete-icon'
