@@ -9,17 +9,11 @@ describe('NoteContainer', () => {
     isDisabled: false,
     query: ''
   };
-  const mockPropsWithQuery = {
-    notes: mockNotes,
-    isDisabled: false,
-    query: 'Learn'
-  };
 
   let wrapper;
-  let wrapperForQuery;
+
   beforeEach(() => {
     wrapper = shallow(<NoteContainer {...mockProps} />);
-    wrapperForQuery = shallow(<NoteContainer {...mockPropsWithQuery} />);
   });
 
   it('should match the snapshot', () => {
@@ -41,9 +35,10 @@ describe('NoteContainer', () => {
     const result = wrapper.instance().getNotesToDisplay();
     expect(result).toEqual(mockNotes);
   });
-
-  it.skip('should return filtered notes if there is a query', () => {
-    const result = wrapperForQuery.instance().getNotesToDisplay();
+  
+  it('should return filtered notes if there is a query', () => {
+    const wrapper = shallow(<NoteContainer notes={mockNotes} query='redux' isDisabled={false} />);
+    const result = wrapper.instance().getNotesToDisplay();
     const expected = [ mockNotes[0] ];
     expect(result).toEqual(expected);
   });
