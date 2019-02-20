@@ -37,7 +37,7 @@ describe('NoteContainer', () => {
   });
   
   it('should return filtered notes if there is a query', () => {
-    const wrapper = shallow(<NoteContainer notes={mockNotes} query='redux' isDisabled={false} />);
+    const wrapper = shallow(<NoteContainer {...mockProps} query='Redux' />);
     const result = wrapper.instance().getNotesToDisplay();
     const expected = [ mockNotes[0] ];
     expect(result).toEqual(expected);
