@@ -22,7 +22,8 @@ export class NoteContainer extends Component {
   }
 
   getNotesToDisplay = () => {
-    const { query, notes } = this.props;
+    const { notes } = this.props;
+    const query = this.props.query.toLowerCase();
     if (query) {
       return notes.filter(note => {
         return note.title.toLowerCase().includes(query) ||
