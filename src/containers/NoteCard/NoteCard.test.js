@@ -49,6 +49,26 @@ describe('NoteCard', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  describe('getCompleteItems', () => {
+    it('should return an array with length equal to complete items', () => {
+      const foundClass = '.NoteCard--span--complete';      
+      const wrapper = shallow(<NoteCard {...mockNote} />);
+      const result = wrapper.instance().getCompleteItems();
+      const wrapperComplete = shallow(result[0]);
+      expect(wrapperComplete.find(foundClass)).toHaveLength(1);
+    });
+  });
+  
+  describe('getIncompleteItems', () => {
+    it('should return an array with length equal to incomplete items', () => {
+      const foundClass = '.NoteCard--span--incomplete';
+      const wrapper = shallow(<NoteCard {...mockNote} />);
+      const result = wrapper.instance().getIncompleteItems();
+      const wrapperIncomplete = shallow(result[0]);
+      expect(wrapperIncomplete.find(foundClass)).toHaveLength(1);
+    });
+  });
+
   describe('handleComplete', () => {
     it('should dispatch putNote with the updatedNote', () => {
       wrapper.instance().handleComplete('lpo');
