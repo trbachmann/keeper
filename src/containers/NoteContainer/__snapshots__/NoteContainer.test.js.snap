@@ -233,3 +233,9 @@ exports[`NoteContainer should match the snapshot when isDisabled is true 1`] = `
   </Masonry>
 </div>
 `;
+
+exports[`NoteContainer should return a NoteCard 1`] = `
+<ContextConsumer>
+  <Component />
+</ContextConsumer>
+`;
