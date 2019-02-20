@@ -20,7 +20,7 @@ exports[`NoteCard should pass snapshot test 1`] = `
     >
       <img
         alt="unchecked icon"
-        className="NoteForm--icon--unchecked"
+        className="NoteCard--icon--unchecked"
         onClick={[Function]}
         src="uncheckedicon.svg"
       />
@@ -36,7 +36,7 @@ exports[`NoteCard should pass snapshot test 1`] = `
     >
       <img
         alt="checked icon"
-        className="NoteForm--icon--checked"
+        className="NoteCard--icon--checked"
         onClick={[Function]}
         src="checkedicon.svg"
       />
@@ -90,7 +90,7 @@ exports[`NoteCard should pass snapshot test when there are more than 10 items 1`
     >
       <img
         alt="unchecked icon"
-        className="NoteForm--icon--unchecked"
+        className="NoteCard--icon--unchecked"
         onClick={[Function]}
         src="uncheckedicon.svg"
       />
@@ -106,7 +106,7 @@ exports[`NoteCard should pass snapshot test when there are more than 10 items 1`
     >
       <img
         alt="unchecked icon"
-        className="NoteForm--icon--unchecked"
+        className="NoteCard--icon--unchecked"
         onClick={[Function]}
         src="uncheckedicon.svg"
       />
@@ -122,7 +122,7 @@ exports[`NoteCard should pass snapshot test when there are more than 10 items 1`
     >
       <img
         alt="unchecked icon"
-        className="NoteForm--icon--unchecked"
+        className="NoteCard--icon--unchecked"
         onClick={[Function]}
         src="uncheckedicon.svg"
       />
@@ -138,7 +138,7 @@ exports[`NoteCard should pass snapshot test when there are more than 10 items 1`
     >
       <img
         alt="unchecked icon"
-        className="NoteForm--icon--unchecked"
+        className="NoteCard--icon--unchecked"
         onClick={[Function]}
         src="uncheckedicon.svg"
       />
@@ -154,7 +154,7 @@ exports[`NoteCard should pass snapshot test when there are more than 10 items 1`
     >
       <img
         alt="unchecked icon"
-        className="NoteForm--icon--unchecked"
+        className="NoteCard--icon--unchecked"
         onClick={[Function]}
         src="uncheckedicon.svg"
       />
@@ -170,7 +170,7 @@ exports[`NoteCard should pass snapshot test when there are more than 10 items 1`
     >
       <img
         alt="unchecked icon"
-        className="NoteForm--icon--unchecked"
+        className="NoteCard--icon--unchecked"
         onClick={[Function]}
         src="uncheckedicon.svg"
       />
@@ -186,7 +186,7 @@ exports[`NoteCard should pass snapshot test when there are more than 10 items 1`
     >
       <img
         alt="unchecked icon"
-        className="NoteForm--icon--unchecked"
+        className="NoteCard--icon--unchecked"
         onClick={[Function]}
         src="uncheckedicon.svg"
       />
@@ -202,7 +202,7 @@ exports[`NoteCard should pass snapshot test when there are more than 10 items 1`
     >
       <img
         alt="unchecked icon"
-        className="NoteForm--icon--unchecked"
+        className="NoteCard--icon--unchecked"
         onClick={[Function]}
         src="uncheckedicon.svg"
       />
@@ -218,7 +218,7 @@ exports[`NoteCard should pass snapshot test when there are more than 10 items 1`
     >
       <img
         alt="unchecked icon"
-        className="NoteForm--icon--unchecked"
+        className="NoteCard--icon--unchecked"
         onClick={[Function]}
         src="uncheckedicon.svg"
       />
@@ -234,7 +234,7 @@ exports[`NoteCard should pass snapshot test when there are more than 10 items 1`
     >
       <img
         alt="unchecked icon"
-        className="NoteForm--icon--unchecked"
+        className="NoteCard--icon--unchecked"
         onClick={[Function]}
         src="uncheckedicon.svg"
       />

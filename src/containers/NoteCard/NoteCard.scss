@@ -99,8 +99,19 @@
   cursor: pointer;
 }
 
+.NoteCard--icon--checked,
+.NoteCard--icon--unchecked {
+  @extend .NoteForm--icon--checked;
+}
+
 @media screen and (max-width: 528px) {
   .NoteCard {
-    width: 80%;
+    width: 100%;
+    margin: 8px 0;
+  }
+
+  .NoteCard--icon--checked,
+  .NoteCard--icon--unchecked {
+    margin-left: 6px;
   }
 }

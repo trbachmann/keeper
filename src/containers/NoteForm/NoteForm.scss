@@ -183,6 +183,7 @@
 
 .NoteForm--icon--delete {
   @extend %icon;
+  margin-left: -4px;
   margin-right: auto;
   width: 20px;
 }
@@ -277,7 +278,13 @@
 
 @media screen and (max-width: 528px) {
   .NoteForm {
+    top: 144px;
     left: 5%;
     width: 90%;
+  }
+
+  .NoteForm--palette-icon {
+    height: 30px;
+    margin-top: -4px;
   }
 }

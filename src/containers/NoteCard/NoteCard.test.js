@@ -72,12 +72,12 @@ describe('NoteCard', () => {
 
   describe('handleComplete', () => {
     it('should dispatch putNote with the updatedNote when the item was unchecked', () => {
-      wrapper.find('.NoteForm--icon--unchecked').simulate('click');
+      wrapper.find('.NoteCard--icon--unchecked').simulate('click');
       expect(mockProps.putNote).toHaveBeenCalledWith(mockNoteAfterComplete);    
     });
 
     it('should dispatch putNote with the updateNote when the item was checked', () => {
-      wrapper.find('.NoteForm--icon--checked').simulate('click');
+      wrapper.find('.NoteCard--icon--checked').simulate('click');
       expect(mockProps.putNote).toHaveBeenCalledWith(mockNoteAfterCompleteOpposite);    
     });
     
