@@ -1,5 +1,5 @@
-import { statusReducer } from './statusReducer';
-import { setStatus } from '../actions';
+import { statusReducer } from '../statusReducer';
+import { setStatus } from '../../actions';
 
 describe('statusReducer', () => {
   it('should return the default state of 0', () => {

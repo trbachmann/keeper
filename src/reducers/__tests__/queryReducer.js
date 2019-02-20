@@ -1,6 +1,5 @@
-import React from 'react';
-import { queryReducer } from './queryReducer';
-import { setQuery } from '../actions';
+import { queryReducer } from '../queryReducer';
+import { setQuery } from '../../actions';
 
 describe('queryReducer', () => {
   it('should return the default state', () => {

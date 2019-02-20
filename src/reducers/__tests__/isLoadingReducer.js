@@ -1,5 +1,5 @@
-import { isLoadingReducer } from './isLoadingReducer';
-import * as actions from '../actions/';
+import { isLoadingReducer } from '../isLoadingReducer';
+import * as actions from '../../actions';
 
 describe('isLoadingReducer', () => {
   it('should return the default state', () => {

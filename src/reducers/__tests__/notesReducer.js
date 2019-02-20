@@ -1,6 +1,6 @@
-import { notesReducer } from './notesReducer';
-import * as actions from '../actions';
-import * as data from '../mockNotes';
+import { notesReducer } from '../notesReducer';
+import * as actions from '../../actions';
+import * as data from '../../mockNotes';
 
 describe('notesReducer', () => {
   it('should return the default state', () => {

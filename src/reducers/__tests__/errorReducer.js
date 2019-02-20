@@ -1,5 +1,5 @@
-import { errorReducer } from './errorReducer';
-import * as actions from '../actions';
+import { errorReducer } from '../errorReducer';
+import * as actions from '../../actions';
 
 describe('errorReducer', () => {
   it('should return the default state', () => {
