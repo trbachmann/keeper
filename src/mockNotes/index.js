@@ -78,6 +78,24 @@ export const mockNote = {
   color: 'lavender'
 };
 
+export const mockNoteAfterComplete = {
+  id: 'rzz',
+  title: 'Workout',
+  listItems: [
+    {
+      id: 'lpo',
+      description: '20 situps',
+      isComplete: true
+    },
+    {
+      id: 'lqw',
+      description: '15 pushups',
+      isComplete: true
+    }
+  ],
+  color: 'lavender'
+};
+
 export const mockNotesAfterDelete = [
   { 
     id: 'ijf', 
