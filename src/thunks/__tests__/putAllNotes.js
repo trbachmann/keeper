@@ -1,6 +1,6 @@
 import { putAllNotes } from '../putAllNotes';
 import * as api from '../../utils/api';
-import { toggleLoading, setNotes, setStatus, setError } from '../../actions';
+import { toggleLoading, setNotes, setError } from '../../actions';
 import { mockNotes } from '../../mockNotes';
 
 describe('putAllNotes', () => {
@@ -35,11 +35,6 @@ describe('putAllNotes', () => {
   it('should dispatch setNotes with notes', async () => {
     await thunk(mockDispatch);
     expect(mockDispatch).toHaveBeenCalledWith(setNotes(mockNotes));
-  });
-
-  it('should dispatch setStatus with the status', async () => {
-    await thunk(mockDispatch);
-    expect(mockDispatch).toHaveBeenCalledWith(setStatus(204));
   });
 
   it('should dispatch setError with the message', async () => {
