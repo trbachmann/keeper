@@ -28,6 +28,14 @@ Run `npm start` and visit localhost:3001 in your browser
 Jest and Enzyme for front-end and back-end testing  
 Run `npm test` from the associated root directory  
 
+<img src="./coverage/badge-statements.svg"/>
+<img src="./coverage/badge-lines.svg"/>
+<img src="./coverage/badge-functions.svg"/>
+<img src="./coverage/badge-branches.svg"/>
+
+## Issues tracked with Waffle.io:
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/whitneyburton/trapper-keeper.svg?columns=all)](https://waffle.io/whitneyburton/trapper-keeper)
+
 ### Original Assignment: 
 [Trapper Kepper](http://frontend.turing.io/projects/trapper-keeper.html) project from Turing School of Software & Design
 
