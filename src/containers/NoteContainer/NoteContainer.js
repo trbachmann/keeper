@@ -5,6 +5,7 @@ import NoteCard from '../NoteCard/NoteCard';
 import { Link } from 'react-router-dom';
 import Masonry from 'react-masonry-css';
 import newnoteicon from '../../images/newnoteicon.svg';
+import LoginButton from '../LoginButton/LoginButton';
 
 export class NoteContainer extends Component {
   addWelcomeNote = () => {
@@ -36,7 +37,7 @@ export class NoteContainer extends Component {
   }
 
   render() {
-    const { notes, isDisabled } = this.props;
+    const { notes, isDisabled, user } = this.props;
 
     const notesToDisplay = this.getNotesToDisplay();
     
@@ -61,16 +62,18 @@ export class NoteContainer extends Component {
 
     return (
       <div className={'NoteContainer' + disabledClass}>
+        {!user && <LoginButton />}
         <div className='NoteContainer--div'>
-          <Link to='/new-note' className='NoteContainer--link'>
-            <img
-              src={newnoteicon}
-              className='NoteContainer--icon--new-note'
-              alt='new note icon' />
-            <span className='NoteContainer--span'>
-              New Note
-            </span>
-          </Link>
+          {user && 
+            <Link to='/new-note' className='NoteContainer--link'>
+              <img
+                src={newnoteicon}
+                className='NoteContainer--icon--new-note'
+                alt='new note icon' />
+              <span className='NoteContainer--span'>
+                New Note
+              </span>
+            </Link>}
         </div>
         <Masonry
           breakpointCols={breakpoints}
@@ -85,7 +88,8 @@ export class NoteContainer extends Component {
 
 export const mapStateToProps = (state) => ({
   notes: state.notes,
-  query: state.query
+  query: state.query,
+  user: state.user
 });
 
 export default connect(mapStateToProps)(NoteContainer);
@@ -94,5 +98,6 @@ NoteContainer.propTypes = {
   notes: PropTypes.array,
   isLoading: PropTypes.bool,
   query: PropTypes.string,
-  isDisabled: PropTypes.bool
+  isDisabled: PropTypes.bool,
+  user: PropTypes.object
 }

@@ -11,7 +11,7 @@ import notebookicon from '../../images/notebook.svg';
 import Loader from '../../components/Loader/Loader';
 
 export class App extends Component {
-  componentDidMount = () => {
+  componentDidMount() {
     this.props.fetchNotes();
   }
 
@@ -28,10 +28,13 @@ export class App extends Component {
   }
 
   getNewNoteRoute = ({ match }) => {
-    return [
-      <NoteContainer isDisabled={true} key="NoteContainer" />,
-      <NoteForm match={match} key="NoteForm" />
-    ]
+    const { user } = this.props;
+    return user ? (
+      [
+        <NoteContainer isDisabled={true} key="NoteContainer" />,
+        <NoteForm match={match} key="NoteForm" />
+      ]
+    ) : <Error404 />;
   }
 
   render() {
@@ -59,7 +62,8 @@ export class App extends Component {
 export const mapStateToProps = (state) => ({
   notes: state.notes,
   isLoading: state.isLoading,
-  error: state.error
+  error: state.error,
+  user: state.user
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -72,5 +76,6 @@ App.propTypes = {
   notes: PropTypes.array,
   isLoading: PropTypes.bool,
   error: PropTypes.string,
-  fetchNotes: PropTypes.func
+  fetchNotes: PropTypes.func,
+  user: PropTypes.object
 }
