@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginButton should match the snapshot 1`] = `
+<div>
+  <button
+    className="Login--button"
+    onClick={[Function]}
+  >
+    <img
+      alt="Google Icon"
+      className="Login--icon"
+      src="googleicon.svg"
+    />
+    <span
+      className="Login--text"
+    >
+      Sign in with Google
+    </span>
+  </button>
+</div>
+`;
