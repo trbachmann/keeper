@@ -9,10 +9,30 @@ import { fetchNotes } from '../../thunks/fetchNotes';
 import Error404 from '../../components/Error404/Error404';
 import notebookicon from '../../images/notebook.svg';
 import Loader from '../../components/Loader/Loader';
+import { fetchData, createOptions } from '../../utils/api';
+import { setUser, setNotes } from '../../actions';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 
 export class App extends Component {
   componentDidMount() {
     this.props.fetchNotes();
+    this.checkUser();
+  }
+
+  checkUser = () => {
+    firebase.auth().onAuthStateChanged(async (userData) => {
+      if (userData) {
+        const { displayName, email, uid } = userData;
+        const user = { displayName, email, uid };
+        const url = 'http://localhost:3001/api/v1/users';
+        const options = createOptions('POST', user);
+        const response = await fetchData(url, options);
+        const { notes } = await response.json();
+        this.props.setUser(user);
+        this.props.setNotes(notes)
+      }
+    });
   }
 
   getNotesRoute = ({ match }) => {
@@ -67,7 +87,9 @@ export const mapStateToProps = (state) => ({
 });
 
 export const mapDispatchToProps = (dispatch) => ({
-  fetchNotes: () => dispatch(fetchNotes())
+  fetchNotes: () => dispatch(fetchNotes()),
+  setUser: (user) => dispatch(setUser(user)),
+  setNotes: (notes) => dispatch(setNotes(notes))
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
@@ -77,5 +99,7 @@ App.propTypes = {
   isLoading: PropTypes.bool,
   error: PropTypes.string,
   fetchNotes: PropTypes.func,
-  user: PropTypes.object
+  user: PropTypes.object,
+  setUser: PropTypes.func,
+  setNotes: PropTypes.func
 }
