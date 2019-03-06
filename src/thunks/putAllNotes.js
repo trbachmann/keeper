@@ -1,10 +1,10 @@
 import { fetchData, createOptions } from '../utils/api';
 import { setNotes, setError, toggleLoading } from '../actions';
 
-export const putAllNotes = (notes) => {
+export const putAllNotes = (notes, user) => {
   return async (dispatch) => {
     const url = 'http://localhost:3001/api/v1/notes';
-    const options = createOptions('PUT', { notes });
+    const options = createOptions('PUT', { notes, user });
     try {
       dispatch(toggleLoading(true));
       await fetchData(url, options);

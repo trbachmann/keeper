@@ -75,12 +75,12 @@ export class NoteCard extends Component {
   }
 
   handleDrop = (event) => {
-    const { notes, index: droppedOnIndex, putAllNotes } = this.props;
+    const { notes, index: droppedOnIndex, putAllNotes, user } = this.props;
     const [...updatedNotes] = notes;
     const draggedIndex = event.dataTransfer.getData('draggedIndex');
     const tempNote = updatedNotes.splice(draggedIndex, 1);
     updatedNotes.splice(droppedOnIndex, 0 , ...tempNote);
-    putAllNotes(updatedNotes);
+    putAllNotes(updatedNotes, user);
   }
 
   render() {
@@ -135,7 +135,7 @@ export const mapStateToProps = (state) => ({
 });
 
 export const mapDispatchToProps = (dispatch) => ({
-  putAllNotes: (notes) => dispatch(putAllNotes(notes)),
+  putAllNotes: (notes, user) => dispatch(putAllNotes(notes, user)),
   putNote: (note, user) => dispatch(putNote(note, user)),
   deleteNoteThunk: (id, user) => dispatch(deleteNoteThunk(id, user)),
   setStatus: (code) => dispatch(setStatus(code))
