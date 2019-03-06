@@ -145,7 +145,8 @@ export class NoteForm extends Component {
   handleNoteDelete = async (event) => {
     event.preventDefault();
     const { id } = this.props.match.params;
-    await this.props.deleteNoteThunk(id);
+    const { deleteNoteThunk, user } = this.props;
+    await deleteNoteThunk(id, user);
   }
 
   handleSubmit = async (event) => {
@@ -218,7 +219,7 @@ export const mapStateToProps = (state) => ({
 export const mapDispatchToProps = (dispatch) => ({
   putNote: (note, user) => dispatch(putNote(note, user)),
   postNote: (note, user) => dispatch(postNote(note, user)),
-  deleteNoteThunk: (id) => dispatch(deleteNoteThunk(id)),
+  deleteNoteThunk: (id, user) => dispatch(deleteNoteThunk(id, user)),
   setStatus: (code) => dispatch(setStatus(code))
 });
 
