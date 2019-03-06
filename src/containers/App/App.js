@@ -5,32 +5,26 @@ import { withRouter, Route, Switch } from 'react-router-dom';
 import SearchBar from '../SearchBar/SearchBar';
 import NoteContainer from '../NoteContainer/NoteContainer';
 import NoteForm from '../NoteForm/NoteForm';
-import { fetchNotes } from '../../thunks/fetchNotes';
+import { fetchUser } from '../../thunks/fetchUser';
 import Error404 from '../../components/Error404/Error404';
 import notebookicon from '../../images/notebook.svg';
 import Loader from '../../components/Loader/Loader';
-import { fetchData, createOptions } from '../../utils/api';
-import { setUser, setNotes } from '../../actions';
+import { toggleLoading } from '../../actions';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 
 export class App extends Component {
   componentDidMount() {
-    this.props.fetchNotes();
     this.checkUser();
   }
 
   checkUser = () => {
+    this.props.toggleLoading(true);
     firebase.auth().onAuthStateChanged(async (userData) => {
       if (userData) {
-        const { displayName, email, uid } = userData;
-        const user = { displayName, email, uid };
-        const url = 'http://localhost:3001/api/v1/users';
-        const options = createOptions('POST', user);
-        const response = await fetchData(url, options);
-        const { notes } = await response.json();
-        this.props.setUser(user);
-        this.props.setNotes(notes)
+        this.props.fetchUser(userData);
+      } else {
+        this.props.toggleLoading(false);
       }
     });
   }
@@ -87,9 +81,8 @@ export const mapStateToProps = (state) => ({
 });
 
 export const mapDispatchToProps = (dispatch) => ({
-  fetchNotes: () => dispatch(fetchNotes()),
-  setUser: (user) => dispatch(setUser(user)),
-  setNotes: (notes) => dispatch(setNotes(notes))
+  fetchUser: (userData) => dispatch(fetchUser(userData)),
+  toggleLoading: (bool) => dispatch(toggleLoading(bool))
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
@@ -98,8 +91,7 @@ App.propTypes = {
   notes: PropTypes.array,
   isLoading: PropTypes.bool,
   error: PropTypes.string,
-  fetchNotes: PropTypes.func,
-  user: PropTypes.object,
-  setUser: PropTypes.func,
-  setNotes: PropTypes.func
+  fetchUser: PropTypes.func,
+  toggleLoading: PropTypes.func,
+  user: PropTypes.object
 }

@@ -3,8 +3,8 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import googleicon from '../../images/googleicon.svg';
 import PropTypes from 'prop-types';
-import { fetchData, createOptions } from '../../utils/api';
-import { setUser, setNotes } from '../../actions';
+import { fetchUser } from '../../thunks/fetchUser';
+import { setError } from '../../actions';
 import { connect } from 'react-redux';
 
 export class LoginButton extends Component {
@@ -12,16 +12,9 @@ export class LoginButton extends Component {
     const google = new firebase.auth.GoogleAuthProvider();
     try{
       const { user: userData } = await firebase.auth().signInWithPopup(google);
-      const { displayName, email, uid } = userData;
-      const user = { displayName, email, uid };
-      const url = 'http://localhost:3001/api/v1/users';
-      const options = createOptions('POST', user);
-      const response = await fetchData(url, options);
-      const { notes } = await response.json();
-      this.props.setUser(user);
-      this.props.setNotes(notes);
+      this.props.fetchUser(userData);
     } catch (error) {
-      console.log('error', error);
+      this.props.setError(error.message);
     }
   }
 
@@ -38,13 +31,13 @@ export class LoginButton extends Component {
 }
 
 export const mapDispatchToProps = (dispatch) => ({
-  setUser: (user) => dispatch(setUser(user)),
-  setNotes: (notes) => dispatch(setNotes(notes))
+  fetchUser: (userData) => dispatch(fetchUser(userData)),
+  setError: (message) => dispatch(setError(message))
 });
 
 export default connect(null, mapDispatchToProps)(LoginButton);
 
 LoginButton.propTypes = {
-  setUser: PropTypes.func,
-  setNotes: PropTypes.func
+  fetchUser: PropTypes.func,
+  setError: PropTypes.func
 }
