@@ -9,10 +9,10 @@ import { connect } from 'react-redux';
 
 export class LoginButton extends Component {
   handleClick = async () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
+    const google = new firebase.auth.GoogleAuthProvider();
     try{
-      const googleData = await firebase.auth().signInWithPopup(provider);
-      const { displayName, email, uid } = googleData.user;
+      const { user: userData } = await firebase.auth().signInWithPopup(google);
+      const { displayName, email, uid } = userData;
       const user = { displayName, email, uid };
       const url = 'http://localhost:3001/api/v1/users';
       const options = createOptions('POST', user);
@@ -27,7 +27,7 @@ export class LoginButton extends Component {
 
   render() {
     return (
-      <div>
+      <div className='Login'>
         <button className='Login--button' onClick={this.handleClick}>
           <img src={googleicon} alt='Google Icon' className='Login--icon'/>
           <span className='Login--text'>Sign in with Google</span>

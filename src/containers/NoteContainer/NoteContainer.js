@@ -6,6 +6,9 @@ import { Link } from 'react-router-dom';
 import Masonry from 'react-masonry-css';
 import newnoteicon from '../../images/newnoteicon.svg';
 import LoginButton from '../LoginButton/LoginButton';
+import { setUser, setNotes } from '../../actions';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 
 export class NoteContainer extends Component {
   addWelcomeNote = () => {
@@ -36,6 +39,12 @@ export class NoteContainer extends Component {
     return notes;
   }
 
+  handleClick = async () => {
+    await firebase.auth().signOut();
+    this.props.setUser(null);
+    this.props.setNotes([]);
+  }
+
   render() {
     const { notes, isDisabled, user } = this.props;
 
@@ -62,8 +71,8 @@ export class NoteContainer extends Component {
 
     return (
       <div className={'NoteContainer' + disabledClass}>
-        {!user && <LoginButton />}
         <div className='NoteContainer--div'>
+          {!user && <LoginButton />}
           {user && 
             <Link to='/new-note' className='NoteContainer--link'>
               <img
@@ -74,6 +83,10 @@ export class NoteContainer extends Component {
                 New Note
               </span>
             </Link>}
+          {user &&
+            <button className='NoteContainer--sign-out' onClick={this.handleClick}>
+              Sign Out
+            </button>}
         </div>
         <Masonry
           breakpointCols={breakpoints}
@@ -92,12 +105,19 @@ export const mapStateToProps = (state) => ({
   user: state.user
 });
 
-export default connect(mapStateToProps)(NoteContainer);
+export const mapDispatchToProps = (dispatch) => ({
+  setUser: (user) => dispatch(setUser(user)),
+  setNotes: (notes) => dispatch(setNotes(notes))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(NoteContainer);
 
 NoteContainer.propTypes = {
   notes: PropTypes.array,
   isLoading: PropTypes.bool,
   query: PropTypes.string,
   isDisabled: PropTypes.bool,
-  user: PropTypes.object
+  user: PropTypes.object,
+  setUser: PropTypes.func,
+  setNotes: PropTypes.func
 }
