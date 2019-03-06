@@ -3,7 +3,7 @@ import { setNotes, setError, toggleLoading } from '../actions';
 
 export const putAllNotes = (notes, user) => {
   return async (dispatch) => {
-    const url = 'http://localhost:3001/api/v1/notes';
+    const url = 'https://keeper-turing-api.herokuapp.com/api/v1/notes';
     const options = createOptions('PUT', { notes, user });
     try {
       dispatch(toggleLoading(true));

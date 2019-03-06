@@ -7,7 +7,7 @@ export const fetchUser = (userData) => {
       dispatch(toggleLoading(true));
       const { displayName, email, uid } = userData;
       const user = { displayName, email, uid };
-      const url = 'http://localhost:3001/api/v1/users';
+      const url = 'https://keeper-turing-api.herokuapp.com/api/v1/users';
       const options = createOptions('POST', user);
       const response = await fetchData(url, options);
       const { notes } = await response.json();
