@@ -1,10 +1,10 @@
 import { fetchData, createOptions } from '../utils/api';
 import { setError, deleteNote, toggleLoading, setStatus } from '../actions';
 
-export const deleteNoteThunk = (id) => {
+export const deleteNoteThunk = (id, user) => {
   return async (dispatch) => {
-    const url = `http://localhost:3001/api/v1/notes/${id}`;
-    const options = createOptions('DELETE');
+    const url = `https://keeper-turing-api.herokuapp.com/api/v1/notes/${id}`;
+    const options = createOptions('DELETE', { user });
     try {
       dispatch(toggleLoading(true));
       const response = await fetchData(url, options);

@@ -145,17 +145,19 @@ export class NoteForm extends Component {
   handleNoteDelete = async (event) => {
     event.preventDefault();
     const { id } = this.props.match.params;
-    await this.props.deleteNoteThunk(id);
+    const { deleteNoteThunk, user } = this.props;
+    await deleteNoteThunk(id, user);
   }
 
   handleSubmit = async (event) => {
     event.preventDefault();
+    const { user } = this.props;
     const { id } = this.props.match.params;
     const { title, listItems, color } = this.state;
     if (id) {
-      await this.props.putNote({ id, title, listItems, color });
+      await this.props.putNote({ id, title, listItems, color }, user);
     } else {
-      await this.props.postNote({ title, listItems, color });
+      await this.props.postNote({ title, listItems, color }, user);
     }
   }
 
@@ -210,13 +212,14 @@ export class NoteForm extends Component {
 }
 
 export const mapStateToProps = (state) => ({
-  status: state.status
+  status: state.status,
+  user: state.user
 });
 
 export const mapDispatchToProps = (dispatch) => ({
-  putNote: (note) => dispatch(putNote(note)),
-  postNote: (note) => dispatch(postNote(note)),
-  deleteNoteThunk: (id) => dispatch(deleteNoteThunk(id)),
+  putNote: (note, user) => dispatch(putNote(note, user)),
+  postNote: (note, user) => dispatch(postNote(note, user)),
+  deleteNoteThunk: (id, user) => dispatch(deleteNoteThunk(id, user)),
   setStatus: (code) => dispatch(setStatus(code))
 });
 
@@ -227,5 +230,6 @@ NoteForm.propTypes = {
   putNote: PropTypes.func,
   postNote: PropTypes.func,
   status: PropTypes.number,
-  setStatus: PropTypes.func
+  setStatus: PropTypes.func,
+  user: PropTypes.object
 }

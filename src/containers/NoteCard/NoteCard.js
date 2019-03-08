@@ -55,18 +55,18 @@ export class NoteCard extends Component {
   }
 
   handleComplete = async (itemID) => {
-    const { id, title, color, listItems, putNote, setStatus } = this.props;
+    const { id, title, color, listItems, putNote, setStatus, user } = this.props;
     const updatedListItems = listItems.map(item => {
       const { isComplete } = item;
       return item.id === itemID ? { ...item, isComplete: !isComplete } : item;
     });
-    await putNote({ id, title, color, listItems: updatedListItems });
+    await putNote({ id, title, color, listItems: updatedListItems }, user);
     setStatus(0);
   }
 
   handleDelete = async () => {
-    const { id, deleteNoteThunk, setStatus } = this.props;
-    await deleteNoteThunk(id);
+    const { id, deleteNoteThunk, setStatus, user } = this.props;
+    await deleteNoteThunk(id, user);
     setStatus(0);
   }
 
@@ -75,12 +75,12 @@ export class NoteCard extends Component {
   }
 
   handleDrop = (event) => {
-    const { notes, index: droppedOnIndex, putAllNotes } = this.props;
+    const { notes, index: droppedOnIndex, putAllNotes, user } = this.props;
     const [...updatedNotes] = notes;
     const draggedIndex = event.dataTransfer.getData('draggedIndex');
     const tempNote = updatedNotes.splice(draggedIndex, 1);
     updatedNotes.splice(droppedOnIndex, 0 , ...tempNote);
-    putAllNotes(updatedNotes);
+    putAllNotes(updatedNotes, user);
   }
 
   render() {
@@ -130,13 +130,14 @@ export class NoteCard extends Component {
 }
 
 export const mapStateToProps = (state) => ({
-  notes: state.notes
+  notes: state.notes,
+  user: state.user
 });
 
 export const mapDispatchToProps = (dispatch) => ({
-  putAllNotes: (notes) => dispatch(putAllNotes(notes)),
-  putNote: (note) => dispatch(putNote(note)),
-  deleteNoteThunk: (id) => dispatch(deleteNoteThunk(id)),
+  putAllNotes: (notes, user) => dispatch(putAllNotes(notes, user)),
+  putNote: (note, user) => dispatch(putNote(note, user)),
+  deleteNoteThunk: (id, user) => dispatch(deleteNoteThunk(id, user)),
   setStatus: (code) => dispatch(setStatus(code))
 });
 
@@ -151,5 +152,6 @@ NoteCard.propTypes = {
   putAllNotes: PropTypes.func,
   putNote: PropTypes.func,
   deleteNote: PropTypes.func,
-  setStatus: PropTypes.func
+  setStatus: PropTypes.func,
+  user: PropTypes.object
 }

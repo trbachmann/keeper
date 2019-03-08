@@ -13,7 +13,8 @@ const mockProps = {
   notes: mockNotes,
   isLoading: false,
   error: '',
-  fetchNotes: jest.fn(() => true)
+  fetchNotes: jest.fn(() => true),
+  user: { displayName: 'Jeo', email: 'jeo@email.com', uid: 'qwerty' }
 }
 
 const mockMatch = { params: { id: 'ijf' }, path: 'notes/ijf' };

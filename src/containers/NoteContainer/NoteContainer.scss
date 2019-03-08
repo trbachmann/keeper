@@ -14,7 +14,8 @@
   display: grid;
   margin: 24px 0 16px;
   justify-content: center;
-  grid-template-columns: 48px 88px 48px;
+  grid-template-columns: 1fr 48px 88px 48px 1fr;
+  height: 40px;
 }
 
 .NoteContainer--link {
@@ -24,6 +25,7 @@
   color: #000;
   display: grid;
   grid-template-columns: 48px 88px;
+  grid-column: 2/5;
 }
 
 .NoteContainer--cards {
@@ -41,10 +43,28 @@
   margin-right: 14px;
   border-radius: 5px;
   box-shadow: $light-shadow;
+  align-self: center;
   
   &:hover {
     box-shadow: $heavy-shadow;
   }
+}
+
+.NoteContainer--sign-out {
+  width: 88px;
+  border: none;
+  border-radius: 2px;
+  position: absolute;
+  right: 4%;
+  background-color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 2px;
+  height: 36px;
+  outline: none;
+  cursor: pointer;
+  box-shadow: $light-shadow;
+  font-size: 14px;
 }
 
 .NoteContainer--span {
@@ -80,5 +100,9 @@
   .NoteContainer {
     width: 100%;
     padding: 0 8px;
+  }
+
+  .NoteContainer--sign-out {
+    right: 8px;
   }
 }
