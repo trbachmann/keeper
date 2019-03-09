@@ -5,6 +5,10 @@ import NoteCard from '../NoteCard/NoteCard';
 import { Link } from 'react-router-dom';
 import Masonry from 'react-masonry-css';
 import newnoteicon from '../../images/newnoteicon.svg';
+import LoginButton from '../LoginButton/LoginButton';
+import { setUser, setNotes } from '../../actions';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 
 export class NoteContainer extends Component {
   addWelcomeNote = () => {
@@ -35,8 +39,14 @@ export class NoteContainer extends Component {
     return notes;
   }
 
+  handleClick = async () => {
+    await firebase.auth().signOut();
+    this.props.setUser(null);
+    this.props.setNotes([]);
+  }
+
   render() {
-    const { notes, isDisabled } = this.props;
+    const { notes, isDisabled, user } = this.props;
 
     const notesToDisplay = this.getNotesToDisplay();
     
@@ -62,15 +72,21 @@ export class NoteContainer extends Component {
     return (
       <div className={'NoteContainer' + disabledClass}>
         <div className='NoteContainer--div'>
-          <Link to='/new-note' className='NoteContainer--link'>
-            <img
-              src={newnoteicon}
-              className='NoteContainer--icon--new-note'
-              alt='new note icon' />
-            <span className='NoteContainer--span'>
-              New Note
-            </span>
-          </Link>
+          {!user && <LoginButton />}
+          {user && 
+            <Link to='/new-note' className='NoteContainer--link'>
+              <img
+                src={newnoteicon}
+                className='NoteContainer--icon--new-note'
+                alt='new note icon' />
+              <span className='NoteContainer--span'>
+                New Note
+              </span>
+            </Link>}
+          {user &&
+            <button className='NoteContainer--sign-out' onClick={this.handleClick}>
+              Sign Out
+            </button>}
         </div>
         <Masonry
           breakpointCols={breakpoints}
@@ -85,14 +101,23 @@ export class NoteContainer extends Component {
 
 export const mapStateToProps = (state) => ({
   notes: state.notes,
-  query: state.query
+  query: state.query,
+  user: state.user
 });
 
-export default connect(mapStateToProps)(NoteContainer);
+export const mapDispatchToProps = (dispatch) => ({
+  setUser: (user) => dispatch(setUser(user)),
+  setNotes: (notes) => dispatch(setNotes(notes))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(NoteContainer);
 
 NoteContainer.propTypes = {
   notes: PropTypes.array,
   isLoading: PropTypes.bool,
   query: PropTypes.string,
-  isDisabled: PropTypes.bool
+  isDisabled: PropTypes.bool,
+  user: PropTypes.object,
+  setUser: PropTypes.func,
+  setNotes: PropTypes.func
 }

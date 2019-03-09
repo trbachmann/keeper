@@ -5,14 +5,28 @@ import { withRouter, Route, Switch } from 'react-router-dom';
 import SearchBar from '../SearchBar/SearchBar';
 import NoteContainer from '../NoteContainer/NoteContainer';
 import NoteForm from '../NoteForm/NoteForm';
-import { fetchNotes } from '../../thunks/fetchNotes';
+import { fetchUser } from '../../thunks/fetchUser';
 import Error404 from '../../components/Error404/Error404';
 import notebookicon from '../../images/notebook.svg';
 import Loader from '../../components/Loader/Loader';
+import { toggleLoading } from '../../actions';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 
 export class App extends Component {
-  componentDidMount = () => {
-    this.props.fetchNotes();
+  componentDidMount() {
+    this.checkUser();
+  }
+
+  checkUser = () => {
+    this.props.toggleLoading(true);
+    firebase.auth().onAuthStateChanged(async (userData) => {
+      if (userData) {
+        this.props.fetchUser(userData);
+      } else {
+        this.props.toggleLoading(false);
+      }
+    });
   }
 
   getNotesRoute = ({ match }) => {
@@ -28,10 +42,13 @@ export class App extends Component {
   }
 
   getNewNoteRoute = ({ match }) => {
-    return [
-      <NoteContainer isDisabled={true} key="NoteContainer" />,
-      <NoteForm match={match} key="NoteForm" />
-    ]
+    const { user } = this.props;
+    return user ? (
+      [
+        <NoteContainer isDisabled={true} key="NoteContainer" />,
+        <NoteForm match={match} key="NoteForm" />
+      ]
+    ) : <Error404 />;
   }
 
   render() {
@@ -59,11 +76,13 @@ export class App extends Component {
 export const mapStateToProps = (state) => ({
   notes: state.notes,
   isLoading: state.isLoading,
-  error: state.error
+  error: state.error,
+  user: state.user
 });
 
 export const mapDispatchToProps = (dispatch) => ({
-  fetchNotes: () => dispatch(fetchNotes())
+  fetchUser: (userData) => dispatch(fetchUser(userData)),
+  toggleLoading: (bool) => dispatch(toggleLoading(bool))
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
@@ -72,5 +91,7 @@ App.propTypes = {
   notes: PropTypes.array,
   isLoading: PropTypes.bool,
   error: PropTypes.string,
-  fetchNotes: PropTypes.func
+  fetchUser: PropTypes.func,
+  toggleLoading: PropTypes.func,
+  user: PropTypes.object
 }

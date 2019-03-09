@@ -9,6 +9,10 @@ import { BrowserRouter } from 'react-router-dom';
 import { rootReducer } from './reducers';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
+import firebase from 'firebase/app';
+import { firebaseConfig } from './firebaseConfig';
+
+firebase.initializeApp(firebaseConfig);
 
 const devTools = composeWithDevTools(applyMiddleware(thunk));
 const store = createStore(rootReducer, devTools);

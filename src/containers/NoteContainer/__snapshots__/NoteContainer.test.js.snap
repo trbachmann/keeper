@@ -4,26 +4,10 @@ exports[`NoteContainer should match the snapshot 1`] = `
 <div
   className="NoteContainer"
 >
+  <Connect(LoginButton) />
   <div
     className="NoteContainer--div"
-  >
-    <Link
-      className="NoteContainer--link"
-      replace={false}
-      to="/new-note"
-    >
-      <img
-        alt="new note icon"
-        className="NoteContainer--icon--new-note"
-        src="newnoteicon.svg"
-      />
-      <span
-        className="NoteContainer--span"
-      >
-        New Note
-      </span>
-    </Link>
-  </div>
+  />
   <Masonry
     breakpointCols={
       Object {
@@ -121,26 +105,10 @@ exports[`NoteContainer should match the snapshot when isDisabled is true 1`] = `
 <div
   className="NoteContainer--disabled"
 >
+  <Connect(LoginButton) />
   <div
     className="NoteContainer--div"
-  >
-    <Link
-      className="NoteContainer--link"
-      replace={false}
-      to="/new-note"
-    >
-      <img
-        alt="new note icon"
-        className="NoteContainer--icon--new-note"
-        src="newnoteicon.svg"
-      />
-      <span
-        className="NoteContainer--span"
-      >
-        New Note
-      </span>
-    </Link>
-  </div>
+  />
   <Masonry
     breakpointCols={
       Object {
