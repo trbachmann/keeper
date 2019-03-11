@@ -12,13 +12,15 @@ import 'firebase/auth';
 
 export class NoteContainer extends Component {
   addWelcomeNote = () => {
+    const message = this.props.user ? 
+      'Click the plus sign above to get started' : 'Sign in with Google';
     const welcomeMessage = {
       id: 'welcome',
-      title: 'Welcome to Keeper',
+      title: 'Welcome to Keeper!',
       listItems: [
         { id: 'firstInstruction', description: 'Keep track of your projects', isComplete: false },
         { id: 'secondInstruction', description: 'List out your tasks to track', isComplete: false },
-        { id: 'thirdInstruction', description: 'Click the plus sign above to get started', isComplete: false },
+        { id: 'thirdInstruction', description: message, isComplete: false },
       ],
       color: 'white'
     };
