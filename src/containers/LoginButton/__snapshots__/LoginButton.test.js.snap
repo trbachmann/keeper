@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`LoginButton should match the snapshot 1`] = `
-<div>
+<div
+  className="Login"
+>
   <button
     className="Login--button"
     onClick={[Function]}

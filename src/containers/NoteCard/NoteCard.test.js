@@ -19,10 +19,12 @@ jest.mock('../../thunks/deleteNoteThunk.js');
 
 describe('NoteCard', () => {
   let wrapper;
+  const mockUser = { displayName: 'Jeo', email: 'jeo@email.com', uid: 'qwerty' };
   const mockProps = {
     ...mockNote,
     index: 0,
     notes: mockNotes,
+    user: mockUser,
     putAllNotes: jest.fn(),
     putNote: jest.fn(),
     setStatus: jest.fn(),
@@ -73,12 +75,12 @@ describe('NoteCard', () => {
   describe('handleComplete', () => {
     it('should dispatch putNote with the updatedNote when the item was unchecked', () => {
       wrapper.find('.NoteCard--icon--unchecked').simulate('click');
-      expect(mockProps.putNote).toHaveBeenCalledWith(mockNoteAfterComplete);    
+      expect(mockProps.putNote).toHaveBeenCalledWith(mockNoteAfterComplete, mockUser);    
     });
 
     it('should dispatch putNote with the updateNote when the item was checked', () => {
       wrapper.find('.NoteCard--icon--checked').simulate('click');
-      expect(mockProps.putNote).toHaveBeenCalledWith(mockNoteAfterCompleteOpposite);    
+      expect(mockProps.putNote).toHaveBeenCalledWith(mockNoteAfterCompleteOpposite, mockUser);    
     });
     
     it('should dispatch setStatus with 0', async () => {
@@ -91,7 +93,7 @@ describe('NoteCard', () => {
     it('should dispatch deleteNoteThunk with the id', () => {
       const expected = mockProps.id;
       wrapper.instance().handleDelete('rzz');
-      expect(mockProps.deleteNoteThunk).toHaveBeenCalledWith(expected);
+      expect(mockProps.deleteNoteThunk).toHaveBeenCalledWith(expected, mockUser);
     });
     
     it('should dispatch setStatus with 0', async () => {
@@ -119,7 +121,7 @@ describe('NoteCard', () => {
     it('should call putAllNotes with the updated array of notes', () => {
       wrapper.find(foundClass).simulate('drop', mockEvent);
       const expected = [mockNotes[1], mockNotes[0], ...mockNotes.slice(2)];
-      expect(mockProps.putAllNotes).toHaveBeenCalledWith(expected);
+      expect(mockProps.putAllNotes).toHaveBeenCalledWith(expected, mockUser);
     });
   });
 

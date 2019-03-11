@@ -11,7 +11,7 @@ describe('postNote', () => {
     body: JSON.stringify({ title, listItems })
   };
   const thunk = postNote(mockNote);
-  const mockUrl = 'http://localhost:3001/api/v1/notes/';
+  const mockUrl = 'https://keeper-turing-api.herokuapp.com/api/v1/notes/';
 
   beforeEach(() => {
     api.fetchData = jest.fn(() => Promise.resolve({

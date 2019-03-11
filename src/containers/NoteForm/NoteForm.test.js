@@ -15,6 +15,7 @@ jest.mock('../../thunks/postNote.js');
 describe('NoteForm', () => {
   let wrapper;
   let wrapperNewNote;
+  const mockUser = { displayName: 'Jeo', email: 'jeo@email.com', uid: 'qwerty' };
   const { id, title, listItems, color } = mockNote;
   const mockMatch = { params: { id }, path: `/notes/${id}` }
   const mockMatchNewNote = { params: {}, path: '/new-note' }
@@ -24,6 +25,7 @@ describe('NoteForm', () => {
     listItems,
     color,
     status: 0,
+    user: mockUser,
     deleteNoteThunk: jest.fn(() => true),
     putNote: jest.fn(() => true),
     postNote: jest.fn(() => true),
@@ -209,7 +211,7 @@ describe('NoteForm', () => {
     const mockEvent = { preventDefault: jest.fn() };
     it('should call deleteNoteThunk with the correct param', async () => {
       wrapper.instance().handleNoteDelete(mockEvent);
-      expect(mockProps.deleteNoteThunk).toHaveBeenCalledWith(id);
+      expect(mockProps.deleteNoteThunk).toHaveBeenCalledWith(id, mockUser);
     });
   });
 
@@ -217,14 +219,14 @@ describe('NoteForm', () => {
     const mockEvent = { preventDefault: jest.fn() };
     it('should call putNote if there is an id', () => {
       wrapper.instance().handleSubmit(mockEvent);
-      expect(mockProps.putNote).toHaveBeenCalledWith(mockNote);
+      expect(mockProps.putNote).toHaveBeenCalledWith(mockNote, mockUser);
     });
 
     it('should call postNote if there is not an id', () => {
       const expected = { title: 'new note', listItems: [], color: 'green' };
       wrapperNewNote.instance().setState(expected);
       wrapperNewNote.instance().handleSubmit(mockEvent);
-      expect(mockProps.postNote).toHaveBeenCalledWith(expected);
+      expect(mockProps.postNote).toHaveBeenCalledWith(expected, mockUser);
     });
   });
 
