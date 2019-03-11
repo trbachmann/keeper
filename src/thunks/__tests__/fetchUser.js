@@ -1,16 +1,24 @@
-import { fetchNotes } from '../fetchNotes';
+import { fetchUser } from '../fetchUser';
 import { toggleLoading, setNotes, setError } from '../../actions';
 import * as api from '../../utils/api';
 import { mockNotes } from '../../mockNotes';
 
-describe('fetchNotes', () => {
+describe('fetchUser', () => {
   const mockDispatch = jest.fn();
-  const thunk = fetchNotes();
-  const mockUrl = 'http://localhost:3001/api/v1/notes';
+  const mockUser = { displayName: 'Jeo', email: 'jeo@email.com', uid: 'qwerty' };
+  const thunk = fetchUser(mockUser);
+  const mockUrl = 'https://keeper-turing-api.herokuapp.com/api/v1/users';
+  const mockOptions = {
+    method: 'POST',
+    body: JSON.stringify(mockUser),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
   
   beforeEach(() => {
     api.fetchData = jest.fn(() => Promise.resolve({
-      json: () => Promise.resolve(mockNotes),
+      json: () => Promise.resolve({ notes: mockNotes }),
       ok: true
     }))
   });
@@ -22,7 +30,7 @@ describe('fetchNotes', () => {
   
   it('should call fetchData with the correct params', async () => {
     await thunk(mockDispatch);
-    expect(api.fetchData).toHaveBeenCalledWith(mockUrl);
+    expect(api.fetchData).toHaveBeenCalledWith(mockUrl, mockOptions);
   });
 
   it('should dispatch toggleLoading with false', async () => {

@@ -1,27 +1,39 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { App, mapStateToProps, mapDispatchToProps} from './App';
-import { fetchNotes } from '../../thunks/fetchNotes';
+import { fetchUser } from '../../thunks/fetchUser';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { rootReducer } from '../../reducers/';
 import { createStore } from 'redux';
 import { shallow } from 'enzyme';
 import { mockNotes } from '../../mockNotes';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import { firebaseConfig } from '../../firebaseConfig';
 
 const mockProps = {
   notes: mockNotes,
   isLoading: false,
   error: '',
-  fetchNotes: jest.fn(() => true),
+  fetchUser: jest.fn(() => true),
+  toggleLoading: jest.fn(),
   user: { displayName: 'Jeo', email: 'jeo@email.com', uid: 'qwerty' }
 }
 
+firebase.initializeApp(firebaseConfig);
+
 const mockMatch = { params: { id: 'ijf' }, path: 'notes/ijf' };
 
-jest.mock('../../thunks/fetchNotes.js');
+jest.mock('../../thunks/fetchUser.js');
 
 describe('App', () => {
+  beforeEach(() => {
+    firebase.auth = jest.fn().mockReturnValue({
+      onAuthStateChanged: jest.fn()
+    });
+  });
+
   it('renders without crashing', () => {
     const div = document.createElement('div');
     const store = createStore(rootReducer);
@@ -44,9 +56,11 @@ describe('App', () => {
       expect(wrapper).toMatchSnapshot();
     });
 
-    it('should call fetchNotes on componentDidMount', () => {
+    it('should call checkUser on componentDidMount', () => {
+      const instance = wrapper.instance();
+      jest.spyOn(instance, 'checkUser');
       wrapper.instance().componentDidMount();
-      expect(mockProps.fetchNotes).toHaveBeenCalled();
+      expect(instance.checkUser).toHaveBeenCalled();
     });
 
     it('should return an array of JSX when there is a note', () => {
@@ -86,11 +100,11 @@ describe('App', () => {
   });
 
   describe('mapDispatchToProps', () => {
-    it('should call dispatch with a fetchNotes thunk', () => {
+    it('should call dispatch with a fetchUser thunk', () => {
       const mockDispatch = jest.fn();
-      const actionToDispatch = fetchNotes();
+      const actionToDispatch = fetchUser();
       const mappedProps = mapDispatchToProps(mockDispatch);
-      mappedProps.fetchNotes();
+      mappedProps.fetchUser();
       expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
     });
   });
