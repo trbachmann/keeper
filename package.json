@@ -26,7 +26,8 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "test:coverage": "npm test -- --coverage",
-    "test:badges": "npm run test:coverage  && jest-coverage-badges"
+    "test:badges": "npm run test:coverage  && jest-coverage-badges",
+    "heroku-postbuild": "echo Skip build on Heroku"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -60,5 +61,6 @@
       "lcov"
     ]
   },
-  "homepage": "https://keeper-turing.herokuapp.com/"
+  "homepage": "https://www.keeper-turing.com/",
+  "heroku-run-build-script": true
 }
