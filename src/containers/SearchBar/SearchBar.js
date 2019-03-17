@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setQuery } from '../../actions';
 import PropTypes from 'prop-types';
+import searchicon from '../../images/searchicon.svg';
 
 export class SearchBar extends Component {
   filterNotes = (e) => {
@@ -12,10 +13,16 @@ export class SearchBar extends Component {
 
   render() {
     return (
-      <input
-        onChange={this.filterNotes}
-        className='SearchBar--input'
-        placeholder='Search notes' />
+      <div className='SearchBar'>
+        <img
+          src={searchicon}
+          alt='search icon'
+          className='SearchBar--searchicon'></img>
+        <input
+          onChange={this.filterNotes}
+          className='SearchBar--input'
+          placeholder='Search notes'/>
+      </div>
     )
   }
 }
