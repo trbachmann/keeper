@@ -49,6 +49,22 @@ export class NoteForm extends Component {
     });
   }
 
+  getCompleteListItems = () => {
+    const { listItems } = this.state;
+    const completeItems = listItems.filter(item => item.isComplete);
+    return completeItems.map(item => {
+      return (
+        <CompleteItem
+          key={item.id}
+          id={item.id}
+          description={item.description}
+          handleComplete={this.handleComplete}
+          handleItemDelete={this.handleItemDelete}
+        />
+      );
+    });
+  }
+
   getIncompleteListItems = () => {
     const { focusedListItemID, listItems } = this.state;
     const incompleteItems = listItems.filter(item => !item.isComplete);
@@ -61,22 +77,6 @@ export class NoteForm extends Component {
           focusedListItemID={focusedListItemID}
           handleComplete={this.handleComplete}
           handleChange={this.handleChange}
-          handleItemDelete={this.handleItemDelete}
-        />
-      );
-    });
-  }
-
-  getCompleteListItems = () => {
-    const { listItems } = this.state;
-    const completeItems = listItems.filter(item => item.isComplete);
-    return completeItems.map(item => {
-      return (
-        <CompleteItem
-          key={item.id}
-          id={item.id}
-          description={item.description}
-          handleComplete={this.handleComplete}
           handleItemDelete={this.handleItemDelete}
         />
       );
@@ -174,6 +174,9 @@ export class NoteForm extends Component {
     const buttons = colors.map(color => {
       return <button key={color} id={color} className='NoteForm--color' onClick={this.handleColorChoice}></button >
     });
+    const completeCount = this.getCompleteListItems().length;
+    const completeNotice = completeCount === 1 ? `${completeCount} Completed Item` :
+      `${completeCount} Completed Items`;
 
     return (
       <div className='NoteForm--div--overlay'>
@@ -182,6 +185,7 @@ export class NoteForm extends Component {
           <div className='NoteForm--title-and-listitems'>
             {this.getIncompleteListItems()}
             {this.getNewListItemInput()}
+            <p className='NoteForm--completed-notice'>{completeNotice}</p>
             {this.getCompleteListItems()}
           </div>
           <button

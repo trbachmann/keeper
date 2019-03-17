@@ -23,6 +23,22 @@
   max-height: 350px;
 }
 
+hr {
+  border: .3px solid #80808047;
+  width: 94%;
+  margin: auto;
+}
+
+.NoteForm--completed-notice {
+  color: #8e8e8e;
+  font-weight: 200;
+  font-size: 11px;
+  padding: 6px 0px 0px 15px;
+  text-align: left;
+  font-style: italic;
+  letter-spacing: .5px;
+}
+
 .NoteForm--color {
   border-radius: 50%;
   height: 30px;
