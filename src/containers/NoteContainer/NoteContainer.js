@@ -12,7 +12,7 @@ import 'firebase/auth';
 
 export class NoteContainer extends Component {
   addWelcomeNote = () => {
-    const message = this.props.user ? 
+    const message = this.props.user ?
       'Click the plus sign above to get started' : 'Sign in with Google';
     const welcomeMessage = {
       id: 'welcome',
@@ -24,7 +24,7 @@ export class NoteContainer extends Component {
       ],
       color: 'white'
     };
-    return <NoteCard {...welcomeMessage} key={welcomeMessage.id} disabled/>
+    return <NoteCard {...welcomeMessage} key={welcomeMessage.id} disabled />
   }
 
   getNotesToDisplay = () => {
@@ -33,9 +33,9 @@ export class NoteContainer extends Component {
     if (query) {
       return notes.filter(note => {
         return note.title.toLowerCase().includes(query) ||
-        note.listItems.filter(item => {
-          return item.description.toLowerCase().includes(query)
-        }).length;
+          note.listItems.filter(item => {
+            return item.description.toLowerCase().includes(query)
+          }).length;
       });
     }
     return notes;
@@ -49,13 +49,10 @@ export class NoteContainer extends Component {
 
   render() {
     const { notes, isDisabled, user } = this.props;
-
     const notesToDisplay = this.getNotesToDisplay();
-    
     const cards = notesToDisplay.map((note, index) => {
       return <NoteCard {...note} key={note.id} index={index} />
     }).reverse();
-
     const breakpoints = {
       default: 6,
       1552: 5,
@@ -75,7 +72,7 @@ export class NoteContainer extends Component {
       <div className={'NoteContainer' + disabledClass}>
         <div className='NoteContainer--div'>
           {!user && <LoginButton />}
-          {user && 
+          {user &&
             <Link to='/new-note' className='NoteContainer--link'>
               <img
                 src={newnoteicon}
