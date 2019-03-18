@@ -5,7 +5,7 @@
 .Login--button {
   max-width: 220px;
   min-height: 40px;
-  padding: 8px 16px;
+  padding: 8px 20px;
   text-align: left;
   width: 100%;
   border: none;
@@ -17,6 +17,10 @@
   box-shadow: $light-shadow;
   justify-self: center;
   background-color: #fff;
+
+  &:hover {
+    box-shadow: $heavy-shadow;
+  }
 }
 
 .Login--icon {

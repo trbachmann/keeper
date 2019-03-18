@@ -30,6 +30,12 @@ exports[`NoteCard should pass snapshot test 1`] = `
         20 situps
       </p>
     </span>
+    <p
+      className="NoteCard--completed-notice"
+      key="complete-notice"
+    >
+      1 Completed Item
+    </p>
     <span
       className="NoteCard--span--complete"
       key="lqw"

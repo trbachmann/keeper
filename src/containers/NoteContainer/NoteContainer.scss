@@ -44,7 +44,7 @@
   border-radius: 5px;
   box-shadow: $light-shadow;
   align-self: center;
-  
+
   &:hover {
     box-shadow: $heavy-shadow;
   }
@@ -65,11 +65,24 @@
   cursor: pointer;
   box-shadow: $light-shadow;
   font-size: 14px;
+  color: #676767;
+  
+  &:hover {
+    color: #000;
+    transition: all 500ms ease;
+    box-shadow: $heavy-shadow;
+  }
 }
 
 .NoteContainer--span {
   justify-self: left;
   align-self: center;
+  color: #676767;
+
+  &:hover {
+    color: #000;
+    transition: all 500ms ease;
+  }
 }
 
 @media screen and (max-width: 1552px) {

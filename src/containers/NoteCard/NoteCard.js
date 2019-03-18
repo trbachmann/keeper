@@ -79,16 +79,22 @@ export class NoteCard extends Component {
     const [...updatedNotes] = notes;
     const draggedIndex = event.dataTransfer.getData('draggedIndex');
     const tempNote = updatedNotes.splice(draggedIndex, 1);
-    updatedNotes.splice(droppedOnIndex, 0 , ...tempNote);
+    updatedNotes.splice(droppedOnIndex, 0, ...tempNote);
     putAllNotes(updatedNotes, user);
   }
 
   render() {
     const { id, title, color, disabled } = this.props;
-    const result = [
-      ...this.getIncompleteItems(),
-      ...this.getCompleteItems()
-    ];
+    const completeItems = this.getCompleteItems();
+    const completeCount = completeItems.length;
+    const completeNotice = completeCount > 1 ? `${completeCount} Completed Items` :
+      `${completeCount} Completed Item`;
+    const incompleteItems = this.getIncompleteItems();
+    const result = completeCount ? [
+      ...incompleteItems,
+      <p key='complete-notice' className='NoteCard--completed-notice'>{completeNotice}</p>,
+      ...completeItems
+    ] : incompleteItems;
     if (result.length > 10) {
       result.splice(10);
       result.push(<p className='NoteCard--ellipsis' key='...'>...</p>);
@@ -99,8 +105,9 @@ export class NoteCard extends Component {
     } else {
       noteCardClass += color;
     }
+
     return (
-      <div 
+      <div
         draggable
         onDragStart={this.handleDrag}
         onDragOver={(event) => event.preventDefault()}

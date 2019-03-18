@@ -35,6 +35,11 @@ exports[`NoteForm should match the snapshot when 200 < status < 300 1`] = `
         placeholder="List item"
         value=""
       />
+      <p
+        className="NoteForm--completed-notice"
+      >
+        1 Completed Item
+      </p>
       <CompleteItem
         description="15 pushups"
         handleComplete={[Function]}
@@ -99,6 +104,11 @@ exports[`NoteForm should match the snapshot when the path is /new-note 1`] = `
         placeholder="List item"
         value=""
       />
+      <p
+        className="NoteForm--completed-notice"
+      >
+        0 Completed Items
+      </p>
     </div>
     <button
       className="NoteForm--button-white"
@@ -165,6 +175,11 @@ exports[`NoteForm should match the snapshot when the path is /notes/:id 1`] = `
         placeholder="List item"
         value=""
       />
+      <p
+        className="NoteForm--completed-notice"
+      >
+        1 Completed Item
+      </p>
       <CompleteItem
         description="15 pushups"
         handleComplete={[Function]}
