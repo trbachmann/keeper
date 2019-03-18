@@ -1,9 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SearchBar SearchBar component should match the snapshot 1`] = `
-<input
-  className="SearchBar--input"
-  onChange={[Function]}
-  placeholder="Search notes"
-/>
+<div
+  className="SearchBar"
+>
+  <img
+    alt="search icon"
+    className="SearchBar--searchicon"
+    src="searchicon.svg"
+  />
+  <input
+    className="SearchBar--input"
+    onChange={[Function]}
+    placeholder="Search notes"
+  />
+</div>
 `;

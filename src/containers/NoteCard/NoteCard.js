@@ -90,15 +90,11 @@ export class NoteCard extends Component {
     const completeNotice = completeCount > 1 ? `${completeCount} Completed Items` :
       `${completeCount} Completed Item`;
     const incompleteItems = this.getIncompleteItems();
-
-    const result = completeItems.length ? [
-      incompleteItems,
-      <p className='NoteCard--completed-notice'>{completeNotice}</p>,
-      completeItems
-    ] : [
-        incompleteItems,
-        completeItems
-      ];
+    const result = completeCount ? [
+      ...incompleteItems,
+      <p key='complete-notice' className='NoteCard--completed-notice'>{completeNotice}</p>,
+      ...completeItems
+    ] : incompleteItems;
     if (result.length > 10) {
       result.splice(10);
       result.push(<p className='NoteCard--ellipsis' key='...'>...</p>);
@@ -109,6 +105,7 @@ export class NoteCard extends Component {
     } else {
       noteCardClass += color;
     }
+
     return (
       <div
         draggable
