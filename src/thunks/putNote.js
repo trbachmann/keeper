@@ -4,7 +4,7 @@ import { setError, updateNote, toggleLoading, setStatus } from '../actions';
 export const putNote = (note, user) => {
   return async (dispatch) => {
     const { id, title, listItems, color } = note;
-    const url = `https://keeper-turing-api.herokuapp.com/api/v1/notes/${id}`;
+    const url = `https://api.keeper-turing.com/api/v1/notes/${id}`;
     const options = createOptions('PUT', { title, listItems, color, user });
     try {
       dispatch(toggleLoading(true));
