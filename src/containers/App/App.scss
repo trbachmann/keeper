@@ -32,6 +32,7 @@
 @media screen and (max-width: 528px) {
   .App--header {
     display: grid;
-    padding: 0px 0px 16px 38px;
+    padding: 0px 38px 16px 38px;
+    grid-template-columns: 1fr;
   }  
 }
