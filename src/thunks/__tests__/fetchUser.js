@@ -7,7 +7,7 @@ describe('fetchUser', () => {
   const mockDispatch = jest.fn();
   const mockUser = { displayName: 'Jeo', email: 'jeo@email.com', uid: 'qwerty' };
   const thunk = fetchUser(mockUser);
-  const mockUrl = 'https://keeper-turing-api.herokuapp.com/api/v1/users';
+  const mockUrl = 'https://api.keeper-turing.com/api/v1/users';
   const mockOptions = {
     method: 'POST',
     body: JSON.stringify(mockUser),
