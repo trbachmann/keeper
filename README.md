@@ -1,5 +1,6 @@
 # Keeper
-Keeper is an application to help users track the projects they are working on to stay on task and accomplish their goals. Keeper is modeled after Google Keep. Users can save notes about multiple projects, add lists of items they need to do in order to complete a project, check them off as they go and edit or delete any part of a note.
+Keeper is an application to help users track the projects they are working on to stay on task and accomplish their goals. Keeper is modeled after Google Keep. Users can sign in with their Google account, save notes with lists of items they need to complete, check them off as they go, and edit or delete any part of a note. 
+Other user enhancements include personalizing your account by changing the background color of your notes and drag-and-drop functionality to re-order your notes.
 
 ### Set-Up:   
 #### Front-end  
@@ -21,6 +22,7 @@ Run `npm start` and visit localhost:3001 in your browser
 * React Router
 * Node.js
 * Express
+* MongoDB / OAuth
 * JavaScript
 * SCSS
 
