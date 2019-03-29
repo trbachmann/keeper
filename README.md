@@ -17,7 +17,7 @@ Run `npm start` and visit localhost:3001 in your browser
 ### Preview:
 ![Screen Shot 2019-03-29 at 8 05 16 AM](https://user-images.githubusercontent.com/33883645/55238191-831e0500-51f9-11e9-8e00-ec2bc086fa19.png)
 
-[See Video](https://drive.google.com/file/d/14NiQTs3c344xsOjj1GWG8UMOawUYj401/view?usp=sharing)
+[**See Video Demonstration**](https://drive.google.com/file/d/14NiQTs3c344xsOjj1GWG8UMOawUYj401/view?usp=sharing)
 
 ### Primary Technologies Used:
 * React 
